@@ -51,6 +51,7 @@
 #include "detail/mffc_utils.hpp"
 #include "detail/switching_activity.hpp"
 
+
 namespace mockturtle
 {
 
@@ -100,6 +101,7 @@ struct map_params
 
   /*! \brief Be verbose. */
   bool verbose{ false };
+
 };
 
 /*! \brief Statistics for mapper.

@@ -1,0 +1,592 @@
+[
+  {
+    "entries": [
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "runtime": 0.04540298506617546,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 1.3398230075836182,
+        "size": 3336,
+        "size_mig": 2588
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2238,
+        "equivalent": true,
+        "runtime": 9.0472412109375,
+        "size": 57247,
+        "size_mig": 36875
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8885,
+        "equivalent": true,
+        "runtime": 19.719772338867188,
+        "size": 214335,
+        "size_mig": 137054
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 206,
+        "equivalent": true,
+        "runtime": 2.9309394359588623,
+        "size": 32060,
+        "size_mig": 24295
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "runtime": 1.022475004196167,
+        "size": 2865,
+        "size_mig": 2171
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "runtime": 2.491849660873413,
+        "size": 27062,
+        "size_mig": 19299
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 122,
+        "equivalent": true,
+        "runtime": 0.9822856783866882,
+        "size": 5416,
+        "size_mig": 4196
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 3846,
+        "equivalent": true,
+        "runtime": 34.38410186767578,
+        "size": 24618,
+        "size_mig": 17355
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime": 1.9033721685409546,
+        "size": 18484,
+        "size_mig": 11924
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "runtime": 1.6606125831604004,
+        "size": 11839,
+        "size_mig": 6996
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 0.1309218406677246,
+        "size": 693,
+        "size_mig": 623
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "runtime": 0.011750505305826664,
+        "size": 174,
+        "size_mig": 114
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "runtime": 0.010041492991149426,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "runtime": 0.16338014602661133,
+        "size": 1342,
+        "size_mig": 1217
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "runtime": 0.02480377070605755,
+        "size": 260,
+        "size_mig": 223
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 94,
+        "equivalent": true,
+        "runtime": 13.687019348144531,
+        "size": 46836,
+        "size_mig": 41267
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "runtime": 0.21190571784973145,
+        "size": 978,
+        "size_mig": 808
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 43,
+        "equivalent": true,
+        "runtime": 0.029711507260799408,
+        "size": 257,
+        "size_mig": 207
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 49,
+        "equivalent": true,
+        "runtime": 2.034729480743408,
+        "size": 13758,
+        "size_mig": 5802
+      }
+    ],
+    "version": "c4e50f0"
+  },
+  {
+    "entries": [
+      {
+        "algorithm": "algo 1",
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "runtime": 0.03350616246461868,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "runtime": 0.03323817253112793,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 0.13103218376636505,
+        "size": 3336,
+        "size_mig": 2684
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 1.1623603105545044,
+        "size": 3336,
+        "size_mig": 2588
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 4067,
+        "equivalent": true,
+        "runtime": 3.4895071983337402,
+        "size": 57247,
+        "size_mig": 45961
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2238,
+        "equivalent": true,
+        "runtime": 8.370956420898438,
+        "size": 57247,
+        "size_mig": 36875
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8908,
+        "equivalent": true,
+        "runtime": 15.419525146484375,
+        "size": 214335,
+        "size_mig": 137670
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8885,
+        "equivalent": true,
+        "runtime": 20.82768440246582,
+        "size": 214335,
+        "size_mig": 137054
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 210,
+        "equivalent": true,
+        "runtime": 3.1853084564208984,
+        "size": 32060,
+        "size_mig": 24329
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 206,
+        "equivalent": true,
+        "runtime": 3.024568796157837,
+        "size": 32060,
+        "size_mig": 24295
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 167,
+        "equivalent": true,
+        "runtime": 0.4293241798877716,
+        "size": 2865,
+        "size_mig": 2284
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "runtime": 1.2233978509902954,
+        "size": 2865,
+        "size_mig": 2171
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "runtime": 2.1507158279418945,
+        "size": 27062,
+        "size_mig": 19299
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "runtime": 2.5951499938964844,
+        "size": 27062,
+        "size_mig": 19299
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime": 0.5154502391815186,
+        "size": 5416,
+        "size_mig": 4200
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 122,
+        "equivalent": true,
+        "runtime": 1.099887490272522,
+        "size": 5416,
+        "size_mig": 4196
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 4904,
+        "equivalent": true,
+        "runtime": 1.878809928894043,
+        "size": 24618,
+        "size_mig": 20374
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 3846,
+        "equivalent": true,
+        "runtime": 35.84245300292969,
+        "size": 24618,
+        "size_mig": 17355
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime": 1.4369804859161377,
+        "size": 18484,
+        "size_mig": 11966
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime": 1.9720220565795898,
+        "size": 18484,
+        "size_mig": 11924
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 60,
+        "equivalent": true,
+        "runtime": 1.7442224025726318,
+        "size": 11839,
+        "size_mig": 6999
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "runtime": 1.7033052444458008,
+        "size": 11839,
+        "size_mig": 6996
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 12,
+        "equivalent": true,
+        "runtime": 0.05416986346244812,
+        "size": 693,
+        "size_mig": 630
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 0.11508549749851227,
+        "size": 693,
+        "size_mig": 623
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "runtime": 0.007855373434722424,
+        "size": 174,
+        "size_mig": 114
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "runtime": 0.010010330937802792,
+        "size": 174,
+        "size_mig": 114
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "runtime": 0.012986446730792522,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "runtime": 0.006323960144072771,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 0.09528452903032303,
+        "size": 1342,
+        "size_mig": 1221
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "runtime": 0.1891513168811798,
+        "size": 1342,
+        "size_mig": 1217
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "runtime": 0.025925299152731895,
+        "size": 260,
+        "size_mig": 224
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "runtime": 0.025966325774788857,
+        "size": 260,
+        "size_mig": 223
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 97,
+        "equivalent": true,
+        "runtime": 4.019774436950684,
+        "size": 46836,
+        "size_mig": 41597
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 94,
+        "equivalent": true,
+        "runtime": 14.004114151000977,
+        "size": 46836,
+        "size_mig": 41267
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 123,
+        "equivalent": true,
+        "runtime": 0.0578923374414444,
+        "size": 978,
+        "size_mig": 850
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "runtime": 0.19728076457977295,
+        "size": 978,
+        "size_mig": 808
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 45,
+        "equivalent": true,
+        "runtime": 0.018041878938674927,
+        "size": 257,
+        "size_mig": 208
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 43,
+        "equivalent": true,
+        "runtime": 0.027793332934379578,
+        "size": 257,
+        "size_mig": 207
+      },
+      {
+        "algorithm": "algo 1",
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 54,
+        "equivalent": true,
+        "runtime": 1.1736652851104736,
+        "size": 13758,
+        "size_mig": 6573
+      },
+      {
+        "algorithm": "algo 0",
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 49,
+        "equivalent": true,
+        "runtime": 2.3354902267456055,
+        "size": 13758,
+        "size_mig": 5802
+      }
+    ],
+    "version": "5ec601e"
+  }
+]
