@@ -44,14 +44,25 @@ namespace mockturtle
 {
 	using namespace nlohmann;
 
+	struct flow_config{
+		exact_library<mig_network, mig_npn_resynthesis> exact_lib;
+	};
+
 	namespace flow_algorithm{
 		
-		struct flow_config{
+		mig_network flow_map( mig_network mig, flow_config* config, json param,float* runtime ){
+			map_params map_ps;
+  			map_stats map_st;
+			// TODO : param
+			map_ps.skip_delay_round = true;
+			map_ps.required_time = std::numeric_limits<double>::max(),
+			map_ps.ela_rounds = 3;
+			map_ps.enable_logic_sharing = true;
+			map_ps.logic_sharing_cut_limit = 1;
 
-		};
-
-		mig_network flow_map( mig_network mig, flow_config config, json param,float* runtime ){
-
+			mig_network res = map( mig, config->exact_lib, map_ps, &map_st );
+			*runtime += to_seconds( map_st.time_total );
+			return res;
 		}
 
 
@@ -94,7 +105,7 @@ namespace mockturtle
 					}
 			};
 			std::list<Operation> flows;
-			flow_algorithm::flow_config config;
+			flow_config* config;
 
 			Operation compute_flow(mig_flow* self, json flow, mig_network*  mig, Operation parent ){
 				Operation actual = parent;
@@ -135,9 +146,9 @@ namespace mockturtle
 				}
 			}
 
-			mig_flow( json flow, flow_algorithm::flow_config config, mig_network mig ){
+			mig_flow( json flow, flow_config* configuration, mig_network mig ){
 				Root root(mig);
-				this->config = config;
+				this->config = configuration;
 				compute_flow( this, flow, &mig, (Operation) root );
 			}
 
@@ -147,4 +158,14 @@ namespace mockturtle
 
 	};
 
+	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+    	map_params,
+    	required_time,
+    	skip_delay_round,
+	    area_flow_rounds,
+	    ela_rounds,
+    	eswp_rounds,
+    	switching_activity_patterns, enable_logic_sharing,
+    	logic_sharing_cut_limit,
+    	verbose )
 }/* namespace mockturtle */
