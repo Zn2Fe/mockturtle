@@ -3,51 +3,28 @@
     "branch":2,
     "flow":[    
         {
-            "type":101,
-            "branch":1,
-            "flow":[
-                {
-                    "type":201,
-                    "param":{
-                    }
-                },
-                {
-                    "type":201,
-                    "param":{
-                    }
-                },
-                {
-                    "type":102,
-                    "name":"algo 1"
-                }
-            ]
+            "type":201,
+            "param":{
+                "skip_delay_round" : true,
+                "required_time" : 1.7976931348623157e+308,
+                "ela_rounds" :3,
+                "enable_logic_sharing" :true,
+                "logic_sharing_cut_limit" :1
+            }
         },
         {
-            "type":101,
-            "branch":1,
-            "flow":[
-                {
-                    "type":103,
-                    "name":"algo 0",
-                    "flow":[
-                        {
-                            "type":201,
-                            "name":"algo 0",
-                            "param":{
-                                "skip_delay_round" : true,
-                                "required_time" : "std::numeric_limits<double>::max()",
-                                "ela_rounds" :3,
-                                "enable_logic_sharing" :true,
-                                "logic_sharing_cut_limit" :1
-                            }
-                        }
-                    ]
-                },
-                {
-                    "type":102,
-                    "name":"algo 0"
-                }
-            ]
+            "type":201,
+            "param":{
+                "skip_delay_round" : true,
+                "required_time" : 1.7976931348623157e+308,
+                "ela_rounds" :3,
+                "enable_logic_sharing" :true,
+                "logic_sharing_cut_limit" :1
+            }
+        },
+        {
+            "type":102,
+            "name":"algo 1"
         }
     ]   
 }

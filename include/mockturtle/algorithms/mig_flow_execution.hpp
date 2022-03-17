@@ -39,133 +39,123 @@
 #include <mockturtle/views/depth_view.hpp>
 #include <mockturtle/networks/mig.hpp>
 
-
-namespace mockturtle
-{
+namespace mockturtle{
 	using namespace nlohmann;
 
-	struct flow_config{
-		exact_library<mig_network, mig_npn_resynthesis> exact_lib;
-	};
+	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+		map_params,
+		required_time,
+		skip_delay_round,
+		//area_flow_rounds,
+		ela_rounds,
+		//eswp_rounds,
+		//switching_activity_patterns,
+		enable_logic_sharing,
+		logic_sharing_cut_limit //,
+		//verbose 
+		)
+	
+	namespace mig_flow_algo{
 
-	namespace flow_algorithm{
-		
-		mig_network flow_map( mig_network mig, flow_config* config, json param,float* runtime ){
-			map_params map_ps;
+		struct mig_flow_config{
+			exact_library<mig_network, mig_npn_resynthesis> exact_lib;
+		};
+
+		mig_network flow_map( mig_network mig, mig_flow_config* config, json param,float* runtime ){
+			map_params map_ps = param.get<map_params>();
   			map_stats map_st;
-			// TODO : param
-			map_ps.skip_delay_round = true;
-			map_ps.required_time = std::numeric_limits<double>::max(),
-			map_ps.ela_rounds = 3;
-			map_ps.enable_logic_sharing = true;
-			map_ps.logic_sharing_cut_limit = 1;
 
 			mig_network res = map( mig, config->exact_lib, map_ps, &map_st );
 			*runtime += to_seconds( map_st.time_total );
 			return res;
 		}
 
-
+		mig_network base_operation( int op_type, mig_network mig, mig_flow_config* config, json param,float* runtime ){
+				switch (op_type)
+				{
+				case 201:
+					return mig_flow_algo::flow_map( mig, config, param, runtime );
+				default:
+					break;
+				}
+			}
 	}
- 	
+	
+	class operation_data{
+		public:
+			operation_data(json param, mig_network mig, float runtime){
 
+			}
+	};
+
+	class operation{
+		public :
+			operation_data* data;
+			operation* parent;
+
+			operation(){}
+			operation( operation* parent, json object, mig_network mig, float runtime ){
+				this->parent = parent;
+				this->data = new operation_data(object,mig,runtime);
+			}
+			
+	};
+
+	class end :  public operation{
+		public :
+			end(operation* op) : operation(){
+
+			}
+	};
 
 	class mig_flow{
-		public :
-			class Operation{
-				public:
-					Operation* parent;
-					int type;
-					json param;
-					float runtime;
-					float flow_runtime;
-					u_int32_t size;
-					u_int32_t depth;
-					Operation(mig_network mig){
-						this->size = mig.num_gates();
-						this->depth = depth_view(mig).depth();
-					}
-					Operation(Operation* op, mig_network mig, float individual_runtime,json param,int type){
-						this->parent = op;	
-						this->flow_runtime = op->flow_runtime + individual_runtime;
-						this->runtime = individual_runtime;	
-
-						this->size = mig.num_gates();
-						this->depth = depth_view(mig).depth();
-						this->param = param;
-						this->type = type;
-					}
-			};
-			class Root : public Operation{
-				public:
-					Root(Operation mig) : Operation(mig){
-						this->type = 0;
-						this->runtime = 0;
-						this->flow_runtime = 0;
-					}
-			};
-			std::list<Operation> flows;
-			flow_config* config;
-
-			Operation compute_flow(mig_flow* self, json flow, mig_network*  mig, Operation parent ){
-				Operation actual = parent;
-
+		private :
+			std::list<operation*> operations;
+		public: //param
+			std::list<operation*> flows;
+			operation root;
+			mig_flow_algo::mig_flow_config* config;
+			
+			void compute_flow( json flow, mig_network mig, operation* parent_adr){
+				operation* actual = parent_adr;
+				mig_network res = mig;
 				for(const auto& item : flow["flow"].items()){
-					float individual_runtime;
-					switch (item.value()["type"].get<int>())
+					int type = item.value()["type"].get<int>();
+					switch (type)
 					{
-					case 101: //branching
-						compute_flow(self,item.value(),&cleanup_dangling(*mig),actual);
-						break;
 					case 102: //ending
-						self->flows.push_back(actual);
-						break;
-					case 103://looping
-						while (true){
-							u_int32_t size_start_loop = mig->num_gates();
-							mig_network loop_res = cleanup_dangling(*mig);
-							Operation op_loop = compute_flow(self,item.value(),&loop_res,actual);
-							if(loop_res.num_gates() >= size_start_loop){
-								break;
-							}
-							*mig = loop_res;
-							actual = op_loop;
-						}
+						{
+							
+							this->flows.push_back(new end(actual));
 
+						}
 						break;
 					case 201: //mapping
-						*mig = flow_algorithm::flow_map(*mig,self->config,item.value()["param"],&individual_runtime);	
+						{
+							float individual_runtime;
+							res = mig_flow_algo::base_operation(type,res,this->config, item.value()["param"], &individual_runtime);
+							actual = new operation( actual, item.value(), res, individual_runtime );
+							this->operations.push_back(actual);
+						}
 						break;
 					default:
 						break;
 					}
-					if(item.value()["type"].get<int>()%100 == 2){
-						Operation next_op(&actual,*mig,individual_runtime,item.value()["param"],item.value()["type"].get<int>());
-						actual = next_op;
-					}
 				}
 			}
 
-			mig_flow( json flow, flow_config* configuration, mig_network mig ){
-				Root root(mig);
+			mig_flow( json flow, mig_flow_algo::mig_flow_config* configuration, mig_network mig){
 				this->config = configuration;
-				compute_flow( this, flow, &mig, (Operation) root );
+				this->root = operation();
+				compute_flow(flow, mig, &(this->root));
 			}
 
 			void save_to_file(){
-				
+
 			}
 
 	};
 
-	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
-    	map_params,
-    	required_time,
-    	skip_delay_round,
-	    area_flow_rounds,
-	    ela_rounds,
-    	eswp_rounds,
-    	switching_activity_patterns, enable_logic_sharing,
-    	logic_sharing_cut_limit,
-    	verbose )
-}/* namespace mockturtle */
+
+}
+
