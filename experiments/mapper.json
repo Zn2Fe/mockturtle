@@ -592,5 +592,190 @@
   {
     "entries": null,
     "version": "2886a2e"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "runtime1": 0.10160058736801147,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime1": 0.2627858519554138,
+        "size": 3336,
+        "size_mig": 2684
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 4067,
+        "equivalent": true,
+        "runtime1": 6.345126628875732,
+        "size": 57247,
+        "size_mig": 45961
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8908,
+        "equivalent": true,
+        "runtime1": 27.908958435058594,
+        "size": 214335,
+        "size_mig": 137668
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 210,
+        "equivalent": true,
+        "runtime1": 5.157986640930176,
+        "size": 32060,
+        "size_mig": 24331
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 167,
+        "equivalent": true,
+        "runtime1": 0.6588789820671082,
+        "size": 2865,
+        "size_mig": 2284
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "runtime1": 3.791116237640381,
+        "size": 27062,
+        "size_mig": 19305
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime1": 0.8492621183395386,
+        "size": 5416,
+        "size_mig": 4200
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 4904,
+        "equivalent": true,
+        "runtime1": 2.96575665473938,
+        "size": 24618,
+        "size_mig": 20374
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime1": 2.5998945236206055,
+        "size": 18484,
+        "size_mig": 11966
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 60,
+        "equivalent": true,
+        "runtime1": 2.921219825744629,
+        "size": 11839,
+        "size_mig": 6999
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 12,
+        "equivalent": true,
+        "runtime1": 0.08081269264221191,
+        "size": 693,
+        "size_mig": 630
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "runtime1": 0.013488281518220901,
+        "size": 174,
+        "size_mig": 114
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "runtime1": 0.020375091582536697,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime1": 0.1139238253235817,
+        "size": 1342,
+        "size_mig": 1221
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "runtime1": 0.023605836555361748,
+        "size": 260,
+        "size_mig": 224
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 96,
+        "equivalent": true,
+        "runtime1": 5.7893967628479,
+        "size": 46836,
+        "size_mig": 41609
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 123,
+        "equivalent": true,
+        "runtime1": 0.10834804177284241,
+        "size": 978,
+        "size_mig": 850
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 45,
+        "equivalent": true,
+        "runtime1": 0.036542873829603195,
+        "size": 257,
+        "size_mig": 208
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 54,
+        "equivalent": true,
+        "runtime1": 2.0114026069641113,
+        "size": 13758,
+        "size_mig": 6573
+      }
+    ],
+    "version": "eedda4d"
   }
 ]

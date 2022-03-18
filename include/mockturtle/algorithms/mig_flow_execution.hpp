@@ -83,8 +83,18 @@ namespace mockturtle{
 	
 	class operation_data{
 		public:
-			operation_data(json param, mig_network mig, float runtime){
+			json param;
+			u_int32_t size;
+			u_int32_t depth;
+			float runtime;
+			bool cec;
 
+			operation_data(json object, mig_network mig, float runtime, bool cec ){
+				this->param = object["param"];
+				this->size = mig.num_gates();
+				this->depth = depth_view(mig).depth();
+				this->runtime = runtime;
+				this->cec = cec;
 			}
 	};
 
@@ -92,49 +102,86 @@ namespace mockturtle{
 		public :
 			operation_data* data;
 			operation* parent;
+			float flow_runtime;
 
-			operation(){}
-			operation( operation* parent, json object, mig_network mig, float runtime ){
+			operation(float runtime){
+				this->flow_runtime = runtime;
+			}
+			operation( operation* parent){
 				this->parent = parent;
-				this->data = new operation_data(object,mig,runtime);
+			}
+			operation( operation* parent, json object, mig_network mig, float runtime,bool cec ){
+				this->parent = parent;
+				this->data = new operation_data( object, mig, runtime, cec );
+				this->flow_runtime = parent->flow_runtime + runtime;
 			}
 			
 	};
 
-	class end :  public operation{
-		public :
-			end(operation* op) : operation(){
-
+	class loop : public operation{
+		public:
+			mig_flow* container;
+			loop( operation* parent, json flow, mig_flow_algo::mig_flow_config* configuration, mig_network mig ):operation(parent){
+				this->container = new mig_flow(parent->flow_runtime,flow,configuration,mig);
 			}
 	};
 
 	class mig_flow{
-		private :
+		public :
 			std::list<operation*> operations;
-		public: //param
+			std::list<operation*> loop_buffer;
+			bool is_loop;
+			mig_network origin;
 			std::list<operation*> flows;
-			operation root;
+			operation* root;
 			mig_flow_algo::mig_flow_config* config;
 			
-			void compute_flow( json flow, mig_network mig, operation* parent_adr){
+			mig_network compute_flow( json flow, mig_network mig, operation* parent_adr){
+				this->operations.merge(this->loop_buffer);
 				operation* actual = parent_adr;
 				mig_network res = mig;
 				for(const auto& item : flow["flow"].items()){
 					int type = item.value()["type"].get<int>();
 					switch (type)
 					{
-					case 102: //ending
+					case 101: //branching
+						if(not this->is_loop)
 						{
-							
-							this->flows.push_back(new end(actual));
-
+							mig_network loop_mig = cleanup_dangling(res);
+							compute_flow( item.value(), loop_mig, actual );
+						}
+						break;
+					case 102: //ending
+						if(not this->is_loop)
+						{
+							this->flows.push_back(actual);
+						}
+						break;
+					case 103: //looping 
+						{
+							loop* loop_operation = new loop(actual,item.value(),this->config,res);
+							while(true){
+								u_int32_t before_loop_size = res.num_gates();
+								mig_network mig_copy = cleanup_dangling(res);
+								mig_copy =  loop_operation->container->compute_flow(item.value(),mig_copy,loop_operation->container->flows.back());
+								if(mig_copy.num_gates()>= before_loop_size){
+									break;
+								}
+								res = mig_copy;
+								this->operations.merge(this->loop_buffer);
+							}
+							loop_operation->container->loop_buffer.clear();
+							loop_operation->container->flows.push_back(this->container->operations.back());
+							actual = loop_operation;
+							this->operations.push_back(actual);
 						}
 						break;
 					case 201: //mapping
 						{
 							float individual_runtime;
 							res = mig_flow_algo::base_operation(type,res,this->config, item.value()["param"], &individual_runtime);
-							actual = new operation( actual, item.value(), res, individual_runtime );
+							bool cec = true; //IMPLEMENT EQUIVALENCE TO this->origin
+							actual = new operation( actual, item.value(), res, individual_runtime, cec );
 							this->operations.push_back(actual);
 						}
 						break;
@@ -142,12 +189,22 @@ namespace mockturtle{
 						break;
 					}
 				}
+				return res;
 			}
 
-			mig_flow( json flow, mig_flow_algo::mig_flow_config* configuration, mig_network mig){
+			mig_flow(json flow, mig_flow_algo::mig_flow_config* configuration, mig_network mig){
 				this->config = configuration;
-				this->root = operation();
-				compute_flow(flow, mig, &(this->root));
+				this->root = new operation(0.0);
+				this->origin = cleanup_dangling(mig);
+				compute_flow(flow, mig, this->root);
+				this->operations.merge(this->loop_buffer);
+			}
+
+			mig_flow(float initial_runtime, json flow, mig_flow_algo::mig_flow_config* configuration, mig_network mig){
+				this->config = configuration;
+				this->root = new operation(initial_runtime);
+				this->flows.push_back(this->root);
+				this->origin = cleanup_dangling(mig);
 			}
 
 			void save_to_file(){

@@ -46,10 +46,9 @@ int main()
 
     mig_flow flow( json_flow, &config, mig );
 
-//  for(const auto& f_item : flow.flows){
-//      const auto cec = benchmark == "hyp" ? true : abc_cec( *(f_item.mig_end), benchmark );
-//      exp(benchmark,mig.num_gates(),f_item.size,depth_view(mig).depth(),f_item.depth,f_item.flow_runtime,cec);
-//    }
+  for( operation* f_item : flow.flows){
+      exp(benchmark,mig.num_gates(),f_item->data->size,depth_view(mig).depth(),f_item->data->depth,f_item->flow_runtime,f_item->data->cec);
+    }
     
   }
 
