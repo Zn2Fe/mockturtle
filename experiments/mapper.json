@@ -600,7 +600,7 @@
         "depth": 255,
         "depth_mig": 129,
         "equivalent": true,
-        "runtime1": 0.10160058736801147,
+        "runtime1": 0.08427272737026215,
         "size": 1020,
         "size_mig": 384
       },
@@ -609,7 +609,7 @@
         "depth": 12,
         "depth_mig": 13,
         "equivalent": true,
-        "runtime1": 0.2627858519554138,
+        "runtime1": 0.3277001976966858,
         "size": 3336,
         "size_mig": 2684
       },
@@ -618,7 +618,7 @@
         "depth": 4372,
         "depth_mig": 4067,
         "equivalent": true,
-        "runtime1": 6.345126628875732,
+        "runtime1": 6.347764015197754,
         "size": 57247,
         "size_mig": 45961
       },
@@ -627,7 +627,7 @@
         "depth": 24801,
         "depth_mig": 8908,
         "equivalent": true,
-        "runtime1": 27.908958435058594,
+        "runtime1": 28.7314453125,
         "size": 214335,
         "size_mig": 137668
       },
@@ -636,7 +636,7 @@
         "depth": 444,
         "depth_mig": 210,
         "equivalent": true,
-        "runtime1": 5.157986640930176,
+        "runtime1": 5.447161674499512,
         "size": 32060,
         "size_mig": 24331
       },
@@ -645,7 +645,7 @@
         "depth": 287,
         "depth_mig": 167,
         "equivalent": true,
-        "runtime1": 0.6588789820671082,
+        "runtime1": 0.7581499218940735,
         "size": 2865,
         "size_mig": 2284
       },
@@ -654,7 +654,7 @@
         "depth": 274,
         "depth_mig": 142,
         "equivalent": true,
-        "runtime1": 3.791116237640381,
+        "runtime1": 3.964360237121582,
         "size": 27062,
         "size_mig": 19305
       },
@@ -663,7 +663,7 @@
         "depth": 225,
         "depth_mig": 126,
         "equivalent": true,
-        "runtime1": 0.8492621183395386,
+        "runtime1": 0.8481097221374512,
         "size": 5416,
         "size_mig": 4200
       },
@@ -672,7 +672,7 @@
         "depth": 5058,
         "depth_mig": 4904,
         "equivalent": true,
-        "runtime1": 2.96575665473938,
+        "runtime1": 2.959171772003174,
         "size": 24618,
         "size_mig": 20374
       },
@@ -681,7 +681,7 @@
         "depth": 250,
         "depth_mig": 126,
         "equivalent": true,
-        "runtime1": 2.5998945236206055,
+        "runtime1": 2.528439998626709,
         "size": 18484,
         "size_mig": 11966
       },
@@ -690,7 +690,7 @@
         "depth": 87,
         "depth_mig": 60,
         "equivalent": true,
-        "runtime1": 2.921219825744629,
+        "runtime1": 2.8877220153808594,
         "size": 11839,
         "size_mig": 6999
       },
@@ -699,7 +699,7 @@
         "depth": 16,
         "depth_mig": 12,
         "equivalent": true,
-        "runtime1": 0.08081269264221191,
+        "runtime1": 0.0864822268486023,
         "size": 693,
         "size_mig": 630
       },
@@ -708,7 +708,7 @@
         "depth": 10,
         "depth_mig": 5,
         "equivalent": true,
-        "runtime1": 0.013488281518220901,
+        "runtime1": 0.014362489804625511,
         "size": 174,
         "size_mig": 114
       },
@@ -717,7 +717,7 @@
         "depth": 3,
         "depth_mig": 3,
         "equivalent": true,
-        "runtime1": 0.020375091582536697,
+        "runtime1": 0.023465976119041443,
         "size": 304,
         "size_mig": 304
       },
@@ -726,7 +726,7 @@
         "depth": 20,
         "depth_mig": 13,
         "equivalent": true,
-        "runtime1": 0.1139238253235817,
+        "runtime1": 0.11708060652017593,
         "size": 1342,
         "size_mig": 1221
       },
@@ -735,7 +735,7 @@
         "depth": 16,
         "depth_mig": 10,
         "equivalent": true,
-        "runtime1": 0.023605836555361748,
+        "runtime1": 0.023550208657979965,
         "size": 260,
         "size_mig": 224
       },
@@ -744,7 +744,7 @@
         "depth": 114,
         "depth_mig": 96,
         "equivalent": true,
-        "runtime1": 5.7893967628479,
+        "runtime1": 6.083660125732422,
         "size": 46836,
         "size_mig": 41609
       },
@@ -753,7 +753,7 @@
         "depth": 250,
         "depth_mig": 123,
         "equivalent": true,
-        "runtime1": 0.10834804177284241,
+        "runtime1": 0.10478070378303528,
         "size": 978,
         "size_mig": 850
       },
@@ -762,7 +762,7 @@
         "depth": 54,
         "depth_mig": 45,
         "equivalent": true,
-        "runtime1": 0.036542873829603195,
+        "runtime1": 0.0340283066034317,
         "size": 257,
         "size_mig": 208
       },
@@ -771,11 +771,358 @@
         "depth": 70,
         "depth_mig": 54,
         "equivalent": true,
-        "runtime1": 2.0114026069641113,
+        "runtime1": 2.0848660469055176,
         "size": 13758,
         "size_mig": 6573
       }
     ],
     "version": "eedda4d"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 255,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 1020,
+        "size_mig": 1020
+      },
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "runtime": 0.04186838120222092,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 12,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 3336,
+        "size_mig": 3336
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 0.10702525079250336,
+        "size": 3336,
+        "size_mig": 2693
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 4372,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 57247,
+        "size_mig": 57247
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2425,
+        "equivalent": true,
+        "runtime": 2.087223529815674,
+        "size": 57247,
+        "size_mig": 53113
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 24801,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 214335,
+        "size_mig": 214335
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8956,
+        "equivalent": true,
+        "runtime": 11.672505378723145,
+        "size": 214335,
+        "size_mig": 138142
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 444,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 32060,
+        "size_mig": 32060
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 207,
+        "equivalent": true,
+        "runtime": 2.001847505569458,
+        "size": 32060,
+        "size_mig": 24297
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 287,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 2865,
+        "size_mig": 2865
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 158,
+        "equivalent": true,
+        "runtime": 0.26412150263786316,
+        "size": 2865,
+        "size_mig": 2413
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 274,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 27062,
+        "size_mig": 27062
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 143,
+        "equivalent": true,
+        "runtime": 1.5444103479385376,
+        "size": 27062,
+        "size_mig": 19356
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 225,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 5416,
+        "size_mig": 5416
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 127,
+        "equivalent": true,
+        "runtime": 0.3507063090801239,
+        "size": 5416,
+        "size_mig": 4248
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 5058,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 24618,
+        "size_mig": 24618
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 5074,
+        "equivalent": true,
+        "runtime": 0.9961410164833069,
+        "size": 24618,
+        "size_mig": 20724
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 250,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 18484,
+        "size_mig": 18484
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "runtime": 1.0500746965408325,
+        "size": 18484,
+        "size_mig": 12175
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 87,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 11839,
+        "size_mig": 11839
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "runtime": 1.1180379390716553,
+        "size": 11839,
+        "size_mig": 6996
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 16,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 693,
+        "size_mig": 693
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 14,
+        "equivalent": true,
+        "runtime": 0.030939793214201927,
+        "size": 693,
+        "size_mig": 649
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 10,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 174,
+        "size_mig": 174
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "runtime": 0.006191242020577192,
+        "size": 174,
+        "size_mig": 115
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 20,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 1342,
+        "size_mig": 1342
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 13,
+        "equivalent": true,
+        "runtime": 0.04144144803285599,
+        "size": 1342,
+        "size_mig": 1229
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 16,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 260,
+        "size_mig": 260
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 11,
+        "equivalent": true,
+        "runtime": 0.008889494463801384,
+        "size": 260,
+        "size_mig": 235
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 114,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 46836,
+        "size_mig": 46836
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 97,
+        "equivalent": true,
+        "runtime": 2.0110256671905518,
+        "size": 46836,
+        "size_mig": 42079
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 250,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 978,
+        "size_mig": 978
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 124,
+        "equivalent": true,
+        "runtime": 0.04011661559343338,
+        "size": 978,
+        "size_mig": 908
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 54,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 257,
+        "size_mig": 257
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 47,
+        "equivalent": true,
+        "runtime": 0.014313718304038048,
+        "size": 257,
+        "size_mig": 218
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 70,
+        "equivalent": true,
+        "runtime": 0.0,
+        "size": 13758,
+        "size_mig": 13758
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 54,
+        "equivalent": true,
+        "runtime": 0.826803982257843,
+        "size": 13758,
+        "size_mig": 7219
+      }
+    ],
+    "version": "2577799"
   }
 ]

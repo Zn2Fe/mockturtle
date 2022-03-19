@@ -1,0 +1,990 @@
+[
+    [
+        [
+            {
+                "depth": 255,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1020,
+                "type": ""
+            },
+            {
+                "depth": 255,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1020,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 255,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1020,
+                "type": ""
+            },
+            {
+                "depth": 129,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.04186838120222092,
+                "size": 384,
+                "type": ""
+            },
+            {
+                "depth": 129,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 384,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 12,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 3336,
+                "type": ""
+            },
+            {
+                "depth": 12,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 3336,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 12,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 3336,
+                "type": ""
+            },
+            {
+                "depth": 13,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.10702525079250336,
+                "size": 2693,
+                "type": ""
+            },
+            {
+                "depth": 13,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 2693,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 4372,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 57247,
+                "type": ""
+            },
+            {
+                "depth": 4372,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 57247,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 4372,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 57247,
+                "type": ""
+            },
+            {
+                "depth": 2425,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 2.087223529815674,
+                "size": 53113,
+                "type": ""
+            },
+            {
+                "depth": 2425,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 53113,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 24801,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 214335,
+                "type": ""
+            },
+            {
+                "depth": 24801,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 214335,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 24801,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 214335,
+                "type": ""
+            },
+            {
+                "depth": 8956,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 11.672505378723145,
+                "size": 138142,
+                "type": ""
+            },
+            {
+                "depth": 8956,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 138142,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 444,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 32060,
+                "type": ""
+            },
+            {
+                "depth": 444,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 32060,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 444,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 32060,
+                "type": ""
+            },
+            {
+                "depth": 207,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 2.001847505569458,
+                "size": 24297,
+                "type": ""
+            },
+            {
+                "depth": 207,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 24297,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 287,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 2865,
+                "type": ""
+            },
+            {
+                "depth": 287,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 2865,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 287,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 2865,
+                "type": ""
+            },
+            {
+                "depth": 158,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.26412150263786316,
+                "size": 2413,
+                "type": ""
+            },
+            {
+                "depth": 158,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 2413,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 274,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 27062,
+                "type": ""
+            },
+            {
+                "depth": 274,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 27062,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 274,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 27062,
+                "type": ""
+            },
+            {
+                "depth": 143,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 1.5444103479385376,
+                "size": 19356,
+                "type": ""
+            },
+            {
+                "depth": 143,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 19356,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 225,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 5416,
+                "type": ""
+            },
+            {
+                "depth": 225,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 5416,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 225,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 5416,
+                "type": ""
+            },
+            {
+                "depth": 127,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.3507063090801239,
+                "size": 4248,
+                "type": ""
+            },
+            {
+                "depth": 127,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 4248,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 5058,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 24618,
+                "type": ""
+            },
+            {
+                "depth": 5058,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 24618,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 5058,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 24618,
+                "type": ""
+            },
+            {
+                "depth": 5074,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.9961410164833069,
+                "size": 20724,
+                "type": ""
+            },
+            {
+                "depth": 5074,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 20724,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 250,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 18484,
+                "type": ""
+            },
+            {
+                "depth": 250,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 18484,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 250,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 18484,
+                "type": ""
+            },
+            {
+                "depth": 126,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 1.0500746965408325,
+                "size": 12175,
+                "type": ""
+            },
+            {
+                "depth": 126,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 12175,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 87,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 11839,
+                "type": ""
+            },
+            {
+                "depth": 87,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 11839,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 87,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 11839,
+                "type": ""
+            },
+            {
+                "depth": 59,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 1.1180379390716553,
+                "size": 6996,
+                "type": ""
+            },
+            {
+                "depth": 59,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 6996,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 16,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 693,
+                "type": ""
+            },
+            {
+                "depth": 16,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 693,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 16,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 693,
+                "type": ""
+            },
+            {
+                "depth": 14,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.030939793214201927,
+                "size": 649,
+                "type": ""
+            },
+            {
+                "depth": 14,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 649,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 10,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 174,
+                "type": ""
+            },
+            {
+                "depth": 10,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 174,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 10,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 174,
+                "type": ""
+            },
+            {
+                "depth": 5,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.006191242020577192,
+                "size": 115,
+                "type": ""
+            },
+            {
+                "depth": 5,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 115,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 20,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1342,
+                "type": ""
+            },
+            {
+                "depth": 20,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1342,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 20,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1342,
+                "type": ""
+            },
+            {
+                "depth": 13,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.04144144803285599,
+                "size": 1229,
+                "type": ""
+            },
+            {
+                "depth": 13,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 1229,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 16,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 260,
+                "type": ""
+            },
+            {
+                "depth": 16,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 260,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 16,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 260,
+                "type": ""
+            },
+            {
+                "depth": 11,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.008889494463801384,
+                "size": 235,
+                "type": ""
+            },
+            {
+                "depth": 11,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 235,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 114,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 46836,
+                "type": ""
+            },
+            {
+                "depth": 114,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 46836,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 114,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 46836,
+                "type": ""
+            },
+            {
+                "depth": 97,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 2.0110256671905518,
+                "size": 42079,
+                "type": ""
+            },
+            {
+                "depth": 97,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 42079,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 250,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 978,
+                "type": ""
+            },
+            {
+                "depth": 250,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 978,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 250,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 978,
+                "type": ""
+            },
+            {
+                "depth": 124,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.04011661559343338,
+                "size": 908,
+                "type": ""
+            },
+            {
+                "depth": 124,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 908,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 54,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 257,
+                "type": ""
+            },
+            {
+                "depth": 54,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 257,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 54,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 257,
+                "type": ""
+            },
+            {
+                "depth": 47,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.014313718304038048,
+                "size": 218,
+                "type": ""
+            },
+            {
+                "depth": 47,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 218,
+                "type": ""
+            }
+        ]
+    ],
+    [
+        [
+            {
+                "depth": 70,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 13758,
+                "type": ""
+            },
+            {
+                "depth": 70,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 13758,
+                "type": ""
+            }
+        ],
+        [
+            {
+                "depth": 70,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 13758,
+                "type": ""
+            },
+            {
+                "depth": 54,
+                "equivalent": true,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.826803982257843,
+                "size": 7219,
+                "type": ""
+            },
+            {
+                "depth": 54,
+                "equivalent": true,
+                "param": {},
+                "runtime": 0.0,
+                "size": 7219,
+                "type": ""
+            }
+        ]
+    ]
+]
