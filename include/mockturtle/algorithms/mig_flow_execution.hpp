@@ -34,15 +34,23 @@
 
 #include <list>
 #include <nlohmann/json.hpp>
+
+#include <mockturtle/algorithms/cleanup.hpp>
+#include <mockturtle/algorithms/cut_rewriting.hpp>
 #include <mockturtle/algorithms/functional_reduction.hpp>
 #include <mockturtle/algorithms/mapper.hpp>
-#include <mockturtle/algorithms/cleanup.hpp>
-#include <mockturtle/views/depth_view.hpp>
+#include <mockturtle/algorithms/mig_algebraic_rewriting.hpp>
+#include <mockturtle/algorithms/mig_resub.hpp>
+#include <mockturtle/algorithms/node_resynthesis/xag_npn.hpp>
 #include <mockturtle/networks/mig.hpp>
+#include <mockturtle/views/depth_view.hpp>
+#include <mockturtle/views/fanout_view.hpp>
 
+/*
+ *  Json serialization and deserialization for class used in mig_flow
+ */
 namespace mockturtle{
-	using namespace nlohmann;
-
+	using namespace nlohmann; 
 	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
 		map_params,
 		required_time,
@@ -54,284 +62,335 @@ namespace mockturtle{
 		enable_logic_sharing,
 		logic_sharing_cut_limit //,
 		//verbose 
-		)
+	)
 	
-	class operation_data{
-		public:
-			json param;
-			u_int32_t size;
-			u_int32_t depth;
-			float runtime;
-			bool cec;
+	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+		cut_rewriting_params,
+		cut_enumeration_ps.cut_size,
+		progress
+	)
 
-			operation_data(json object){
-				this->param = object["param"];
-				this->runtime = 0;
-			}
-			void load_data_mig( mig_network mig, bool cec ){
-				this->size = mig.num_gates();
-				this->depth = depth_view(mig).depth();
-				this->cec = cec;
-			}
-			json get_data_json(){
-				json res;
-				res["param"]=this->param;
-				res["size"] = this->size;
-				res["depth"]= this->depth;
-				res["runtime"] = this->runtime;
-				res["equivalent"] = this->cec;
-				return res;
-			}
-	};
-
-	namespace mig_flow_algo{
-
-		struct mig_flow_config{
-			exact_library<mig_network, mig_npn_resynthesis> exact_lib;
-		};
-
-		mig_network flow_map( mig_network mig, mig_flow_config* config, operation_data* data_out){
-			map_params map_ps = data_out->param.get<map_params>();
-  			map_stats map_st;
-
-			mig_network res = map( mig, config->exact_lib, map_ps, &map_st );
-			data_out->runtime = to_seconds( map_st.time_total );
-			return res;
-		}
-
-		mig_network flow_functionnal_reduction(mig_network mig, mig_flow_config* config, operation_data* data_out){
-			functional_reduction_params ps;
-    		functional_reduction_stats st;
-
-			mig_network res = mig;
-			functional_reduction( res, ps, &st );
-			data_out->runtime = to_seconds(st.time_total);
-			return res;
-
-		}
-
-		mig_network base_operation( int op_type, mig_network mig, mig_flow_config* config, operation_data* data_out){
-			switch (op_type)
-				{
-				case 201:
-					return flow_map( mig, config, data_out );
-				case 202:
-					return flow_functionnal_reduction( mig, config, data_out );
-				default:
-					break;
-				}
-			}
-	}
-	
-	class operation{
-		public :
-			std::string type;
-			operation_data* data;
-			operation* parent;
-			operation(){}
-			operation( std::string type, operation_data* data_load ){
-				this->data = data_load;
-			}
-			operation( std::string type, operation* parent, operation_data* data_load ){
-				this->parent = parent;
-				this->data = data_load;
-			}
-
-			virtual json save_to_json(){
-				json res = this->parent->save_to_json();
-				json data_json = this->data->get_data_json();
-				data_json["type"]=type;
-				res.push_back(data_json);
-				return res;
-			}
-			virtual float get_flow_runtime(){
-				float flow_runtime = this->parent->get_flow_runtime();
-				flow_runtime += this->data->runtime;
-				return flow_runtime;
-			}
-	};
-
-	class root : public operation{
-		public :
-		root(operation_data* data):operation( "root", data){
-
-		}
-			json save_to_json(){
-				json res = json::array();
-				json data_json = this->data->get_data_json();
-				data_json["type"]=type;
-				res.push_back(data_json);
-				return res;
-			}
-			float get_flow_runtime(){
-				float flow_runtime = 0;
-				return flow_runtime;
-			}
-	};
-
-	class loop : public operation{
-		public:
-			std::list<operation*> operations;
-			mig_network compute_loop(json flow, mig_network mig, operation* parent, mig_flow_algo::mig_flow_config* config){
-				mig_network res = mig;
-
-				operation_data* root_data = new operation_data(flow);
-				root_data->runtime = parent->data->runtime;
-				root_data->load_data_mig(mig,true);
-				operation* actual = new root(root_data);
-
-				while (true)
-				{
-					u_int32_t size_before = res.num_gates();
-					mig_network mig_buffer = cleanup_dangling(res);
-					std::list<operation*> loop_op_buffer;
-
-					for(const auto& item : flow["flow"].items()){
-						int type = item.value()["type"].get<int>();
-						switch (type)
-						{
-							case 101: //branching
-							case 102: //ending
-								//raise error 
-								break;
-							case 103: //looping 
-								{
-									loop* loop_operation = new loop();
-									mig_buffer = loop_operation->compute_loop(item.value(),res,actual,config);
-									actual = loop_operation;
-									loop_op_buffer.push_back(actual);
-								}
-								break;
-							case 201:
-							case 202:
-								{
-									operation_data* data = new operation_data(item.value());
-									mig_buffer = mig_flow_algo::base_operation( type, res, config, data );
-									bool cec = true; //IMPLEMENT EQUIVALENCE TO this->origin
-									data->load_data_mig(mig_buffer,cec);
-									actual = new operation( "operation", actual, data );
-
-									loop_op_buffer.push_back(actual);
-								}
-								break;
-							default:
-								break;
-						}
-					}
-					
-					if(mig_buffer.num_gates() >= size_before){
-						break;
-					}
-					res = mig_buffer;
-					this->operations.merge(loop_op_buffer);
-				}
-				
-
-				operation_data* data_loop = new operation_data(flow);
-				bool cec = true;
-				data_loop->load_data_mig(res,cec);
-				data_loop->runtime = this->operations.back()->get_flow_runtime();
-				this->parent = parent;
-				this->data = data_loop;
-				this->type = "loop";
-				return res;
-			}
-
-			json save_to_json(){
-				json res = this->parent->save_to_json();
-				json loop = this->data->get_data_json();
-				loop["flow"] = this->operations.back()->save_to_json();
-				loop["type"]=type;
-				res.push_back(loop);
-				return res;
-			}
-
-			float get_flow_runtime(){
-				float flow_runtime = this->parent->get_flow_runtime();
-				flow_runtime += this->data->runtime;
-				return flow_runtime;
-			}
-	};
-
-	class mig_flow{
-		public :
-			std::list<operation*> operations;
-			std::list<operation*> flows;
-
-			mig_network origin;
-			root* op_root;
-
-			mig_flow_algo::mig_flow_config* config;
-			
-			mig_network compute_flow( json flow, mig_network mig, operation* parent_adr){
-				operation* actual = parent_adr;
-				mig_network res = mig;
-
-				for(const auto& item : flow["flow"].items()){
-					int type = item.value()["type"].get<int>();
-					mig_network mig_buffer;
-					switch (type)
-					{
-					case 101: //branching
-						mig_buffer = cleanup_dangling(res);
-						compute_flow( item.value(), mig_buffer, actual );
-						break;
-					case 102: //ending
-						{
-							operation_data* data = new operation_data(item.value());
-							res = cleanup_dangling(res);
-							bool cec = true;
-							data->load_data_mig( res, cec);
-							actual = new operation( "end", actual, data );
-							this->flows.push_back(actual);
-						}
-						break;
-					case 103: //looping 
-						{
-							loop* loop_operation = new loop();
-							res = loop_operation->compute_loop(item.value(),res,actual,this->config);
-							actual = loop_operation;
-							this->operations.push_back(actual);
-						}
-						break;
-					case 201: //mapping
-						{
-							operation_data* data = new operation_data(item.value());
-							res = mig_flow_algo::base_operation( type, res, this->config, data );
-							bool cec = true; //IMPLEMENT EQUIVALENCE TO this->origin
-							data->load_data_mig(res,cec);
-							actual = new operation( "operation", actual, data );
-							this->operations.push_back(actual);
-						}
-						break;
-					default:
-						break;
-					}
-				}
-				return res;
-			}
-
-			mig_flow(json flow, mig_flow_algo::mig_flow_config* configuration, mig_network mig ){
-				this->config = configuration;
-				float init_runtime = 0;
-				operation_data* root_data = new operation_data(flow);
-				root_data->load_data_mig(mig,true);
-				this->op_root = new root( root_data);
-				this->origin = cleanup_dangling(mig);
-				compute_flow(flow, mig, this->op_root);
-			}
-
-
-			json save_to_json_flow(){
-				json res = json::array();
-				for(const auto& item : this->flows){
-					res.push_back(item->save_to_json());
-				}
-				return res;
-			}
-
-	};
-
+	NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(
+		resubstitution_params,
+		max_pis,
+		max_inserts,
+		progress
+	)
 
 }
 
+
+namespace mockturtle{
+	using namespace nlohmann;
+
+	class mig_data{
+		public:
+			u_int32_t size = 0;
+			u_int32_t depth = 0;
+
+			void load_data_mig( mig_network mig){
+				this->size = mig.num_gates();
+				this->depth = depth_view(mig).depth();
+			}
+
+			json get_data_json(){
+				json res;
+				res["size"] = this->size;
+				res["depth"]= this->depth;
+				return res;
+			}
+	};
+
+	class operation_algo_data{
+			public:
+				//operation param
+				json param;
+
+				//operation data
+				float runtime = 0;
+				map_stats flow_map_stat;
+				functional_reduction_stats flow_functionnal_reduction_stat;
+				cut_rewriting_stats flow_cut_rewriting_stats;
+				resubstitution_stats flow_resubstitution_stats;
+				mig_algebraic_depth_rewriting_stats flow_mig_algebraic_depth_rewriting_stats;
+
+				//mig_data
+				mig_data mig_stats;
+
+				operation_algo_data(){
+				}
+				operation_algo_data(json object){
+					this->param = object["param"];
+				}
+
+				json get_data_json(){
+					json res = mig_stats.get_data_json();
+					res["param"]=this->param;
+					res["runtime"] = this->runtime;
+					return res;
+				}
+			};
+
+	mig_network flow_map( mig_network mig, operation_algo_data* data_out){
+		mig_npn_resynthesis resyn{ true };
+		exact_library_params eps;
+		exact_library<mig_network, mig_npn_resynthesis> exact_lib( resyn, eps );
+		map_params map_ps = data_out->param.get<map_params>();
+		mig_network res = mig;
+
+		res = map( res, exact_lib, map_ps, &data_out->flow_map_stat );
+		res = cleanup_dangling(res);
+
+		data_out->runtime = to_seconds( data_out->flow_map_stat.time_total );
+		return res;
+	}
+
+	mig_network flow_functionnal_reduction(mig_network mig, operation_algo_data* data_out){
+		functional_reduction_params ps;
+		mig_network res = mig;
+
+		functional_reduction( res, ps, &data_out->flow_functionnal_reduction_stat );
+		res = cleanup_dangling(res);
+
+		data_out->runtime = to_seconds( data_out->flow_functionnal_reduction_stat.time_total );
+		return res;
+
+	}
+
+	/**
+	 * @brief doesn't work 
+	 * 
+	 * @param mig 
+	 * @param data_out 
+	 * @return mig_network 
+	 */
+	mig_network flow_cut_rewriting_with_compatibility_graph(mig_network mig, operation_algo_data* data_out){
+		xag_npn_resynthesis<mig_network> resyn;
+		cut_rewriting_params ps = data_out->param.get<cut_rewriting_params>();
+		mig_network res = mig;
+
+		cut_rewriting_with_compatibility_graph( res, resyn, ps, &data_out->flow_cut_rewriting_stats );
+		res = cleanup_dangling(res);
+
+		data_out->runtime = to_seconds( data_out->flow_cut_rewriting_stats.time_total );
+		return res;
+	}
+
+	mig_network flow_cut_rewriting(mig_network mig, operation_algo_data* data_out){
+		xag_npn_resynthesis<mig_network> resyn;
+		cut_rewriting_params ps = data_out->param.get<cut_rewriting_params>();
+		mig_network res = mig;
+
+		cut_rewriting( res, resyn, ps, &data_out->flow_cut_rewriting_stats );
+		res = cleanup_dangling(res);
+
+		data_out->runtime = to_seconds( data_out->flow_cut_rewriting_stats.time_total );
+		return res;
+	}
+
+	/**
+	 * @brief doesn't work 
+	 * 
+	 * @param mig 
+	 * @param data_out 
+	 * @return mig_network 
+	 */
+	mig_network flow_mig_resubstitution(mig_network mig, operation_algo_data* data_out){
+		resubstitution_params ps = data_out->param.get<resubstitution_params>();
+		mig_network res = mig;
+		depth_view depth_mig{res};
+		fanout_view fanout_mig{depth_mig};
+
+		mig_resubstitution( fanout_mig, ps, &data_out->flow_resubstitution_stats );
+		res = cleanup_dangling(res);
+
+		data_out->runtime = to_seconds( data_out->flow_resubstitution_stats.time_total );
+		return res;
+	}
+
+	mig_network flow_mig_algebraic_rewriting(mig_network mig, operation_algo_data* data_out){
+			mig_algebraic_depth_rewriting_params ps;
+			mig_network res = mig;
+			depth_view mig_depth{res};
+
+			mig_algebraic_depth_rewriting( mig_depth, ps, &data_out->flow_mig_algebraic_depth_rewriting_stats );
+    		res = cleanup_dangling(res);
+
+			data_out->runtime = to_seconds( data_out->flow_mig_algebraic_depth_rewriting_stats.time_total );
+			return res;
+		}
+
+	class operation{
+		public :
+			int type;
+			operation(int type){
+				this->type = type;
+			}
+			virtual float get_flow_runtime(){
+				return 0;
+			}
+			virtual json save_data_to_json(){
+				json res;
+				res["type"]=type;
+				return res;
+			}
+	};
+
+	class root_operation: public operation{
+		public :
+			mig_data root_stat;
+
+			root_operation(mig_network mig):operation(100){
+				root_stat.load_data_mig(mig);
+			}
+
+			float get_flow_runtime(){
+				return 0;
+			}
+			json save_data_to_json(){
+				json res = json::array();
+				res.push_back(this->root_stat.get_data_json());
+				return res;
+			}
+
+	};
+
+	class chained_algo_operation: public operation{
+		public :
+			operation* parent;
+			operation_algo_data* operation_data;
+
+			chained_algo_operation(operation* parent, operation_algo_data* operation_data, int type ):operation(type){
+				this->operation_data = operation_data;
+				this->parent = parent;
+			}
+
+			float get_flow_runtime(){
+				float res = this->parent->get_flow_runtime();
+				res += this->operation_data->runtime;
+				return res;
+			}
+			json save_data_to_json(){
+				json res = this->parent->save_data_to_json();
+				json data = this->operation_data->get_data_json();
+				data["type"] = this->type;
+				res.push_back(data);
+				return res;
+			}
+	};
+
+	class end_operation: public operation{
+		public :
+			operation* parent;
+			mig_network result;
+			mig_data end_stat;
+
+			end_operation( operation* parent, mig_network mig, bool loop = false):operation(199){
+				this->parent = parent;
+				if(not loop){
+					this->result = mig;	
+				}
+				this->end_stat.load_data_mig(mig);
+			}
+
+			float get_flow_runtime(){
+				float res = this->parent->get_flow_runtime();
+				return res;
+			}
+			json save_data_to_json(){
+				json res = this->parent->save_data_to_json();
+				res.push_back(this->end_stat.get_data_json());
+				return res;
+			}
+	};
+
+	class loop_operation: public operation{
+		public :
+			operation* parent;
+			std::list<end_operation*> operations;
+			mig_data data;
+
+			loop_operation(operation* parent):operation(102){
+				this->parent = parent;
+			}
+			virtual float get_flow_runtime(){
+				float res = this->parent->get_flow_runtime();
+				
+				res += this->operations.size() == 0 ? 0 : this->operations.back()->get_flow_runtime();
+				return res;
+			}
+			json save_data_to_json(){
+				json res = this->parent->save_data_to_json();
+				json data = this->data.get_data_json();
+				data["type"] = this->type;
+				data["flow"] = this->operations.size() == 0 ? json::array():this->operations.back()->save_data_to_json();
+				res.push_back(data);
+				return res;
+			}
+	};
+	
+	mig_network compute_flow(mig_network* mig, json flow, std::list<end_operation*>* op_result, operation* root , bool loop = false){
+		mig_network res = *mig;
+		operation* actual = root;
+
+		for(const auto& item : flow["flow"].items()){
+			int type_of_operation = item.value()["type"].get<int>();
+			if( type_of_operation == 101){ //branching
+				mig_network copy = cleanup_dangling(res);
+				compute_flow(&copy, item.value(), op_result, new root_operation(copy));
+				continue;
+			}
+			if(type_of_operation ==102){
+				mig_network mig_buffer = res;
+				loop_operation* loop = new loop_operation(actual); 
+				mig_buffer = compute_flow( &res, item.value(), &loop->operations, new root_operation(res), true);
+				u_int32_t size_before = res.num_gates();
+				while (loop->operations.back()->end_stat.size < size_before)
+				{
+					res = mig_buffer;
+					size_before = loop->operations.back()->end_stat.size;
+					mig_buffer = compute_flow( &res, item.value(), &loop->operations, loop->operations.back(), true);
+				}
+
+				loop->operations.pop_back();
+				loop->data.load_data_mig(res);
+				actual = loop;
+				continue;
+			}
+			operation_algo_data* operation_data = new operation_algo_data(item.value());
+			switch (type_of_operation)
+			{
+			case 201:
+				res = flow_map( res, operation_data );
+				break;
+			case 202:
+				res = flow_functionnal_reduction( res, operation_data );
+				break;
+			case 203:
+				res = flow_cut_rewriting_with_compatibility_graph( res, operation_data );
+				break;
+			case 204:
+				res = flow_cut_rewriting( res, operation_data );
+				break;
+			case 205:
+				res = flow_mig_resubstitution( res, operation_data );
+				break;
+			case 206:
+				res = flow_mig_algebraic_rewriting( res, operation_data );
+				break;
+			default:
+				break;
+			}
+			operation_data->mig_stats.load_data_mig(res);
+			actual = new chained_algo_operation( actual, operation_data, type_of_operation );
+			actual->type = type_of_operation;
+		}
+		if(not loop){
+			op_result->push_back(new end_operation( actual, res ));
+		}else{
+			op_result->push_back(new end_operation( actual, res, true ));
+		}
+		return res;
+	}
+	
+}

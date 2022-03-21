@@ -1,0 +1,61 @@
+{
+    "type" :101,
+    "flow":[
+        {
+            "type":101,
+            "flow":[
+                {
+                    "type":202,
+                    "param":{}
+                },
+                {
+                    "type":201,
+                    "param":{
+                        "skip_delay_round" : true,
+                        "required_time" : 1.7976931348623157e+308,
+                        "ela_rounds" :3,
+                        "enable_logic_sharing" :true,
+                        "logic_sharing_cut_limit" :1
+                    }
+                }
+
+            ]
+        },
+        {
+            "type":101,
+            "flow":[
+                {
+                    "type":102,
+                    "flow":[
+                        {
+                            "type":206,
+                            "param":{}
+                        },
+                        {
+                            "type":201,
+                            "param":{
+                                "skip_delay_round" : true,
+                                "required_time" : 1.7976931348623157e+308,
+                                "ela_rounds" :3,
+                                "enable_logic_sharing" :true,
+                                "logic_sharing_cut_limit" :1
+                            }
+                        }
+                    ]
+                }
+                
+
+            ]
+        },
+        {
+            "type":205,
+            "param":{
+                "max_pis" : 8,
+                "max_inserts" : 1,
+                "progress" :false
+            }
+        }
+        
+        
+    ]   
+}
