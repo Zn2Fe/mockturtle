@@ -1132,25 +1132,25 @@
         "depth": 255,
         "depth_mig": 129,
         "equivalent": true,
-        "runtime1": 0.04501251131296158,
+        "runtime1": 0.0538996122777462,
         "size": 1020,
         "size_mig": 384
       },
       {
         "benchmark": "adder",
         "depth": 255,
-        "depth_mig": 129,
+        "depth_mig": 14,
         "equivalent": true,
-        "runtime1": 0.042689248919487,
+        "runtime1": 0.05769827216863632,
         "size": 1020,
-        "size_mig": 384
+        "size_mig": 1165
       },
       {
         "benchmark": "adder",
         "depth": 255,
         "depth_mig": 254,
         "equivalent": true,
-        "runtime1": 0.0026074040215462446,
+        "runtime1": 0.003223793115466833,
         "size": 1020,
         "size_mig": 893
       },
@@ -1159,25 +1159,25 @@
         "depth": 12,
         "depth_mig": 13,
         "equivalent": true,
-        "runtime1": 0.12406712025403976,
+        "runtime1": 0.13113106787204742,
         "size": 3336,
         "size_mig": 2693
       },
       {
         "benchmark": "bar",
         "depth": 12,
-        "depth_mig": 13,
+        "depth_mig": 12,
         "equivalent": true,
-        "runtime1": 1.642852544784546,
+        "runtime1": 0.0855017825961113,
         "size": 3336,
-        "size_mig": 2588
+        "size_mig": 3024
       },
       {
         "benchmark": "bar",
         "depth": 12,
         "depth_mig": 13,
         "equivalent": true,
-        "runtime1": 0.00994484405964613,
+        "runtime1": 0.011545445770025253,
         "size": 3336,
         "size_mig": 2944
       },
@@ -1186,25 +1186,25 @@
         "depth": 4372,
         "depth_mig": 2474,
         "equivalent": true,
-        "runtime1": 4.367586135864258,
+        "runtime1": 4.614004135131836,
         "size": 57247,
         "size_mig": 26848
       },
       {
         "benchmark": "div",
         "depth": 4372,
-        "depth_mig": 2223,
+        "depth_mig": 772,
         "equivalent": true,
-        "runtime1": 22.257556915283203,
+        "runtime1": 77.84701538085938,
         "size": 57247,
-        "size_mig": 18999
+        "size_mig": 110061
       },
       {
         "benchmark": "div",
         "depth": 4372,
         "depth_mig": 4438,
         "equivalent": true,
-        "runtime1": 0.6190710067749023,
+        "runtime1": 0.6158256530761719,
         "size": 57247,
         "size_mig": 51914
       },
@@ -1213,25 +1213,25 @@
         "depth": 24801,
         "depth_mig": 8956,
         "equivalent": true,
-        "runtime1": 15.632282257080078,
+        "runtime1": 15.02633285522461,
         "size": 214335,
         "size_mig": 138143
       },
       {
         "benchmark": "hyp",
         "depth": 24801,
-        "depth_mig": 8879,
+        "depth_mig": 15812,
         "equivalent": true,
-        "runtime1": 36.85436248779297,
+        "runtime1": 511.24267578125,
         "size": 214335,
-        "size_mig": 135973
+        "size_mig": 183085
       },
       {
         "benchmark": "hyp",
         "depth": 24801,
         "depth_mig": 9503,
         "equivalent": true,
-        "runtime1": 4.867537021636963,
+        "runtime1": 4.695799350738525,
         "size": 214335,
         "size_mig": 198816
       },
@@ -1240,25 +1240,25 @@
         "depth": 444,
         "depth_mig": 190,
         "equivalent": true,
-        "runtime1": 7.357326030731201,
+        "runtime1": 7.387477874755859,
         "size": 32060,
         "size_mig": 23929
       },
       {
         "benchmark": "log2",
         "depth": 444,
-        "depth_mig": 190,
+        "depth_mig": 218,
         "equivalent": true,
-        "runtime1": 7.3501362800598145,
+        "runtime1": 17.821748733520508,
         "size": 32060,
-        "size_mig": 23921
+        "size_mig": 40774
       },
       {
         "benchmark": "log2",
         "depth": 444,
         "depth_mig": 444,
         "equivalent": true,
-        "runtime1": 0.15388257801532745,
+        "runtime1": 0.15765263140201569,
         "size": 32060,
         "size_mig": 31998
       },
@@ -1267,25 +1267,25 @@
         "depth": 287,
         "depth_mig": 158,
         "equivalent": true,
-        "runtime1": 0.2871759831905365,
+        "runtime1": 0.28537505865097046,
         "size": 2865,
         "size_mig": 2413
       },
       {
         "benchmark": "max",
         "depth": 287,
-        "depth_mig": 159,
+        "depth_mig": 27,
         "equivalent": true,
-        "runtime1": 0.9753170609474182,
+        "runtime1": 0.8804868459701538,
         "size": 2865,
-        "size_mig": 2219
+        "size_mig": 8632
       },
       {
         "benchmark": "max",
         "depth": 287,
         "depth_mig": 287,
         "equivalent": true,
-        "runtime1": 0.007429493125528097,
+        "runtime1": 0.006958112120628357,
         "size": 2865,
         "size_mig": 2840
       },
@@ -1294,25 +1294,25 @@
         "depth": 274,
         "depth_mig": 143,
         "equivalent": true,
-        "runtime1": 2.222416400909424,
+        "runtime1": 2.2678568363189697,
         "size": 27062,
         "size_mig": 19354
       },
       {
         "benchmark": "multiplier",
         "depth": 274,
-        "depth_mig": 142,
+        "depth_mig": 77,
         "equivalent": true,
-        "runtime1": 2.9908602237701416,
+        "runtime1": 10.539436340332031,
         "size": 27062,
-        "size_mig": 19297
+        "size_mig": 29448
       },
       {
         "benchmark": "multiplier",
         "depth": 274,
         "depth_mig": 269,
         "equivalent": true,
-        "runtime1": 0.1483619064092636,
+        "runtime1": 0.1478472203016281,
         "size": 27062,
         "size_mig": 26796
       },
@@ -1321,25 +1321,25 @@
         "depth": 225,
         "depth_mig": 128,
         "equivalent": true,
-        "runtime1": 0.8512253761291504,
+        "runtime1": 0.8595303297042847,
         "size": 5416,
         "size_mig": 4213
       },
       {
         "benchmark": "sin",
         "depth": 225,
-        "depth_mig": 122,
+        "depth_mig": 100,
         "equivalent": true,
-        "runtime1": 4.990427494049072,
+        "runtime1": 1.0521752834320068,
         "size": 5416,
-        "size_mig": 4158
+        "size_mig": 6809
       },
       {
         "benchmark": "sin",
         "depth": 225,
         "depth_mig": 226,
         "equivalent": true,
-        "runtime1": 0.047425705939531326,
+        "runtime1": 0.04690011218190193,
         "size": 5416,
         "size_mig": 5317
       },
@@ -1348,25 +1348,25 @@
         "depth": 5058,
         "depth_mig": 5022,
         "equivalent": true,
-        "runtime1": 1.6003215312957764,
+        "runtime1": 1.6586323976516724,
         "size": 24618,
         "size_mig": 20666
       },
       {
         "benchmark": "sqrt",
         "depth": 5058,
-        "depth_mig": 3845,
+        "depth_mig": 3955,
         "equivalent": true,
-        "runtime1": 57.80149841308594,
+        "runtime1": 6.341406345367432,
         "size": 24618,
-        "size_mig": 17515
+        "size_mig": 29261
       },
       {
         "benchmark": "sqrt",
         "depth": 5058,
         "depth_mig": 7036,
         "equivalent": true,
-        "runtime1": 0.22970157861709595,
+        "runtime1": 0.2320587933063507,
         "size": 24618,
         "size_mig": 20410
       },
@@ -1375,25 +1375,25 @@
         "depth": 250,
         "depth_mig": 126,
         "equivalent": true,
-        "runtime1": 1.4934463500976563,
+        "runtime1": 1.5206862688064575,
         "size": 18484,
         "size_mig": 12177
       },
       {
         "benchmark": "square",
         "depth": 250,
-        "depth_mig": 126,
+        "depth_mig": 29,
         "equivalent": true,
-        "runtime1": 3.4444994926452637,
+        "runtime1": 5.766249179840088,
         "size": 18484,
-        "size_mig": 11482
+        "size_mig": 13555
       },
       {
         "benchmark": "square",
         "depth": 250,
         "depth_mig": 251,
         "equivalent": true,
-        "runtime1": 0.11008569598197937,
+        "runtime1": 0.11185963451862335,
         "size": 18484,
         "size_mig": 18060
       },
@@ -1402,25 +1402,25 @@
         "depth": 87,
         "depth_mig": 59,
         "equivalent": true,
-        "runtime1": 1.6798356771469116,
+        "runtime1": 1.692887306213379,
         "size": 11839,
         "size_mig": 6996
       },
       {
         "benchmark": "arbiter",
         "depth": 87,
-        "depth_mig": 59,
+        "depth_mig": 10,
         "equivalent": true,
-        "runtime1": 1.6648005247116089,
+        "runtime1": 5.0190606117248535,
         "size": 11839,
-        "size_mig": 6996
+        "size_mig": 6483
       },
       {
         "benchmark": "arbiter",
         "depth": 87,
         "depth_mig": 87,
         "equivalent": true,
-        "runtime1": 0.04174679145216942,
+        "runtime1": 0.039195552468299866,
         "size": 11839,
         "size_mig": 11711
       },
@@ -1429,25 +1429,25 @@
         "depth": 16,
         "depth_mig": 14,
         "equivalent": true,
-        "runtime1": 0.03208418935537338,
+        "runtime1": 0.030778637155890465,
         "size": 693,
         "size_mig": 647
       },
       {
         "benchmark": "cavlc",
         "depth": 16,
-        "depth_mig": 13,
+        "depth_mig": 11,
         "equivalent": true,
-        "runtime1": 0.11114393174648285,
+        "runtime1": 0.05573815107345581,
         "size": 693,
-        "size_mig": 622
+        "size_mig": 653
       },
       {
         "benchmark": "cavlc",
         "depth": 16,
         "depth_mig": 16,
         "equivalent": true,
-        "runtime1": 0.04961242154240608,
+        "runtime1": 0.04674956947565079,
         "size": 693,
         "size_mig": 615
       },
@@ -1456,7 +1456,7 @@
         "depth": 10,
         "depth_mig": 5,
         "equivalent": true,
-        "runtime1": 0.005328192841261625,
+        "runtime1": 0.006033257115632296,
         "size": 174,
         "size_mig": 116
       },
@@ -1465,16 +1465,16 @@
         "depth": 10,
         "depth_mig": 5,
         "equivalent": true,
-        "runtime1": 0.01026558130979538,
+        "runtime1": 0.006991775706410408,
         "size": 174,
-        "size_mig": 111
+        "size_mig": 119
       },
       {
         "benchmark": "ctrl",
         "depth": 10,
         "depth_mig": 11,
         "equivalent": true,
-        "runtime1": 0.031981211155653,
+        "runtime1": 0.031200077384710312,
         "size": 174,
         "size_mig": 86
       },
@@ -1483,7 +1483,7 @@
         "depth": 3,
         "depth_mig": 3,
         "equivalent": true,
-        "runtime1": 0.013269429095089436,
+        "runtime1": 0.011762566864490509,
         "size": 304,
         "size_mig": 304
       },
@@ -1501,7 +1501,7 @@
         "depth": 3,
         "depth_mig": 3,
         "equivalent": true,
-        "runtime1": 0.0027513839304447174,
+        "runtime1": 0.003113730112090707,
         "size": 304,
         "size_mig": 304
       },
@@ -1510,25 +1510,25 @@
         "depth": 20,
         "depth_mig": 13,
         "equivalent": true,
-        "runtime1": 0.04473360627889633,
+        "runtime1": 0.04549869894981384,
         "size": 1342,
         "size_mig": 1204
       },
       {
         "benchmark": "i2c",
         "depth": 20,
-        "depth_mig": 12,
+        "depth_mig": 10,
         "equivalent": true,
-        "runtime1": 0.16760964691638947,
+        "runtime1": 0.058908116072416306,
         "size": 1342,
-        "size_mig": 1183
+        "size_mig": 1260
       },
       {
         "benchmark": "i2c",
         "depth": 20,
         "depth_mig": 20,
         "equivalent": true,
-        "runtime1": 0.010604830458760262,
+        "runtime1": 0.010140396654605865,
         "size": 1342,
         "size_mig": 1245
       },
@@ -1537,25 +1537,25 @@
         "depth": 16,
         "depth_mig": 11,
         "equivalent": true,
-        "runtime1": 0.0089345658197999,
+        "runtime1": 0.008918054401874542,
         "size": 260,
         "size_mig": 232
       },
       {
         "benchmark": "int2float",
         "depth": 16,
-        "depth_mig": 10,
+        "depth_mig": 9,
         "equivalent": true,
-        "runtime1": 0.01799658313393593,
+        "runtime1": 0.017418725416064262,
         "size": 260,
-        "size_mig": 221
+        "size_mig": 237
       },
       {
         "benchmark": "int2float",
         "depth": 16,
         "depth_mig": 16,
         "equivalent": true,
-        "runtime1": 0.0037466229405254126,
+        "runtime1": 0.004030047915875912,
         "size": 260,
         "size_mig": 222
       },
@@ -1564,25 +1564,25 @@
         "depth": 114,
         "depth_mig": 98,
         "equivalent": true,
-        "runtime1": 5.690961837768555,
+        "runtime1": 5.643622398376465,
         "size": 46836,
         "size_mig": 41942
       },
       {
         "benchmark": "mem_ctrl",
         "depth": 114,
-        "depth_mig": 94,
+        "depth_mig": 70,
         "equivalent": true,
-        "runtime1": 52.52800750732422,
+        "runtime1": 3.314603328704834,
         "size": 46836,
-        "size_mig": 40940
+        "size_mig": 44777
       },
       {
         "benchmark": "mem_ctrl",
         "depth": 114,
         "depth_mig": 114,
         "equivalent": true,
-        "runtime1": 0.4049769639968872,
+        "runtime1": 0.40552496910095215,
         "size": 46836,
         "size_mig": 43447
       },
@@ -1591,25 +1591,25 @@
         "depth": 250,
         "depth_mig": 124,
         "equivalent": true,
-        "runtime1": 0.0846102386713028,
+        "runtime1": 0.06972196698188782,
         "size": 978,
         "size_mig": 908
       },
       {
         "benchmark": "priority",
         "depth": 250,
-        "depth_mig": 117,
+        "depth_mig": 125,
         "equivalent": true,
-        "runtime1": 0.4127787947654724,
+        "runtime1": 0.1007019579410553,
         "size": 978,
-        "size_mig": 808
+        "size_mig": 1133
       },
       {
         "benchmark": "priority",
         "depth": 250,
         "depth_mig": 188,
         "equivalent": true,
-        "runtime1": 0.004186595790088177,
+        "runtime1": 0.0038635029923170805,
         "size": 978,
         "size_mig": 668
       },
@@ -1618,25 +1618,25 @@
         "depth": 54,
         "depth_mig": 47,
         "equivalent": true,
-        "runtime1": 0.01613638922572136,
+        "runtime1": 0.016103995963931084,
         "size": 257,
         "size_mig": 218
       },
       {
         "benchmark": "router",
         "depth": 54,
-        "depth_mig": 42,
+        "depth_mig": 14,
         "equivalent": true,
-        "runtime1": 0.03632422536611557,
+        "runtime1": 0.013565430417656898,
         "size": 257,
-        "size_mig": 206
+        "size_mig": 445
       },
       {
         "benchmark": "router",
         "depth": 54,
         "depth_mig": 54,
         "equivalent": true,
-        "runtime1": 0.00103811698500067,
+        "runtime1": 0.001116325962357223,
         "size": 257,
         "size_mig": 257
       },
@@ -1645,29 +1645,834 @@
         "depth": 70,
         "depth_mig": 52,
         "equivalent": true,
-        "runtime1": 1.7242023944854736,
+        "runtime1": 1.662356972694397,
         "size": 13758,
         "size_mig": 6262
       },
       {
         "benchmark": "voter",
         "depth": 70,
-        "depth_mig": 43,
+        "depth_mig": 46,
         "equivalent": true,
-        "runtime1": 3.378939151763916,
+        "runtime1": 2.6475772857666016,
         "size": 13758,
-        "size_mig": 5049
+        "size_mig": 8204
       },
       {
         "benchmark": "voter",
         "depth": 70,
         "depth_mig": 81,
         "equivalent": true,
-        "runtime1": 0.1191200390458107,
+        "runtime1": 0.11883489787578583,
         "size": 13758,
         "size_mig": 10462
       }
     ],
     "version": "ee5e310"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.8766580820083618,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.7958663702011108,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.8435434699058533,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 1.1828274726867676,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 15.708660125732422,
+        "size": 3336,
+        "size_mig": 2588
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 12,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 3.8752787113189697,
+        "size": 3336,
+        "size_mig": 3016
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 14,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 16.778793334960938,
+        "size": 3336,
+        "size_mig": 2496
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 14,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 18.110027313232422,
+        "size": 3336,
+        "size_mig": 2496
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2246,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 140.96527099609375,
+        "size": 57247,
+        "size_mig": 19085
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2213,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 73.72126770019531,
+        "size": 57247,
+        "size_mig": 26103
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2231,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 140.1548614501953,
+        "size": 57247,
+        "size_mig": 18505
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2231,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 392.49560546875,
+        "size": 57247,
+        "size_mig": 18505
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8885,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 651.1337890625,
+        "size": 214335,
+        "size_mig": 137054
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8761,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 427.7603454589844,
+        "size": 214335,
+        "size_mig": 135995
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8884,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 693.5867309570313,
+        "size": 214335,
+        "size_mig": 125006
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8884,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 641.889892578125,
+        "size": 214335,
+        "size_mig": 125006
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 190,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 47.572322845458984,
+        "size": 32060,
+        "size_mig": 23929
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 173,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 61.14725112915039,
+        "size": 32060,
+        "size_mig": 24866
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 195,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 65.28209686279297,
+        "size": 32060,
+        "size_mig": 23736
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 195,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 117.92656707763672,
+        "size": 32060,
+        "size_mig": 23736
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 9.633224487304688,
+        "size": 2865,
+        "size_mig": 2171
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 146,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 8.14978313446045,
+        "size": 2865,
+        "size_mig": 2401
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 10.040621757507324,
+        "size": 2865,
+        "size_mig": 2168
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 13.337627410888672,
+        "size": 2865,
+        "size_mig": 2168
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 37.824951171875,
+        "size": 27062,
+        "size_mig": 19299
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 133,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 39.95014572143555,
+        "size": 27062,
+        "size_mig": 19486
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 149,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 52.11785888671875,
+        "size": 27062,
+        "size_mig": 19150
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 149,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 79.43443298339844,
+        "size": 27062,
+        "size_mig": 19150
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 123,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 12.946130752563477,
+        "size": 5416,
+        "size_mig": 4165
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 108,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 14.178709983825684,
+        "size": 5416,
+        "size_mig": 4275
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 124,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 93.81755065917969,
+        "size": 5416,
+        "size_mig": 4128
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 124,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 102.50074768066406,
+        "size": 5416,
+        "size_mig": 4128
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 3845,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 367.2279968261719,
+        "size": 24618,
+        "size_mig": 17518
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 3351,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 60.199127197265625,
+        "size": 24618,
+        "size_mig": 22984
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 2264,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 417.14849853515625,
+        "size": 24618,
+        "size_mig": 13056
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 2263,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 442.1813659667969,
+        "size": 24618,
+        "size_mig": 13059
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 28.996280670166016,
+        "size": 18484,
+        "size_mig": 11924
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 31.964391708374023,
+        "size": 18484,
+        "size_mig": 11963
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 46.255348205566406,
+        "size": 18484,
+        "size_mig": 9153
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 65.49007415771484,
+        "size": 18484,
+        "size_mig": 9147
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 27.658832550048828,
+        "size": 11839,
+        "size_mig": 6996
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 24.983097076416016,
+        "size": 11839,
+        "size_mig": 7000
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 60,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 31.78727912902832,
+        "size": 11839,
+        "size_mig": 6866
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 60,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 55.778648376464844,
+        "size": 11839,
+        "size_mig": 6866
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 1.3441015481948853,
+        "size": 693,
+        "size_mig": 621
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 11,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 1.0460178852081299,
+        "size": 693,
+        "size_mig": 661
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 362.5689697265625,
+        "size": 693,
+        "size_mig": 530
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 361.76751708984375,
+        "size": 693,
+        "size_mig": 530
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.2167906016111374,
+        "size": 174,
+        "size_mig": 111
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.1509564220905304,
+        "size": 174,
+        "size_mig": 117
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 8,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 5.103357791900635,
+        "size": 174,
+        "size_mig": 74
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 8,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 5.194706916809082,
+        "size": 174,
+        "size_mig": 74
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.0,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.0,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 0.06390250474214554,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 1.9410927295684814,
+        "size": 1342,
+        "size_mig": 1190
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 11,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 1.7499035596847534,
+        "size": 1342,
+        "size_mig": 1220
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 5.976681709289551,
+        "size": 1342,
+        "size_mig": 1107
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 7.099513053894043,
+        "size": 1342,
+        "size_mig": 1107
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.3294866681098938,
+        "size": 260,
+        "size_mig": 221
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.333482563495636,
+        "size": 260,
+        "size_mig": 231
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 1.8580174446105957,
+        "size": 260,
+        "size_mig": 198
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 2.035832405090332,
+        "size": 260,
+        "size_mig": 198
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 95,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 130.6317596435547,
+        "size": 46836,
+        "size_mig": 41126
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 72,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 156.2818145751953,
+        "size": 46836,
+        "size_mig": 42433
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 96,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 357.2723693847656,
+        "size": 46836,
+        "size_mig": 39472
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 96,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 426.16998291015625,
+        "size": 46836,
+        "size_mig": 39472
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 2.35258412361145,
+        "size": 978,
+        "size_mig": 808
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 250,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.0,
+        "size": 978,
+        "size_mig": 978
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 3.058817148208618,
+        "size": 978,
+        "size_mig": 542
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 3.9455699920654297,
+        "size": 978,
+        "size_mig": 542
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 43,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.4733710289001465,
+        "size": 257,
+        "size_mig": 207
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 54,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.0,
+        "size": 257,
+        "size_mig": 257
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 42,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.7599801421165466,
+        "size": 257,
+        "size_mig": 190
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 42,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 0.936577558517456,
+        "size": 257,
+        "size_mig": 190
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 44,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 23.42736053466797,
+        "size": 13758,
+        "size_mig": 5327
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 44,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 22.45647430419922,
+        "size": 13758,
+        "size_mig": 6115
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 40,
+        "equivalent": true,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 33.37583923339844,
+        "size": 13758,
+        "size_mig": 4414
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 40,
+        "equivalent": true,
+        "flow": "config_test",
+        "runtime1": 40.744293212890625,
+        "size": 13758,
+        "size_mig": 4416
+      }
+    ],
+    "version": "b14b13a"
   }
 ]

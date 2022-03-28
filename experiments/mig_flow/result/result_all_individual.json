@@ -1,0 +1,2022 @@
+[
+    {
+        "benchmark": "adder",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 255,
+                "size": 1020
+            },
+            {
+                "depth": 129,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.37619367241859436,
+                "size": 384
+            },
+            {
+                "depth": 129,
+                "name": "map",
+                "size": 384
+            }
+        ]
+    },
+    {
+        "benchmark": "adder",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 255,
+                "size": 1020
+            },
+            {
+                "depth": 255,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.22277620434761047,
+                "size": 1020
+            },
+            {
+                "depth": 255,
+                "name": "functionnal_reduction",
+                "size": 1020
+            }
+        ]
+    },
+    {
+        "benchmark": "adder",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 255,
+                "size": 1020
+            },
+            {
+                "depth": 255,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.643649697303772,
+                "size": 1020
+            },
+            {
+                "depth": 255,
+                "name": "cut_rewriting",
+                "size": 1020
+            }
+        ]
+    },
+    {
+        "benchmark": "adder",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 255,
+                "size": 1020
+            },
+            {
+                "depth": 254,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.08071659505367279,
+                "size": 893
+            },
+            {
+                "depth": 254,
+                "name": "resubsitution",
+                "size": 893
+            }
+        ]
+    },
+    {
+        "benchmark": "bar",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 12,
+                "size": 3336
+            },
+            {
+                "depth": 13,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.9213886857032776,
+                "size": 2693
+            },
+            {
+                "depth": 13,
+                "name": "map",
+                "size": 2693
+            }
+        ]
+    },
+    {
+        "benchmark": "bar",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 12,
+                "size": 3336
+            },
+            {
+                "depth": 12,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.5155000686645508,
+                "size": 3336
+            },
+            {
+                "depth": 12,
+                "name": "functionnal_reduction",
+                "size": 3336
+            }
+        ]
+    },
+    {
+        "benchmark": "bar",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 12,
+                "size": 3336
+            },
+            {
+                "depth": 12,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 3.561156988143921,
+                "size": 3336
+            },
+            {
+                "depth": 12,
+                "name": "cut_rewriting",
+                "size": 3336
+            }
+        ]
+    },
+    {
+        "benchmark": "bar",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 12,
+                "size": 3336
+            },
+            {
+                "depth": 13,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.2565891146659851,
+                "size": 2944
+            },
+            {
+                "depth": 13,
+                "name": "resubsitution",
+                "size": 2944
+            }
+        ]
+    },
+    {
+        "benchmark": "div",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 4372,
+                "size": 57247
+            },
+            {
+                "depth": 2425,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 21.63369369506836,
+                "size": 53113
+            },
+            {
+                "depth": 2425,
+                "name": "map",
+                "size": 53113
+            }
+        ]
+    },
+    {
+        "benchmark": "div",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 4372,
+                "size": 57247
+            },
+            {
+                "depth": 4370,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 40.49086380004883,
+                "size": 29111
+            },
+            {
+                "depth": 4370,
+                "name": "functionnal_reduction",
+                "size": 29111
+            }
+        ]
+    },
+    {
+        "benchmark": "div",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 4372,
+                "size": 57247
+            },
+            {
+                "depth": 4372,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 76.05052947998047,
+                "size": 57247
+            },
+            {
+                "depth": 4372,
+                "name": "cut_rewriting",
+                "size": 57247
+            }
+        ]
+    },
+    {
+        "benchmark": "div",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 4372,
+                "size": 57247
+            },
+            {
+                "depth": 4438,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 166.02297973632813,
+                "size": 51914
+            },
+            {
+                "depth": 4438,
+                "name": "resubsitution",
+                "size": 51914
+            }
+        ]
+    },
+    {
+        "benchmark": "hyp",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 24801,
+                "size": 214335
+            },
+            {
+                "depth": 8956,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 110.31684112548828,
+                "size": 138143
+            },
+            {
+                "depth": 8956,
+                "name": "map",
+                "size": 138143
+            }
+        ]
+    },
+    {
+        "benchmark": "hyp",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 24801,
+                "size": 214335
+            },
+            {
+                "depth": 24800,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 46.389888763427734,
+                "size": 214329
+            },
+            {
+                "depth": 24800,
+                "name": "functionnal_reduction",
+                "size": 214329
+            }
+        ]
+    },
+    {
+        "benchmark": "hyp",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 24801,
+                "size": 214335
+            },
+            {
+                "depth": 24801,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 541.5262451171875,
+                "size": 214335
+            },
+            {
+                "depth": 24801,
+                "name": "cut_rewriting",
+                "size": 214335
+            }
+        ]
+    },
+    {
+        "benchmark": "hyp",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 24801,
+                "size": 214335
+            },
+            {
+                "depth": 9503,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 103.0048599243164,
+                "size": 198816
+            },
+            {
+                "depth": 9503,
+                "name": "resubsitution",
+                "size": 198816
+            }
+        ]
+    },
+    {
+        "benchmark": "log2",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 444,
+                "size": 32060
+            },
+            {
+                "depth": 206,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 18.790292739868164,
+                "size": 24295
+            },
+            {
+                "depth": 206,
+                "name": "map",
+                "size": 24295
+            }
+        ]
+    },
+    {
+        "benchmark": "log2",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 444,
+                "size": 32060
+            },
+            {
+                "depth": 415,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 29.648488998413086,
+                "size": 31606
+            },
+            {
+                "depth": 415,
+                "name": "functionnal_reduction",
+                "size": 31606
+            }
+        ]
+    },
+    {
+        "benchmark": "log2",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 444,
+                "size": 32060
+            },
+            {
+                "depth": 444,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 39.40298843383789,
+                "size": 32060
+            },
+            {
+                "depth": 444,
+                "name": "cut_rewriting",
+                "size": 32060
+            }
+        ]
+    },
+    {
+        "benchmark": "log2",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 444,
+                "size": 32060
+            },
+            {
+                "depth": 444,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 3.36138653755188,
+                "size": 31998
+            },
+            {
+                "depth": 444,
+                "name": "resubsitution",
+                "size": 31998
+            }
+        ]
+    },
+    {
+        "benchmark": "max",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 287,
+                "size": 2865
+            },
+            {
+                "depth": 158,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 1.8748102188110352,
+                "size": 2413
+            },
+            {
+                "depth": 158,
+                "name": "map",
+                "size": 2413
+            }
+        ]
+    },
+    {
+        "benchmark": "max",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 287,
+                "size": 2865
+            },
+            {
+                "depth": 287,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.7464039921760559,
+                "size": 2865
+            },
+            {
+                "depth": 287,
+                "name": "functionnal_reduction",
+                "size": 2865
+            }
+        ]
+    },
+    {
+        "benchmark": "max",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 287,
+                "size": 2865
+            },
+            {
+                "depth": 287,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 2.9734182357788086,
+                "size": 2865
+            },
+            {
+                "depth": 287,
+                "name": "cut_rewriting",
+                "size": 2865
+            }
+        ]
+    },
+    {
+        "benchmark": "max",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 287,
+                "size": 2865
+            },
+            {
+                "depth": 287,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.16230180859565735,
+                "size": 2840
+            },
+            {
+                "depth": 287,
+                "name": "resubsitution",
+                "size": 2840
+            }
+        ]
+    },
+    {
+        "benchmark": "multiplier",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 274,
+                "size": 27062
+            },
+            {
+                "depth": 143,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 14.232030868530273,
+                "size": 19354
+            },
+            {
+                "depth": 143,
+                "name": "map",
+                "size": 19354
+            }
+        ]
+    },
+    {
+        "benchmark": "multiplier",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 274,
+                "size": 27062
+            },
+            {
+                "depth": 274,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 12.367457389831543,
+                "size": 27060
+            },
+            {
+                "depth": 274,
+                "name": "functionnal_reduction",
+                "size": 27060
+            }
+        ]
+    },
+    {
+        "benchmark": "multiplier",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 274,
+                "size": 27062
+            },
+            {
+                "depth": 274,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 25.807809829711914,
+                "size": 27062
+            },
+            {
+                "depth": 274,
+                "name": "cut_rewriting",
+                "size": 27062
+            }
+        ]
+    },
+    {
+        "benchmark": "multiplier",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 274,
+                "size": 27062
+            },
+            {
+                "depth": 269,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 4.624931812286377,
+                "size": 26796
+            },
+            {
+                "depth": 269,
+                "name": "resubsitution",
+                "size": 26796
+            }
+        ]
+    },
+    {
+        "benchmark": "sin",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 225,
+                "size": 5416
+            },
+            {
+                "depth": 127,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 2.976624011993408,
+                "size": 4248
+            },
+            {
+                "depth": 127,
+                "name": "map",
+                "size": 4248
+            }
+        ]
+    },
+    {
+        "benchmark": "sin",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 225,
+                "size": 5416
+            },
+            {
+                "depth": 224,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 4.153817176818848,
+                "size": 5368
+            },
+            {
+                "depth": 224,
+                "name": "functionnal_reduction",
+                "size": 5368
+            }
+        ]
+    },
+    {
+        "benchmark": "sin",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 225,
+                "size": 5416
+            },
+            {
+                "depth": 225,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 7.430777072906494,
+                "size": 5416
+            },
+            {
+                "depth": 225,
+                "name": "cut_rewriting",
+                "size": 5416
+            }
+        ]
+    },
+    {
+        "benchmark": "sin",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 225,
+                "size": 5416
+            },
+            {
+                "depth": 226,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 1.316532015800476,
+                "size": 5317
+            },
+            {
+                "depth": 226,
+                "name": "resubsitution",
+                "size": 5317
+            }
+        ]
+    },
+    {
+        "benchmark": "sqrt",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 5058,
+                "size": 24618
+            },
+            {
+                "depth": 5074,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 10.672316551208496,
+                "size": 20724
+            },
+            {
+                "depth": 5074,
+                "name": "map",
+                "size": 20724
+            }
+        ]
+    },
+    {
+        "benchmark": "sqrt",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 5058,
+                "size": 24618
+            },
+            {
+                "depth": 5057,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 9.75063419342041,
+                "size": 24507
+            },
+            {
+                "depth": 5057,
+                "name": "functionnal_reduction",
+                "size": 24507
+            }
+        ]
+    },
+    {
+        "benchmark": "sqrt",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 5058,
+                "size": 24618
+            },
+            {
+                "depth": 5058,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 38.876068115234375,
+                "size": 24618
+            },
+            {
+                "depth": 5058,
+                "name": "cut_rewriting",
+                "size": 24618
+            }
+        ]
+    },
+    {
+        "benchmark": "sqrt",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 5058,
+                "size": 24618
+            },
+            {
+                "depth": 7036,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 5.4080939292907715,
+                "size": 20410
+            },
+            {
+                "depth": 7036,
+                "name": "resubsitution",
+                "size": 20410
+            }
+        ]
+    },
+    {
+        "benchmark": "square",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 18484
+            },
+            {
+                "depth": 126,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 9.695672035217285,
+                "size": 12176
+            },
+            {
+                "depth": 126,
+                "name": "map",
+                "size": 12176
+            }
+        ]
+    },
+    {
+        "benchmark": "square",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 18484
+            },
+            {
+                "depth": 250,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 5.886168479919434,
+                "size": 18482
+            },
+            {
+                "depth": 250,
+                "name": "functionnal_reduction",
+                "size": 18482
+            }
+        ]
+    },
+    {
+        "benchmark": "square",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 18484
+            },
+            {
+                "depth": 250,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 18.462692260742188,
+                "size": 18484
+            },
+            {
+                "depth": 250,
+                "name": "cut_rewriting",
+                "size": 18484
+            }
+        ]
+    },
+    {
+        "benchmark": "square",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 18484
+            },
+            {
+                "depth": 251,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 2.495903491973877,
+                "size": 18060
+            },
+            {
+                "depth": 251,
+                "name": "resubsitution",
+                "size": 18060
+            }
+        ]
+    },
+    {
+        "benchmark": "arbiter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 87,
+                "size": 11839
+            },
+            {
+                "depth": 59,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 9.505569458007813,
+                "size": 6996
+            },
+            {
+                "depth": 59,
+                "name": "map",
+                "size": 6996
+            }
+        ]
+    },
+    {
+        "benchmark": "arbiter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 87,
+                "size": 11839
+            },
+            {
+                "depth": 87,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 11.274665832519531,
+                "size": 11839
+            },
+            {
+                "depth": 87,
+                "name": "functionnal_reduction",
+                "size": 11839
+            }
+        ]
+    },
+    {
+        "benchmark": "arbiter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 87,
+                "size": 11839
+            },
+            {
+                "depth": 87,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 24.90394401550293,
+                "size": 11839
+            },
+            {
+                "depth": 87,
+                "name": "cut_rewriting",
+                "size": 11839
+            }
+        ]
+    },
+    {
+        "benchmark": "arbiter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 87,
+                "size": 11839
+            },
+            {
+                "depth": 87,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 1.1260019540786743,
+                "size": 11711
+            },
+            {
+                "depth": 87,
+                "name": "resubsitution",
+                "size": 11711
+            }
+        ]
+    },
+    {
+        "benchmark": "cavlc",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 693
+            },
+            {
+                "depth": 14,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.2513173520565033,
+                "size": 649
+            },
+            {
+                "depth": 14,
+                "name": "map",
+                "size": 649
+            }
+        ]
+    },
+    {
+        "benchmark": "cavlc",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 693
+            },
+            {
+                "depth": 16,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.10557330399751663,
+                "size": 691
+            },
+            {
+                "depth": 16,
+                "name": "functionnal_reduction",
+                "size": 691
+            }
+        ]
+    },
+    {
+        "benchmark": "cavlc",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 693
+            },
+            {
+                "depth": 16,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.6655609011650085,
+                "size": 693
+            },
+            {
+                "depth": 16,
+                "name": "cut_rewriting",
+                "size": 693
+            }
+        ]
+    },
+    {
+        "benchmark": "cavlc",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 693
+            },
+            {
+                "depth": 16,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 1.5337506532669067,
+                "size": 615
+            },
+            {
+                "depth": 16,
+                "name": "resubsitution",
+                "size": 615
+            }
+        ]
+    },
+    {
+        "benchmark": "ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 10,
+                "size": 174
+            },
+            {
+                "depth": 5,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.04931259527802467,
+                "size": 115
+            },
+            {
+                "depth": 5,
+                "name": "map",
+                "size": 115
+            }
+        ]
+    },
+    {
+        "benchmark": "ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 10,
+                "size": 174
+            },
+            {
+                "depth": 10,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.015294129028916359,
+                "size": 169
+            },
+            {
+                "depth": 10,
+                "name": "functionnal_reduction",
+                "size": 169
+            }
+        ]
+    },
+    {
+        "benchmark": "ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 10,
+                "size": 174
+            },
+            {
+                "depth": 10,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.1726246178150177,
+                "size": 174
+            },
+            {
+                "depth": 10,
+                "name": "cut_rewriting",
+                "size": 174
+            }
+        ]
+    },
+    {
+        "benchmark": "ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 10,
+                "size": 174
+            },
+            {
+                "depth": 11,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 1.1992396116256714,
+                "size": 86
+            },
+            {
+                "depth": 11,
+                "name": "resubsitution",
+                "size": 86
+            }
+        ]
+    },
+    {
+        "benchmark": "dec",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 3,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.06218458712100983,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "name": "map",
+                "size": 304
+            }
+        ]
+    },
+    {
+        "benchmark": "dec",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 3,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.07206609845161438,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "name": "functionnal_reduction",
+                "size": 304
+            }
+        ]
+    },
+    {
+        "benchmark": "dec",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 3,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.021273041144013405,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "name": "cut_rewriting",
+                "size": 304
+            }
+        ]
+    },
+    {
+        "benchmark": "dec",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 3,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.06042417883872986,
+                "size": 304
+            },
+            {
+                "depth": 3,
+                "name": "resubsitution",
+                "size": 304
+            }
+        ]
+    },
+    {
+        "benchmark": "i2c",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 20,
+                "size": 1342
+            },
+            {
+                "depth": 13,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.358652263879776,
+                "size": 1229
+            },
+            {
+                "depth": 13,
+                "name": "map",
+                "size": 1229
+            }
+        ]
+    },
+    {
+        "benchmark": "i2c",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 20,
+                "size": 1342
+            },
+            {
+                "depth": 20,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.13651016354560852,
+                "size": 1319
+            },
+            {
+                "depth": 20,
+                "name": "functionnal_reduction",
+                "size": 1319
+            }
+        ]
+    },
+    {
+        "benchmark": "i2c",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 20,
+                "size": 1342
+            },
+            {
+                "depth": 20,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 1.202659249305725,
+                "size": 1342
+            },
+            {
+                "depth": 20,
+                "name": "cut_rewriting",
+                "size": 1342
+            }
+        ]
+    },
+    {
+        "benchmark": "i2c",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 20,
+                "size": 1342
+            },
+            {
+                "depth": 20,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.27563005685806274,
+                "size": 1245
+            },
+            {
+                "depth": 20,
+                "name": "resubsitution",
+                "size": 1245
+            }
+        ]
+    },
+    {
+        "benchmark": "int2float",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 260
+            },
+            {
+                "depth": 11,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.07588406652212143,
+                "size": 235
+            },
+            {
+                "depth": 11,
+                "name": "map",
+                "size": 235
+            }
+        ]
+    },
+    {
+        "benchmark": "int2float",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 260
+            },
+            {
+                "depth": 16,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.017595622688531876,
+                "size": 259
+            },
+            {
+                "depth": 16,
+                "name": "functionnal_reduction",
+                "size": 259
+            }
+        ]
+    },
+    {
+        "benchmark": "int2float",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 260
+            },
+            {
+                "depth": 16,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.214166060090065,
+                "size": 260
+            },
+            {
+                "depth": 16,
+                "name": "cut_rewriting",
+                "size": 260
+            }
+        ]
+    },
+    {
+        "benchmark": "int2float",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 16,
+                "size": 260
+            },
+            {
+                "depth": 16,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.13232441246509552,
+                "size": 222
+            },
+            {
+                "depth": 16,
+                "name": "resubsitution",
+                "size": 222
+            }
+        ]
+    },
+    {
+        "benchmark": "mem_ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 114,
+                "size": 46836
+            },
+            {
+                "depth": 98,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 18.77000617980957,
+                "size": 42071
+            },
+            {
+                "depth": 98,
+                "name": "map",
+                "size": 42071
+            }
+        ]
+    },
+    {
+        "benchmark": "mem_ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 114,
+                "size": 46836
+            },
+            {
+                "depth": 114,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 35.194114685058594,
+                "size": 46748
+            },
+            {
+                "depth": 114,
+                "name": "functionnal_reduction",
+                "size": 46748
+            }
+        ]
+    },
+    {
+        "benchmark": "mem_ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 114,
+                "size": 46836
+            },
+            {
+                "depth": 114,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 232.6543426513672,
+                "size": 46836
+            },
+            {
+                "depth": 114,
+                "name": "cut_rewriting",
+                "size": 46836
+            }
+        ]
+    },
+    {
+        "benchmark": "mem_ctrl",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 114,
+                "size": 46836
+            },
+            {
+                "depth": 114,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 8.406400680541992,
+                "size": 43447
+            },
+            {
+                "depth": 114,
+                "name": "resubsitution",
+                "size": 43447
+            }
+        ]
+    },
+    {
+        "benchmark": "priority",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 978
+            },
+            {
+                "depth": 124,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.3428895175457001,
+                "size": 908
+            },
+            {
+                "depth": 124,
+                "name": "map",
+                "size": 908
+            }
+        ]
+    },
+    {
+        "benchmark": "priority",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 978
+            },
+            {
+                "depth": 250,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.4251633882522583,
+                "size": 978
+            },
+            {
+                "depth": 250,
+                "name": "functionnal_reduction",
+                "size": 978
+            }
+        ]
+    },
+    {
+        "benchmark": "priority",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 978
+            },
+            {
+                "depth": 250,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.9718191623687744,
+                "size": 978
+            },
+            {
+                "depth": 250,
+                "name": "cut_rewriting",
+                "size": 978
+            }
+        ]
+    },
+    {
+        "benchmark": "priority",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 250,
+                "size": 978
+            },
+            {
+                "depth": 188,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.10734148323535919,
+                "size": 668
+            },
+            {
+                "depth": 188,
+                "name": "resubsitution",
+                "size": 668
+            }
+        ]
+    },
+    {
+        "benchmark": "router",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 54,
+                "size": 257
+            },
+            {
+                "depth": 47,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 0.12273018807172775,
+                "size": 218
+            },
+            {
+                "depth": 47,
+                "name": "map",
+                "size": 218
+            }
+        ]
+    },
+    {
+        "benchmark": "router",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 54,
+                "size": 257
+            },
+            {
+                "depth": 54,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 0.04486703872680664,
+                "size": 257
+            },
+            {
+                "depth": 54,
+                "name": "functionnal_reduction",
+                "size": 257
+            }
+        ]
+    },
+    {
+        "benchmark": "router",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 54,
+                "size": 257
+            },
+            {
+                "depth": 54,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 0.34934863448143005,
+                "size": 257
+            },
+            {
+                "depth": 54,
+                "name": "cut_rewriting",
+                "size": 257
+            }
+        ]
+    },
+    {
+        "benchmark": "router",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 54,
+                "size": 257
+            },
+            {
+                "depth": 54,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 0.028230544179677963,
+                "size": 257
+            },
+            {
+                "depth": 54,
+                "name": "resubsitution",
+                "size": 257
+            }
+        ]
+    },
+    {
+        "benchmark": "voter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 70,
+                "size": 13758
+            },
+            {
+                "depth": 54,
+                "operation_type": 201,
+                "param": {
+                    "ela_rounds": 3,
+                    "enable_logic_sharing": true,
+                    "logic_sharing_cut_limit": 1,
+                    "required_time": 1.7976931348623157e+308,
+                    "skip_delay_round": true
+                },
+                "runtime": 6.6872406005859375,
+                "size": 7219
+            },
+            {
+                "depth": 54,
+                "name": "map",
+                "size": 7219
+            }
+        ]
+    },
+    {
+        "benchmark": "voter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 70,
+                "size": 13758
+            },
+            {
+                "depth": 68,
+                "operation_type": 202,
+                "param": {},
+                "runtime": 4.673546314239502,
+                "size": 11993
+            },
+            {
+                "depth": 68,
+                "name": "functionnal_reduction",
+                "size": 11993
+            }
+        ]
+    },
+    {
+        "benchmark": "voter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 70,
+                "size": 13758
+            },
+            {
+                "depth": 70,
+                "operation_type": 204,
+                "param": {
+                    "cut_enumeration_ps.cut_size": 4,
+                    "progress": true
+                },
+                "runtime": 14.275739669799805,
+                "size": 13758
+            },
+            {
+                "depth": 70,
+                "name": "cut_rewriting",
+                "size": 13758
+            }
+        ]
+    },
+    {
+        "benchmark": "voter",
+        "eqv": true,
+        "flow": [
+            {
+                "depth": 70,
+                "size": 13758
+            },
+            {
+                "depth": 81,
+                "operation_type": 205,
+                "param": {
+                    "max_inserts": 1,
+                    "max_pis": 8,
+                    "progress": false
+                },
+                "runtime": 2.685227632522583,
+                "size": 10462
+            },
+            {
+                "depth": 81,
+                "name": "resubsitution",
+                "size": 10462
+            }
+        ]
+    }
+]
