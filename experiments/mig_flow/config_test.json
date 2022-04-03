@@ -1,30 +1,14 @@
-    {
-        "operation_type": 0,
-        "name": "Cut_rewriting_loop",
-        "flow": [{
-            "operation_type": 102,
-            "param": {},
-            "flow": [{
-                    "operation_type": 204,
-                    "param": {
-                        "allow_zero_gain": true,
-                        "cut_enumeration_ps.cut_size": 4
-                    }
-                },
-                {
-                    "operation_type": 102,
-                    "param": {},
-                    "flow": [{
-                        "operation_type": 201,
-                        "param": {
-                            "skip_delay_round": true,
-                            "required_time": 1.7976931348623157e308,
-                            "ela_rounds": 3,
-                            "enable_logic_sharing": true,
-                            "logic_sharing_cut_limit": 1
-                        }
-                    }]
-                }
-            ]
-        }]
-    }
+{
+    "operation_type": 0,
+    "name": "Cut_rewriting_loop",
+    "flow": [{
+        "operation_type": 101,
+        "param": {
+            "skip_delay_round": true,
+            "required_time": 1.7976931348623157e308,
+            "ela_rounds": 3,
+            "enable_logic_sharing": true,
+            "logic_sharing_cut_limit": 1
+        }
+    }]
+}
