@@ -1678,17 +1678,7 @@
         "depth_mig": 129,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
-        "size": 1020,
-        "size_mig": 384
-      },
-      {
-        "benchmark": "adder",
-        "depth": 255,
-        "depth_mig": 129,
-        "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "runtime1": 0.8766580820083618,
         "size": 1020,
         "size_mig": 384
       },
@@ -1698,7 +1688,7 @@
         "depth_mig": 129,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 0.7958663702011108,
         "size": 1020,
         "size_mig": 384
       },
@@ -1707,8 +1697,8 @@
         "depth": 255,
         "depth_mig": 129,
         "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.8435434699058533,
         "size": 1020,
         "size_mig": 384
       },
@@ -1718,19 +1708,9 @@
         "depth_mig": 129,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 1.1828274726867676,
         "size": 1020,
         "size_mig": 384
-      },
-      {
-        "benchmark": "adder",
-        "depth": 255,
-        "depth_mig": 255,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 1020,
-        "size_mig": 1020
       },
       {
         "benchmark": "bar",
@@ -1738,7 +1718,7 @@
         "depth_mig": 13,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 15.708660125732422,
         "size": 3336,
         "size_mig": 2588
       },
@@ -1747,8 +1727,8 @@
         "depth": 12,
         "depth_mig": 12,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 3.8752787113189697,
         "size": 3336,
         "size_mig": 3016
       },
@@ -1758,17 +1738,7 @@
         "depth_mig": 14,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 3336,
-        "size_mig": 2496
-      },
-      {
-        "benchmark": "bar",
-        "depth": 12,
-        "depth_mig": 14,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 16.778793334960938,
         "size": 3336,
         "size_mig": 2496
       },
@@ -1778,19 +1748,9 @@
         "depth_mig": 14,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 18.110027313232422,
         "size": 3336,
         "size_mig": 2496
-      },
-      {
-        "benchmark": "bar",
-        "depth": 12,
-        "depth_mig": 12,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 3336,
-        "size_mig": 3336
       },
       {
         "benchmark": "div",
@@ -1798,7 +1758,7 @@
         "depth_mig": 2246,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 140.96527099609375,
         "size": 57247,
         "size_mig": 19085
       },
@@ -1807,8 +1767,8 @@
         "depth": 4372,
         "depth_mig": 2213,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 73.72126770019531,
         "size": 57247,
         "size_mig": 26103
       },
@@ -1818,19 +1778,9 @@
         "depth_mig": 2231,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 140.1548614501953,
         "size": 57247,
         "size_mig": 18505
-      },
-      {
-        "benchmark": "div",
-        "depth": 4372,
-        "depth_mig": 2209,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 57247,
-        "size_mig": 18603
       },
       {
         "benchmark": "div",
@@ -1838,19 +1788,9 @@
         "depth_mig": 2231,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 392.49560546875,
         "size": 57247,
         "size_mig": 18505
-      },
-      {
-        "benchmark": "div",
-        "depth": 4372,
-        "depth_mig": 4370,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 57247,
-        "size_mig": 29111
       },
       {
         "benchmark": "hyp",
@@ -1858,7 +1798,7 @@
         "depth_mig": 8885,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 651.1337890625,
         "size": 214335,
         "size_mig": 137054
       },
@@ -1867,8 +1807,8 @@
         "depth": 24801,
         "depth_mig": 8761,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 427.7603454589844,
         "size": 214335,
         "size_mig": 135995
       },
@@ -1878,19 +1818,9 @@
         "depth_mig": 8884,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 693.5867309570313,
         "size": 214335,
         "size_mig": 125006
-      },
-      {
-        "benchmark": "hyp",
-        "depth": 24801,
-        "depth_mig": 8879,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 214335,
-        "size_mig": 124862
       },
       {
         "benchmark": "hyp",
@@ -1898,19 +1828,9 @@
         "depth_mig": 8884,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 641.889892578125,
         "size": 214335,
         "size_mig": 125006
-      },
-      {
-        "benchmark": "hyp",
-        "depth": 24801,
-        "depth_mig": 24800,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 214335,
-        "size_mig": 214329
       },
       {
         "benchmark": "log2",
@@ -1918,7 +1838,7 @@
         "depth_mig": 190,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 47.572322845458984,
         "size": 32060,
         "size_mig": 23929
       },
@@ -1927,8 +1847,8 @@
         "depth": 444,
         "depth_mig": 173,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 61.14725112915039,
         "size": 32060,
         "size_mig": 24866
       },
@@ -1938,19 +1858,9 @@
         "depth_mig": 195,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 65.28209686279297,
         "size": 32060,
         "size_mig": 23736
-      },
-      {
-        "benchmark": "log2",
-        "depth": 444,
-        "depth_mig": 191,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 32060,
-        "size_mig": 23700
       },
       {
         "benchmark": "log2",
@@ -1958,19 +1868,9 @@
         "depth_mig": 195,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 117.92656707763672,
         "size": 32060,
         "size_mig": 23736
-      },
-      {
-        "benchmark": "log2",
-        "depth": 444,
-        "depth_mig": 415,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 32060,
-        "size_mig": 31606
       },
       {
         "benchmark": "max",
@@ -1978,7 +1878,7 @@
         "depth_mig": 162,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 9.633224487304688,
         "size": 2865,
         "size_mig": 2171
       },
@@ -1987,8 +1887,8 @@
         "depth": 287,
         "depth_mig": 146,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 8.14978313446045,
         "size": 2865,
         "size_mig": 2401
       },
@@ -1998,19 +1898,9 @@
         "depth_mig": 162,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 10.040621757507324,
         "size": 2865,
         "size_mig": 2168
-      },
-      {
-        "benchmark": "max",
-        "depth": 287,
-        "depth_mig": 151,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 2865,
-        "size_mig": 2213
       },
       {
         "benchmark": "max",
@@ -2018,19 +1908,9 @@
         "depth_mig": 162,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 13.337627410888672,
         "size": 2865,
         "size_mig": 2168
-      },
-      {
-        "benchmark": "max",
-        "depth": 287,
-        "depth_mig": 287,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 2865,
-        "size_mig": 2865
       },
       {
         "benchmark": "multiplier",
@@ -2038,7 +1918,7 @@
         "depth_mig": 142,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 37.824951171875,
         "size": 27062,
         "size_mig": 19299
       },
@@ -2047,8 +1927,8 @@
         "depth": 274,
         "depth_mig": 133,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 39.95014572143555,
         "size": 27062,
         "size_mig": 19486
       },
@@ -2058,17 +1938,7 @@
         "depth_mig": 149,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 27062,
-        "size_mig": 19150
-      },
-      {
-        "benchmark": "multiplier",
-        "depth": 274,
-        "depth_mig": 149,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 52.11785888671875,
         "size": 27062,
         "size_mig": 19150
       },
@@ -2078,19 +1948,9 @@
         "depth_mig": 149,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 79.43443298339844,
         "size": 27062,
         "size_mig": 19150
-      },
-      {
-        "benchmark": "multiplier",
-        "depth": 274,
-        "depth_mig": 274,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 27062,
-        "size_mig": 27060
       },
       {
         "benchmark": "sin",
@@ -2098,7 +1958,7 @@
         "depth_mig": 123,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 12.946130752563477,
         "size": 5416,
         "size_mig": 4165
       },
@@ -2107,8 +1967,8 @@
         "depth": 225,
         "depth_mig": 108,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 14.178709983825684,
         "size": 5416,
         "size_mig": 4275
       },
@@ -2118,19 +1978,9 @@
         "depth_mig": 124,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 93.81755065917969,
         "size": 5416,
         "size_mig": 4128
-      },
-      {
-        "benchmark": "sin",
-        "depth": 225,
-        "depth_mig": 123,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 5416,
-        "size_mig": 4123
       },
       {
         "benchmark": "sin",
@@ -2138,19 +1988,9 @@
         "depth_mig": 124,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 102.50074768066406,
         "size": 5416,
         "size_mig": 4128
-      },
-      {
-        "benchmark": "sin",
-        "depth": 225,
-        "depth_mig": 224,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 5416,
-        "size_mig": 5368
       },
       {
         "benchmark": "sqrt",
@@ -2158,7 +1998,7 @@
         "depth_mig": 3845,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 367.2279968261719,
         "size": 24618,
         "size_mig": 17518
       },
@@ -2167,8 +2007,8 @@
         "depth": 5058,
         "depth_mig": 3351,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 60.199127197265625,
         "size": 24618,
         "size_mig": 22984
       },
@@ -2178,7 +2018,7 @@
         "depth_mig": 2264,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 417.14849853515625,
         "size": 24618,
         "size_mig": 13056
       },
@@ -2187,30 +2027,10 @@
         "depth": 5058,
         "depth_mig": 2263,
         "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 24618,
-        "size_mig": 13052
-      },
-      {
-        "benchmark": "sqrt",
-        "depth": 5058,
-        "depth_mig": 2263,
-        "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 442.1813659667969,
         "size": 24618,
         "size_mig": 13059
-      },
-      {
-        "benchmark": "sqrt",
-        "depth": 5058,
-        "depth_mig": 5057,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 24618,
-        "size_mig": 24507
       },
       {
         "benchmark": "square",
@@ -2218,7 +2038,7 @@
         "depth_mig": 126,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 28.996280670166016,
         "size": 18484,
         "size_mig": 11924
       },
@@ -2227,8 +2047,8 @@
         "depth": 250,
         "depth_mig": 126,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 31.964391708374023,
         "size": 18484,
         "size_mig": 11963
       },
@@ -2238,7 +2058,7 @@
         "depth_mig": 126,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 46.255348205566406,
         "size": 18484,
         "size_mig": 9153
       },
@@ -2247,30 +2067,10 @@
         "depth": 250,
         "depth_mig": 126,
         "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 18484,
-        "size_mig": 9130
-      },
-      {
-        "benchmark": "square",
-        "depth": 250,
-        "depth_mig": 126,
-        "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 65.49007415771484,
         "size": 18484,
         "size_mig": 9147
-      },
-      {
-        "benchmark": "square",
-        "depth": 250,
-        "depth_mig": 250,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 18484,
-        "size_mig": 18482
       },
       {
         "benchmark": "arbiter",
@@ -2278,7 +2078,7 @@
         "depth_mig": 59,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 27.658832550048828,
         "size": 11839,
         "size_mig": 6996
       },
@@ -2287,8 +2087,8 @@
         "depth": 87,
         "depth_mig": 59,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 24.983097076416016,
         "size": 11839,
         "size_mig": 7000
       },
@@ -2298,17 +2098,7 @@
         "depth_mig": 60,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 11839,
-        "size_mig": 6866
-      },
-      {
-        "benchmark": "arbiter",
-        "depth": 87,
-        "depth_mig": 60,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 31.78727912902832,
         "size": 11839,
         "size_mig": 6866
       },
@@ -2318,19 +2108,9 @@
         "depth_mig": 60,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 55.778648376464844,
         "size": 11839,
         "size_mig": 6866
-      },
-      {
-        "benchmark": "arbiter",
-        "depth": 87,
-        "depth_mig": 87,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 11839,
-        "size_mig": 11839
       },
       {
         "benchmark": "cavlc",
@@ -2338,7 +2118,7 @@
         "depth_mig": 13,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 1.3441015481948853,
         "size": 693,
         "size_mig": 621
       },
@@ -2347,8 +2127,8 @@
         "depth": 16,
         "depth_mig": 11,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 1.0460178852081299,
         "size": 693,
         "size_mig": 661
       },
@@ -2358,17 +2138,7 @@
         "depth_mig": 13,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 693,
-        "size_mig": 530
-      },
-      {
-        "benchmark": "cavlc",
-        "depth": 16,
-        "depth_mig": 13,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 362.5689697265625,
         "size": 693,
         "size_mig": 530
       },
@@ -2378,19 +2148,9 @@
         "depth_mig": 13,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 361.76751708984375,
         "size": 693,
         "size_mig": 530
-      },
-      {
-        "benchmark": "cavlc",
-        "depth": 16,
-        "depth_mig": 16,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 693,
-        "size_mig": 691
       },
       {
         "benchmark": "ctrl",
@@ -2398,7 +2158,7 @@
         "depth_mig": 5,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 0.2167906016111374,
         "size": 174,
         "size_mig": 111
       },
@@ -2407,8 +2167,8 @@
         "depth": 10,
         "depth_mig": 5,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.1509564220905304,
         "size": 174,
         "size_mig": 117
       },
@@ -2418,19 +2178,9 @@
         "depth_mig": 8,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 5.103357791900635,
         "size": 174,
         "size_mig": 74
-      },
-      {
-        "benchmark": "ctrl",
-        "depth": 10,
-        "depth_mig": 9,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 174,
-        "size_mig": 72
       },
       {
         "benchmark": "ctrl",
@@ -2438,19 +2188,9 @@
         "depth_mig": 8,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 5.194706916809082,
         "size": 174,
         "size_mig": 74
-      },
-      {
-        "benchmark": "ctrl",
-        "depth": 10,
-        "depth_mig": 10,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 174,
-        "size_mig": 169
       },
       {
         "benchmark": "dec",
@@ -2458,16 +2198,6 @@
         "depth_mig": 3,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
-        "size": 304,
-        "size_mig": 304
-      },
-      {
-        "benchmark": "dec",
-        "depth": 3,
-        "depth_mig": 3,
-        "equivalent": true,
-        "flow": "loop_cr_map",
         "runtime1": 0.0,
         "size": 304,
         "size_mig": 304
@@ -2487,7 +2217,7 @@
         "depth": 3,
         "depth_mig": 3,
         "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
+        "flow": "loop_cr_withrewriting",
         "runtime1": 0.0,
         "size": 304,
         "size_mig": 304
@@ -2498,17 +2228,7 @@
         "depth_mig": 3,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
-        "size": 304,
-        "size_mig": 304
-      },
-      {
-        "benchmark": "dec",
-        "depth": 3,
-        "depth_mig": 3,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
+        "runtime1": 0.06390250474214554,
         "size": 304,
         "size_mig": 304
       },
@@ -2518,7 +2238,7 @@
         "depth_mig": 12,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 1.9410927295684814,
         "size": 1342,
         "size_mig": 1190
       },
@@ -2527,8 +2247,8 @@
         "depth": 20,
         "depth_mig": 11,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 1.7499035596847534,
         "size": 1342,
         "size_mig": 1220
       },
@@ -2538,19 +2258,9 @@
         "depth_mig": 12,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 5.976681709289551,
         "size": 1342,
         "size_mig": 1107
-      },
-      {
-        "benchmark": "i2c",
-        "depth": 20,
-        "depth_mig": 12,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 1342,
-        "size_mig": 1111
       },
       {
         "benchmark": "i2c",
@@ -2558,19 +2268,9 @@
         "depth_mig": 12,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 7.099513053894043,
         "size": 1342,
         "size_mig": 1107
-      },
-      {
-        "benchmark": "i2c",
-        "depth": 20,
-        "depth_mig": 20,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 1342,
-        "size_mig": 1319
       },
       {
         "benchmark": "int2float",
@@ -2578,7 +2278,7 @@
         "depth_mig": 10,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 0.3294866681098938,
         "size": 260,
         "size_mig": 221
       },
@@ -2587,8 +2287,8 @@
         "depth": 16,
         "depth_mig": 10,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 0.333482563495636,
         "size": 260,
         "size_mig": 231
       },
@@ -2598,17 +2298,7 @@
         "depth_mig": 10,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 260,
-        "size_mig": 198
-      },
-      {
-        "benchmark": "int2float",
-        "depth": 16,
-        "depth_mig": 10,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 1.8580174446105957,
         "size": 260,
         "size_mig": 198
       },
@@ -2618,19 +2308,9 @@
         "depth_mig": 10,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 2.035832405090332,
         "size": 260,
         "size_mig": 198
-      },
-      {
-        "benchmark": "int2float",
-        "depth": 16,
-        "depth_mig": 16,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 260,
-        "size_mig": 259
       },
       {
         "benchmark": "mem_ctrl",
@@ -2638,7 +2318,7 @@
         "depth_mig": 95,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 130.6317596435547,
         "size": 46836,
         "size_mig": 41126
       },
@@ -2647,8 +2327,8 @@
         "depth": 114,
         "depth_mig": 72,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 156.2818145751953,
         "size": 46836,
         "size_mig": 42433
       },
@@ -2658,19 +2338,9 @@
         "depth_mig": 96,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 357.2723693847656,
         "size": 46836,
         "size_mig": 39472
-      },
-      {
-        "benchmark": "mem_ctrl",
-        "depth": 114,
-        "depth_mig": 96,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 46836,
-        "size_mig": 39277
       },
       {
         "benchmark": "mem_ctrl",
@@ -2678,19 +2348,9 @@
         "depth_mig": 96,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 426.16998291015625,
         "size": 46836,
         "size_mig": 39472
-      },
-      {
-        "benchmark": "mem_ctrl",
-        "depth": 114,
-        "depth_mig": 114,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 46836,
-        "size_mig": 46748
       },
       {
         "benchmark": "priority",
@@ -2698,7 +2358,7 @@
         "depth_mig": 117,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 2.35258412361145,
         "size": 978,
         "size_mig": 808
       },
@@ -2707,7 +2367,7 @@
         "depth": 250,
         "depth_mig": 250,
         "equivalent": true,
-        "flow": "loop_cr_map",
+        "flow": "loop_cr_withrewriting",
         "runtime1": 0.0,
         "size": 978,
         "size_mig": 978
@@ -2718,17 +2378,7 @@
         "depth_mig": 117,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 978,
-        "size_mig": 542
-      },
-      {
-        "benchmark": "priority",
-        "depth": 250,
-        "depth_mig": 117,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 3.058817148208618,
         "size": 978,
         "size_mig": 542
       },
@@ -2738,19 +2388,9 @@
         "depth_mig": 117,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 3.9455699920654297,
         "size": 978,
         "size_mig": 542
-      },
-      {
-        "benchmark": "priority",
-        "depth": 250,
-        "depth_mig": 250,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 978,
-        "size_mig": 978
       },
       {
         "benchmark": "router",
@@ -2758,7 +2398,7 @@
         "depth_mig": 43,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 0.4733710289001465,
         "size": 257,
         "size_mig": 207
       },
@@ -2767,7 +2407,7 @@
         "depth": 54,
         "depth_mig": 54,
         "equivalent": true,
-        "flow": "loop_cr_map",
+        "flow": "loop_cr_withrewriting",
         "runtime1": 0.0,
         "size": 257,
         "size_mig": 257
@@ -2778,17 +2418,7 @@
         "depth_mig": 42,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
-        "size": 257,
-        "size_mig": 190
-      },
-      {
-        "benchmark": "router",
-        "depth": 54,
-        "depth_mig": 42,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
+        "runtime1": 0.7599801421165466,
         "size": 257,
         "size_mig": 190
       },
@@ -2798,19 +2428,9 @@
         "depth_mig": 42,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 0.936577558517456,
         "size": 257,
         "size_mig": 190
-      },
-      {
-        "benchmark": "router",
-        "depth": 54,
-        "depth_mig": 54,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 257,
-        "size_mig": 257
       },
       {
         "benchmark": "voter",
@@ -2818,7 +2438,7 @@
         "depth_mig": 44,
         "equivalent": true,
         "flow": "Reference",
-        "runtime1": 0.0,
+        "runtime1": 23.42736053466797,
         "size": 13758,
         "size_mig": 5327
       },
@@ -2827,8 +2447,8 @@
         "depth": 70,
         "depth_mig": 44,
         "equivalent": true,
-        "flow": "loop_cr_map",
-        "runtime1": 0.0,
+        "flow": "loop_cr_withrewriting",
+        "runtime1": 22.45647430419922,
         "size": 13758,
         "size_mig": 6115
       },
@@ -2838,19 +2458,9 @@
         "depth_mig": 40,
         "equivalent": true,
         "flow": "loop_cr_withrewriting",
-        "runtime1": 0.0,
+        "runtime1": 33.37583923339844,
         "size": 13758,
         "size_mig": 4414
-      },
-      {
-        "benchmark": "voter",
-        "depth": 70,
-        "depth_mig": 42,
-        "equivalent": true,
-        "flow": "loop_cr_map_rewriting_fn",
-        "runtime1": 0.0,
-        "size": 13758,
-        "size_mig": 4402
       },
       {
         "benchmark": "voter",
@@ -2858,226 +2468,11 @@
         "depth_mig": 40,
         "equivalent": true,
         "flow": "config_test",
-        "runtime1": 0.0,
+        "runtime1": 40.744293212890625,
         "size": 13758,
         "size_mig": 4416
-      },
-      {
-        "benchmark": "voter",
-        "depth": 70,
-        "depth_mig": 68,
-        "equivalent": true,
-        "flow": "No",
-        "runtime1": 0.0,
-        "size": 13758,
-        "size_mig": 11993
       }
     ],
     "version": "b14b13a"
-  },
-  {
-    "entries": [
-      {
-        "benchmark": "adder",
-        "depth": 255,
-        "depth_mig": 129,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 1020,
-        "size_mig": 384
-      },
-      {
-        "benchmark": "bar",
-        "depth": 12,
-        "depth_mig": 13,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 3336,
-        "size_mig": 2693
-      },
-      {
-        "benchmark": "div",
-        "depth": 4372,
-        "depth_mig": 2425,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 57247,
-        "size_mig": 53113
-      },
-      {
-        "benchmark": "hyp",
-        "depth": 24801,
-        "depth_mig": 8956,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 214335,
-        "size_mig": 138142
-      },
-      {
-        "benchmark": "log2",
-        "depth": 444,
-        "depth_mig": 207,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 32060,
-        "size_mig": 24297
-      },
-      {
-        "benchmark": "max",
-        "depth": 287,
-        "depth_mig": 158,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 2865,
-        "size_mig": 2413
-      },
-      {
-        "benchmark": "multiplier",
-        "depth": 274,
-        "depth_mig": 143,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 27062,
-        "size_mig": 19356
-      },
-      {
-        "benchmark": "sin",
-        "depth": 225,
-        "depth_mig": 127,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 5416,
-        "size_mig": 4248
-      },
-      {
-        "benchmark": "sqrt",
-        "depth": 5058,
-        "depth_mig": 5074,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 24618,
-        "size_mig": 20724
-      },
-      {
-        "benchmark": "square",
-        "depth": 250,
-        "depth_mig": 126,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 18484,
-        "size_mig": 12175
-      },
-      {
-        "benchmark": "arbiter",
-        "depth": 87,
-        "depth_mig": 59,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 11839,
-        "size_mig": 6996
-      },
-      {
-        "benchmark": "cavlc",
-        "depth": 16,
-        "depth_mig": 14,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 693,
-        "size_mig": 649
-      },
-      {
-        "benchmark": "ctrl",
-        "depth": 10,
-        "depth_mig": 5,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 174,
-        "size_mig": 115
-      },
-      {
-        "benchmark": "dec",
-        "depth": 3,
-        "depth_mig": 3,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 304,
-        "size_mig": 304
-      },
-      {
-        "benchmark": "i2c",
-        "depth": 20,
-        "depth_mig": 13,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 1342,
-        "size_mig": 1229
-      },
-      {
-        "benchmark": "int2float",
-        "depth": 16,
-        "depth_mig": 11,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 260,
-        "size_mig": 235
-      },
-      {
-        "benchmark": "mem_ctrl",
-        "depth": 114,
-        "depth_mig": 97,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 46836,
-        "size_mig": 42079
-      },
-      {
-        "benchmark": "priority",
-        "depth": 250,
-        "depth_mig": 124,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 978,
-        "size_mig": 908
-      },
-      {
-        "benchmark": "router",
-        "depth": 54,
-        "depth_mig": 47,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 257,
-        "size_mig": 218
-      },
-      {
-        "benchmark": "voter",
-        "depth": 70,
-        "depth_mig": 54,
-        "equivalent": true,
-        "flow": "Cut_rewriting_loop",
-        "runtime1": 0.0,
-        "size": 13758,
-        "size_mig": 7219
-      }
-    ],
-    "version": "74507ca"
   }
 ]
