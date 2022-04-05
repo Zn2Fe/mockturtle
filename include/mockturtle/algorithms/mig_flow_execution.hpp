@@ -394,6 +394,7 @@ public:
   void load_data_mig( mig_network mig )
   {
     this->size = mig.num_gates();
+
     this->depth = depth_view( mig ).depth();
   }
 
@@ -426,9 +427,6 @@ public:
   resubstitution_stats flow_resubstitution_stats;
   mig_algebraic_depth_rewriting_stats flow_mig_algebraic_depth_rewriting_stats;
 
-  // mig_data
-  mig_data mig_stats;
-
   operation_algo_data()
   {
   }
@@ -440,7 +438,7 @@ public:
   json get_data_json()
   {
     json res;
-    res = ( (mig_data*)this )->data( res );
+    res = this->data( res );
     res["param"] = this->param;
     return res;
   }
@@ -537,6 +535,8 @@ public:
   mig_data m_data;
   json param;
 
+  operation(){}
+
   operation( int type, mig_network mig, json param )
   {
     this->type = type;
@@ -555,7 +555,7 @@ public:
     return 0;
   }
 
-  json data( json init )
+  json data_in_json( json init )
   {
     json res = init;
     res["operation_type"] = type;
@@ -567,7 +567,8 @@ public:
   virtual json save_data_to_json()
   {
     json res;
-    return this->data( res );
+    std::cout << res.dump(2) << std::endl;
+    return this->data_in_json( res );
   }
 };
 
@@ -582,7 +583,8 @@ public:
   {
     json res = json::array();
     json data;
-    data = ( (operation*)this )->data( data );
+    data = this->data_in_json( data );
+    std::cout << res.dump(2) << std::endl;
     res.push_back( data );
     return res;
   }
@@ -592,7 +594,7 @@ class chained_algo_operation : public operation
 {
 public:
   operation* parent;
-  chained_algo_operation( operation* parent, mig_network mig, operation_algo_data& operation_data, int type ) : operation( type, operation_data, operation_data.param )
+  chained_algo_operation( operation* parent, mig_network mig, operation_algo_data operation_data, int type ) : operation( type, operation_data, operation_data.param )
   {
     this->parent = parent;
   }
@@ -608,7 +610,7 @@ public:
   {
     json res = this->parent->save_data_to_json();
     json data;
-    data = ( (operation*)this )->data( data );
+    data = this->data_in_json( data );
     res.push_back( data );
     return res;
   }
@@ -640,7 +642,7 @@ public:
   {
     json res = this->parent->save_data_to_json();
     json data;
-    data = ( (operation*)this )->data( data );
+    data = ( (operation*)this )->data_in_json( data );
     data["name"] = name;
     res.push_back( data );
     return res;
@@ -703,7 +705,7 @@ public:
   {
     json res = this->parent->save_data_to_json();
     json data;
-    data = ( (operation*)this )->data( data );
+    data = this->data_in_json( data );
     data["runtime"] = this->get_flow_runtime();
     data["flow"] = this->operations.size() == 0 ? json::array() : this->operations.back()->save_data_to_json();
     res.push_back( data );
@@ -714,7 +716,7 @@ public:
 mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>* op_result, operation* root, mig_flow_param ps, mig_flow_stats* pst, bool loop = false )
 {
   mig_network res = mig;
-  operation* actual = root;
+  operation actual = *root;
 
   for ( const auto& item : flow["flow"].items() )
   {
@@ -726,7 +728,7 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
       for ( const auto& flows : item.value()["flow"].items() )
       {
 
-        compute_flow( res, flows.value(), op_result, actual, ps, pst, false );
+        compute_flow( res, flows.value(), op_result, &actual, ps, pst, false );
       }
       continue;
     }
@@ -735,15 +737,16 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
     {
 
       mig_network mig_buffer = res;
-      loop_operation* loop = new loop_operation( actual, res, item.value() );
-      mig_buffer = compute_flow( res, item.value(), &loop->operations, new root_operation( res, item.value()["param"] ), ps, pst, true );
+      loop_operation* loop = new loop_operation( &actual, res, item.value() );
+      root_operation root = root_operation( res, item.value()["param"] );
+      mig_buffer = compute_flow( res, item.value(), &loop->operations, &root, ps, pst, true );
       while ( loop->check_end() )
       {
         res = mig_buffer;
         mig_buffer = compute_flow( res, item.value(), &loop->operations, loop->operations.back(), ps, pst, true );
       }
       loop->m_data.load_data_mig( res );
-      actual = loop;
+      actual = *loop;
       continue;
     }
 
@@ -771,19 +774,19 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
     default:
       break;
     }
-    operation_data.mig_stats.load_data_mig( res );
-    actual = new chained_algo_operation( actual, res, operation_data, type_of_operation );
+    operation_data.load_data_mig( res );
+    actual = chained_algo_operation( &actual, res, operation_data, type_of_operation );
   }
 
   if ( not loop )
   {
-    end_operation* end = new end_operation( actual, res, flow["param"] );
+    end_operation* end = new end_operation( &actual, res, flow["param"] );
     end->name = flow.at( "name" ).get<std::string>();
     op_result->push_back( end );
   }
   else
   {
-    op_result->push_back( new end_operation( actual, res, flow["param"], true ) );
+    op_result->push_back( new end_operation( &actual, res, flow["param"], true ) );
   }
 
   return res;
@@ -838,10 +841,11 @@ public:
  */
 std::list<mig_flow_result*> mig_flow_execution( mig_network mig, json json_flow, mig_flow_param const& ps = {}, mig_flow_stats* pst = new mig_flow_stats() )
 {
-  std::list<detail::end_operation*> result;
-  compute_flow( mig, json_flow, &result, new detail::root_operation( mig, json_flow["param"] ), ps, pst );
+  std::list<detail::end_operation*>* result;
+  detail::root_operation root = detail::root_operation( mig, json_flow["param"] );
+  compute_flow( mig, json_flow, result, &root, ps, pst );
   std::list<mig_flow_result*> res;
-  for ( detail::end_operation* end : result )
+  for ( detail::end_operation* end : *result )
   {
     res.push_back( new mig_flow_result( end ) );
   }
