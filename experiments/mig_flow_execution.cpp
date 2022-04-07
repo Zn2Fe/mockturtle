@@ -42,7 +42,7 @@ int main( int argc, char* argv[] )
       {
         continue;
       }
-      std::string conf = fmt::format( "{}", ( argc > 1 ) ? argv[1] : "/home/yuna/Documents/mockturtle/experiments/mig_flow/config.json" );
+      std::string conf = fmt::format( "{}", ( argc > 1 ) ? argv[1] : "~/Documents/mig_flow_result/config.json" );
       std::ifstream i( conf );
       json json_flow;
       i >> json_flow;
@@ -63,10 +63,11 @@ int main( int argc, char* argv[] )
         json_res["flow"] = res_op->save_data_to_json();
         json_res["benchmark"] = benchmark;
         json_res["eqv"] = cec;
+        json_res["name"] = res_op->name();
         json_result.push_back( json_res );
       }
     }
-    std::string result = fmt::format( "{}", ( argc > 2 ) ? argv[2] : "/home/yuna/Documents/mockturtle/experiments/mig_flow/result/result.json" );
+    std::string result = fmt::format( "{}", ( argc > 2 ) ? argv[2] : "~/Documents/mig_flow_result/result.json" );
 
     std::ofstream o( result );
     o << std::setw( 4 ) << json_result << std::endl;

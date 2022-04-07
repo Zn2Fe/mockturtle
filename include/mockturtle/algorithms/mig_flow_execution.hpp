@@ -607,7 +607,6 @@ public:
   {
     json res = this->parent->save_data_to_json();
     json data = this->data();
-    data["name"] = name;
     res.push_back( data );
     return res;
   }
