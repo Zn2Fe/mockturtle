@@ -1,31 +1,29 @@
 {
     "operation_type": 0,
-    "name": "No",
+    "name": "Reference",
     "flow": [{
-            "operation_type": 202,
-            "param": {}
-        },
-        {
-            "operation_type": 101,
+            "operation_type": 2,
             "param": {},
             "flow": [{
-                    "operation_type": 0,
-                    "name": "Reference",
-                    "flow": [{
-                        "operation_type": 102,
+                "operation_type": 0,
+                "name": "ReferenceInv",
+                "flow": [{
+                        "operation_type": 3,
                         "param": {},
                         "flow": [{
-                                "operation_type": 204,
+                                "operation_type": 104,
                                 "param": {
+
                                     "allow_zero_gain": true,
                                     "cut_enumeration_ps.cut_size": 4
+
                                 }
                             },
                             {
-                                "operation_type": 102,
+                                "operation_type": 3,
                                 "param": {},
                                 "flow": [{
-                                    "operation_type": 201,
+                                    "operation_type": 101,
                                     "param": {
                                         "skip_delay_round": true,
                                         "required_time": 1.7976931348623157e308,
@@ -36,157 +34,39 @@
                                 }]
                             }
                         ]
-                    }]
-                },
-                {
-                    "operation_type": 0,
-                    "name": "loop_cr_withrewriting",
-                    "flow": [{
-                        "operation_type": 102,
-                        "param": {},
-                        "flow": [{
-                            "operation_type": 204,
-                            "param": {
-                                "allow_zero_gain": true,
-                                "cut_enumeration_ps.cut_size": 4
-                            }
-                        }, {
-                            "operation_type": 201,
-                            "param": {
+                    }
 
-                            }
-                        }]
-                    }]
-                },
-                {
-                    "operation_type": 0,
-                    "name": "loop_cr_withrewriting",
+                ]
+            }]
+        },
+        {
+            "operation_type": 3,
+            "param": {},
+            "flow": [{
+                    "operation_type": 3,
+                    "param": {},
                     "flow": [{
-                        "operation_type": 102,
-                        "param": {},
-                        "flow": [{
-                                "operation_type": 204,
-                                "param": {
-                                    "allow_zero_gain": true,
-                                    "cut_enumeration_ps.cut_size": 4
-                                }
-                            }, {
-                                "operation_type": 102,
-                                "param": {},
-                                "flow": [{
-                                    "operation_type": 201,
-                                    "param": {
-                                        "skip_delay_round": true,
-                                        "required_time": 1.7976931348623157e308,
-                                        "ela_rounds": 3,
-                                        "enable_logic_sharing": true,
-                                        "logic_sharing_cut_limit": 1
-                                    }
-                                }]
-                            },
-                            {
-                                "operation_type": 102,
-                                "param": {},
-                                "flow": [{
-                                    "operation_type": 205,
-                                    "param": {}
-                                }]
-                            }
-                        ]
-                    }]
-                },
-                {
-                    "operation_type": 0,
-                    "name": "config_test",
-                    "flow": [{
-                            "operation_type": 202,
-                            "param": {}
-                        },
-                        {
-                            "operation_type": 102,
-                            "param": {},
-                            "flow": [{
-                                    "operation_type": 204,
-                                    "param": {
-                                        "allow_zero_gain": true,
-                                        "cut_enumeration_ps.cut_size": 4
-                                    }
-                                },
-                                {
-                                    "operation_type": 102,
-                                    "param": {},
-                                    "flow": [{
-                                        "operation_type": 201,
-                                        "param": {
-                                            "skip_delay_round": true,
-                                            "required_time": 1.7976931348623157e308,
-                                            "ela_rounds": 3,
-                                            "enable_logic_sharing": true,
-                                            "logic_sharing_cut_limit": 1
-                                        }
-                                    }]
-                                },
-                                {
-                                    "operation_type": 204,
-                                    "param": {
-                                        "allow_zero_gain": true,
-                                        "cut_enumeration_ps.cut_size": 4
-                                    }
-                                }
-                            ]
-                        },
-                        {
-                            "operation_type": 102,
-                            "param": {},
-                            "flow": [{
-                                "operation_type": 204,
-                                "param": {
-                                    "allow_zero_gain": true,
-                                    "cut_enumeration_ps.cut_size": 4
-                                }
-                            }, {
-                                "operation_type": 201,
-                                "param": {
-
-                                }
-                            }]
-                        },
-                        {
-                            "operation_type": 102,
-                            "param": {},
-                            "flow": [{
-                                    "operation_type": 204,
-                                    "param": {
-                                        "allow_zero_gain": true,
-                                        "cut_enumeration_ps.cut_size": 4
-                                    }
-                                }, {
-                                    "operation_type": 102,
-                                    "param": {},
-                                    "flow": [{
-                                        "operation_type": 201,
-                                        "param": {
-                                            "skip_delay_round": true,
-                                            "required_time": 1.7976931348623157e308,
-                                            "ela_rounds": 3,
-                                            "enable_logic_sharing": true,
-                                            "logic_sharing_cut_limit": 1
-                                        }
-                                    }]
-                                },
-                                {
-                                    "operation_type": 102,
-                                    "param": {},
-                                    "flow": [{
-                                        "operation_type": 205,
-                                        "param": {}
-                                    }]
-                                }
-                            ]
+                        "operation_type": 101,
+                        "param": {
+                            "skip_delay_round": true,
+                            "required_time": 1.7976931348623157e308,
+                            "ela_rounds": 3,
+                            "enable_logic_sharing": true,
+                            "logic_sharing_cut_limit": 1
                         }
-                    ]
+                    }]
+                },
+                {
+                    "operation_type": 104,
+                    "param": {
+
+                        "allow_zero_gain": true,
+                        "cut_enumeration_ps.cut_size": 4
+
+                    }
                 }
             ]
         }
+
     ]
 }

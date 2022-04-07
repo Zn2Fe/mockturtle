@@ -379,20 +379,18 @@ struct mig_flow_stats
   stopwatch<>::duration time_total{ 0 };
 };
 
-/**
- * @brief
- *
- */
+
 class mig_data
 {
 public:
+  float runtime = 0;
+
   u_int32_t size = 0;
   u_int32_t depth = 0;
 
-  void load_data_mig( mig_network mig )
+  void load_data_from_mig( mig_network mig )
   {
     this->size = mig.num_gates();
-
     this->depth = depth_view( mig ).depth();
   }
 
@@ -401,51 +399,35 @@ public:
     json res;
     res["size"] = this->size;
     res["depth"] = this->depth;
-    return res;
-  }
-};
-
-namespace detail
-{
-class operation_algo_data
-{
-public:
-  // operation param
-  json param;
-  mig_data mig_stats;
-
-  // operation data
-  float runtime = 0;
-  map_stats flow_map_stat;
-  functional_reduction_stats flow_functionnal_reduction_stat;
-  cut_rewriting_stats flow_cut_rewriting_stats;
-  resubstitution_stats flow_resubstitution_stats;
-  mig_algebraic_depth_rewriting_stats flow_mig_algebraic_depth_rewriting_stats;
-
-  operation_algo_data()
-  {
-  }
-  operation_algo_data( json object )
-  {
-    this->param = object["param"];
-  }
-
-  json get_data_json()
-  {
-    json res = mig_stats.get_data_json();
-    res["param"] = this->param;
     res["runtime"] = this->runtime;
     return res;
   }
 };
 
+class operation_algo_data: public mig_data
+{
+public:
+
+  map_stats flow_map_stat;
+  functional_reduction_stats flow_functionnal_reduction_stat;
+  cut_rewriting_stats flow_cut_rewriting_stats;
+  resubstitution_stats flow_resubstitution_stats;
+  mig_algebraic_depth_rewriting_stats flow_mig_algebraic_depth_rewriting_stats;
+};
+
+namespace detail
+{
+  
+
+
+namespace compute{
 // 201
-mig_network flow_map( mig_network mig, operation_algo_data* data_out )
+mig_network flow_map( mig_network mig, operation_algo_data* data_out, json param )
 {
   mig_npn_resynthesis resyn{ true };
   exact_library_params eps;
   exact_library<mig_network, mig_npn_resynthesis> exact_lib( resyn, eps );
-  map_params map_ps = data_out->param.get<map_params>();
+  map_params map_ps = param.get<map_params>();
   mig_network res = mig;
 
   res = map( res, exact_lib, map_ps, &data_out->flow_map_stat );
@@ -455,7 +437,7 @@ mig_network flow_map( mig_network mig, operation_algo_data* data_out )
   return res;
 }
 // 202
-mig_network flow_functionnal_reduction( mig_network mig, operation_algo_data* data_out )
+mig_network flow_functionnal_reduction( mig_network mig, operation_algo_data* data_out, json param )
 {
   functional_reduction_params ps;
   mig_network res = mig;
@@ -467,10 +449,10 @@ mig_network flow_functionnal_reduction( mig_network mig, operation_algo_data* da
   return res;
 }
 // 203
-mig_network flow_cut_rewriting_with_compatibility_graph( mig_network mig, operation_algo_data* data_out )
+mig_network flow_cut_rewriting_with_compatibility_graph( mig_network mig, operation_algo_data* data_out, json param)
 {
   mig_npn_resynthesis resyn{ true };
-  cut_rewriting_params ps = data_out->param.get<cut_rewriting_params>();
+  cut_rewriting_params ps = param.get<cut_rewriting_params>();
   mig_network res = mig;
 
   cut_rewriting_with_compatibility_graph( res, resyn, ps, &data_out->flow_cut_rewriting_stats );
@@ -480,10 +462,10 @@ mig_network flow_cut_rewriting_with_compatibility_graph( mig_network mig, operat
   return res;
 }
 // 204
-mig_network flow_cut_rewriting( mig_network mig, operation_algo_data* data_out )
+mig_network flow_cut_rewriting( mig_network mig, operation_algo_data* data_out, json param )
 {
   mig_npn_resynthesis resyn{ true };
-  cut_rewriting_params ps = data_out->param.get<cut_rewriting_params>();
+  cut_rewriting_params ps = param.get<cut_rewriting_params>();
   mig_network res = mig;
 
   cut_rewriting( res, resyn, ps, &data_out->flow_cut_rewriting_stats );
@@ -493,9 +475,9 @@ mig_network flow_cut_rewriting( mig_network mig, operation_algo_data* data_out )
   return res;
 }
 // 205
-mig_network flow_mig_resubstitution( mig_network mig, operation_algo_data* data_out )
+mig_network flow_mig_resubstitution( mig_network mig, operation_algo_data* data_out, json param  )
 {
-  resubstitution_params ps = data_out->param.get<resubstitution_params>();
+  resubstitution_params ps = param.get<resubstitution_params>();
   mig_network res = mig;
   depth_view depth_mig{ res };
   fanout_view fanout_mig{ depth_mig };
@@ -507,7 +489,7 @@ mig_network flow_mig_resubstitution( mig_network mig, operation_algo_data* data_
   return res;
 }
 // 206
-mig_network flow_mig_algebraic_rewriting( mig_network mig, operation_algo_data* data_out )
+mig_network flow_mig_algebraic_rewriting( mig_network mig, operation_algo_data* data_out, json param )
 {
   mig_algebraic_depth_rewriting_params ps;
   mig_network res = mig;
@@ -519,46 +501,48 @@ mig_network flow_mig_algebraic_rewriting( mig_network mig, operation_algo_data* 
   data_out->runtime = to_seconds( data_out->flow_mig_algebraic_depth_rewriting_stats.time_total );
   return res;
 }
+}
+
 
 class operation
 {
 public:
-  int type;
-  operation( int type )
-  {
-    this->type = type;
-  }
+  int operation_type = -1;
+  json param;
+  mig_data stats;
+
   virtual float get_flow_runtime()
   {
-    return 0;
+    return this->stats.runtime;
   }
+  json data(){
+    json res = this->stats.get_data_json();
+    res["operation_type"] = operation_type;
+    res["param"] = param;
+    return res;
+  }
+
   virtual json save_data_to_json()
   {
-    json res;
-    res["operation_type"] = type;
-    return res;
+    return this->data();
   }
 };
 
 class root_operation : public operation
 {
 public:
-  mig_data root_stat;
 
-  root_operation( mig_network mig ) : operation( 100 )
+  root_operation( mig_network mig, json param )
   {
-    root_stat.load_data_mig( mig );
+    this->stats.load_data_from_mig( mig );
+    this->param = param;
+    this->operation_type = 0;
   }
 
-  float get_flow_runtime()
-  {
-    return 0;
-  }
   json save_data_to_json()
   {
     json res = json::array();
-    json data = this->root_stat.get_data_json();
-    data["operation_type"] = 0;
+    json data = this->data();
     res.push_back( data );
     return res;
   }
@@ -568,25 +552,27 @@ class chained_algo_operation : public operation
 {
 public:
   operation* parent;
-  operation_algo_data* operation_data;
 
-  chained_algo_operation( operation* parent, operation_algo_data* operation_data, int type ) : operation( type )
+  chained_algo_operation( operation* parent, operation_algo_data* operation_data, json param, int type )
   {
-    this->operation_data = operation_data;
     this->parent = parent;
+    this->stats = *operation_data;
+    this->param = param;
+    this->operation_type = type;
+    
   }
 
   float get_flow_runtime()
   {
     float res = this->parent->get_flow_runtime();
-    res += this->operation_data->runtime;
+    res += this->stats.runtime;
     return res;
   }
+
   json save_data_to_json()
   {
     json res = this->parent->save_data_to_json();
-    json data = this->operation_data->get_data_json();
-    data["operation_type"] = this->type;
+    json data = this->data();
     res.push_back( data );
     return res;
   }
@@ -597,17 +583,18 @@ class end_operation : public operation
 public:
   operation* parent;
   mig_network result;
-  mig_data end_stat;
   std::string name;
 
-  end_operation( operation* parent, mig_network mig, bool loop = false ) : operation( 199 )
+  end_operation( operation* parent, mig_network mig, std::string name, bool loop = false )
   {
     this->parent = parent;
+    this->stats.load_data_from_mig(mig);
+    this->operation_type = 1;
+    this->name = name;
     if ( not loop )
     {
       this->result = mig;
     }
-    this->end_stat.load_data_mig( mig );
   }
 
   float get_flow_runtime()
@@ -615,11 +602,11 @@ public:
     float res = this->parent->get_flow_runtime();
     return res;
   }
+
   json save_data_to_json()
   {
     json res = this->parent->save_data_to_json();
-    json data = this->end_stat.get_data_json();
-    data["operation_type"] = 1;
+    json data = this->data();
     data["name"] = name;
     res.push_back( data );
     return res;
@@ -631,15 +618,40 @@ class loop_operation : public operation
 public:
   operation* parent;
   std::list<end_operation*> operations;
+private:
+  bool size_end(){
+    return this->operations.back()->stats.size >= (--this->operations.back())->stats.size;
+  }
+  bool max_rep(){
+    return this->param.at("max_rep").get<int>() >= this->operations.size();
+  }
 
-  mig_data data;
-  json param;
-  float runtime;
+public:
 
-  loop_operation( operation* parent, json object ) : operation( 102 )
+  loop_operation( operation* parent, json param )
   {
     this->parent = parent;
-    this->param = object["param"];
+    this->operation_type = 3;
+    this->param = param;
+  }
+
+  bool check_end(){
+    std::string end_condition;
+    try
+    {
+      end_condition = this->param.at( "end_condition" ).get<std::string>();
+    }
+      catch ( const json::exception& )
+    {
+      return this->size_end();
+    }
+    if(end_condition == "no_size_increase"){
+      return this->size_end();
+    }
+    if(end_condition == "max_rep"){
+      return this->max_rep();
+    }
+    
   }
 
   float get_flow_runtime()
@@ -649,22 +661,22 @@ public:
     res += this->operations.size() == 0 ? 0 : this->operations.back()->get_flow_runtime();
     return res;
   }
+
   json save_data_to_json()
   {
     json res = this->parent->save_data_to_json();
-    json data = this->data.get_data_json();
-    data["operation_type"] = this->type;
-    data["param"] = this->param;
-    data["runtime"] = this->get_flow_runtime();
+    json data = this->data();
     data["flow"] = this->operations.size() == 0 ? json::array() : this->operations.back()->save_data_to_json();
     res.push_back( data );
     return res;
   }
 };
 
-mig_network compute_flow( mig_network* mig, json flow, std::list<end_operation*>* op_result, operation* root, mig_flow_param ps, mig_flow_stats* pst, bool loop = false )
+
+mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>* op_result, operation* root, mig_flow_param ps, mig_flow_stats* pst, bool loop = false )
 {
-  mig_network res = cleanup_dangling( *mig );
+  mig_network res = mig;
+  
   operation* actual = root;
 
   for ( const auto& item : flow["flow"].items() )
@@ -672,71 +684,69 @@ mig_network compute_flow( mig_network* mig, json flow, std::list<end_operation*>
 
     int type_of_operation = item.value()["operation_type"].get<int>();
 
-    if ( type_of_operation == 101 )
+    if ( type_of_operation == 2 )
     { // branching
       for ( const auto& flows : item.value()["flow"].items() )
       {
-
-        compute_flow( &res, flows.value(), op_result, new root_operation( res ), ps, pst, false );
+        compute_flow( res, flows.value(), op_result, actual, ps, pst, false );
       }
       continue;
     }
 
-    if ( type_of_operation == 102 )
+    if ( type_of_operation == 3 )
     {
 
       mig_network mig_buffer = res;
-      loop_operation* loop = new loop_operation( actual, item.value() );
-      mig_buffer = compute_flow( &res, item.value(), &loop->operations, new root_operation( res ), ps, pst, true );
-      u_int32_t size_before = res.num_gates();
-      while ( loop->operations.back()->end_stat.size < size_before )
+      loop_operation* loop = new loop_operation( actual, item.value()["param"] );
+      mig_buffer = compute_flow( res, item.value(), &loop->operations, new root_operation( res, loop->param ), ps, pst, true );
+      while ( loop->check_end() )
       {
         res = mig_buffer;
-        size_before = loop->operations.back()->end_stat.size;
-        mig_buffer = compute_flow( &res, item.value(), &loop->operations, loop->operations.back(), ps, pst, true );
+        mig_buffer = compute_flow( res, item.value(), &loop->operations, loop->operations.back(), ps, pst, true );
       }
-      loop->data.load_data_mig( res );
+      loop->stats.load_data_from_mig( res );
       actual = loop;
       continue;
     }
 
-    operation_algo_data* operation_data = new operation_algo_data( item.value() );
+    operation_algo_data* operation_data = new operation_algo_data();
     switch ( type_of_operation )
     {
-    case 201:
-      res = flow_map( res, operation_data );
+    case 101:
+      res = compute::flow_map( res, operation_data, item.value()["param"] );
       break;
-    case 202:
-      res = flow_functionnal_reduction( res, operation_data );
+    case 102:
+      res = compute::flow_functionnal_reduction( res, operation_data, item.value()["param"] );
       break;
-    case 203:
-      res = flow_cut_rewriting_with_compatibility_graph( res, operation_data );
+    case 103:
+      res = compute::flow_cut_rewriting_with_compatibility_graph( res, operation_data, item.value()["param"] );
       break;
-    case 204:
-      res = flow_cut_rewriting( res, operation_data );
+    case 104:
+      res = compute::flow_cut_rewriting( res, operation_data, item.value()["param"] );
       break;
-    case 205:
-      res = flow_mig_resubstitution( res, operation_data );
+    case 105:
+      res = compute::flow_mig_resubstitution( res, operation_data, item.value()["param"] );
       break;
-    case 206:
-      res = flow_mig_algebraic_rewriting( res, operation_data );
+    case 106:
+      res = compute::flow_mig_algebraic_rewriting( res, operation_data, item.value()["param"] );
       break;
     default:
       break;
     }
-    operation_data->mig_stats.load_data_mig( res );
-    actual = new chained_algo_operation( actual, operation_data, type_of_operation );
+    chained_algo_operation* op = new chained_algo_operation( actual, operation_data, item.value()["param"],type_of_operation);
+    op->stats.load_data_from_mig(res);
+    actual = op;
   }
 
   if ( not loop )
   {
-    end_operation* end = new end_operation( actual, res );
-    end->name = flow.at( "name" ).get<std::string>();
+    end_operation* end = new end_operation( actual, res,flow.at( "name" ).get<std::string>() );
     op_result->push_back( end );
   }
   else
   {
-    op_result->push_back( new end_operation( actual, res, true ) );
+    std::string loop = "loop";
+    op_result->push_back( new end_operation( actual, res,loop, true ) );
   }
 
   return res;
@@ -764,7 +774,7 @@ public:
   }
   mig_data data()
   {
-    return real->end_stat;
+    return real->stats;
   }
   json save_data_to_json()
   {
@@ -793,12 +803,15 @@ std::list<mig_flow_result*> mig_flow_execution( mig_network mig, json json_flow,
 {
   mig_network mig_calc = mig;
   std::list<detail::end_operation*> result;
-  compute_flow( &mig_calc, json_flow, &result, new detail::root_operation( mig ), ps, pst );
+  detail::root_operation* root = new detail::root_operation(mig,json_flow["param"]);
+  compute_flow( mig_calc, json_flow, &result, root , ps, pst );
+  
   std::list<mig_flow_result*> res;
   for ( detail::end_operation* end : result )
   {
     res.push_back( new mig_flow_result( end ) );
   }
+
   return res;
 }
 

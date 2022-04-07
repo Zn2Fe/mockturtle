@@ -2474,5 +2474,410 @@
       }
     ],
     "version": "b14b13a"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 3336,
+        "size_mig": 2588
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 3336,
+        "size_mig": 2588
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2238,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 57247,
+        "size_mig": 36875
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2238,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 57247,
+        "size_mig": 36875
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8885,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 214335,
+        "size_mig": 137054
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8885,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 214335,
+        "size_mig": 137052
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 206,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 32060,
+        "size_mig": 24295
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 207,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 32060,
+        "size_mig": 24297
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 2865,
+        "size_mig": 2171
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 2865,
+        "size_mig": 2171
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 27062,
+        "size_mig": 19299
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 142,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 27062,
+        "size_mig": 19305
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 122,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 5416,
+        "size_mig": 4196
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 122,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 5416,
+        "size_mig": 4196
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 3846,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 24618,
+        "size_mig": 17355
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 3846,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 24618,
+        "size_mig": 17355
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 18484,
+        "size_mig": 11924
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 18484,
+        "size_mig": 11923
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 11839,
+        "size_mig": 6996
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 59,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 11839,
+        "size_mig": 6996
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 693,
+        "size_mig": 623
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 693,
+        "size_mig": 623
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 174,
+        "size_mig": 114
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 5,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 174,
+        "size_mig": 114
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 1342,
+        "size_mig": 1217
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 1342,
+        "size_mig": 1217
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 260,
+        "size_mig": 223
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 260,
+        "size_mig": 223
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 94,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 46836,
+        "size_mig": 41267
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 94,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 46836,
+        "size_mig": 41292
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 978,
+        "size_mig": 808
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 978,
+        "size_mig": 808
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 43,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 257,
+        "size_mig": 207
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 43,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 257,
+        "size_mig": 207
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 49,
+        "equivalent": true,
+        "flow": "ReferenceInv",
+        "runtime1": 0.0,
+        "size": 13758,
+        "size_mig": 5802
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 49,
+        "equivalent": true,
+        "flow": "Reference",
+        "runtime1": 0.0,
+        "size": 13758,
+        "size_mig": 5802
+      }
+    ],
+    "version": "72fb1c3"
   }
 ]
