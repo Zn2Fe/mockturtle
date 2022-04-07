@@ -620,7 +620,10 @@ public:
   std::list<end_operation*> operations;
 private:
   bool size_end(){
-    return this->operations.back()->stats.size >= (--this->operations.back())->stats.size;
+    if (this->operations.size()<2){
+      return this->operations.back()->stats.size <= this->parent->stats.size;
+    }
+    return this->operations.back()->stats.size <= (--this->operations.back())->stats.size;
   }
   bool max_rep(){
     return this->param.at("max_rep").get<int>() >= this->operations.size();
@@ -635,7 +638,7 @@ public:
     this->param = param;
   }
 
-  bool check_end(){
+  bool check_end(bool in){
     std::string end_condition;
     try
     {
@@ -643,10 +646,10 @@ public:
     }
       catch ( const json::exception& )
     {
-      return this->size_end();
+      return in;
     }
     if(end_condition == "no_size_increase"){
-      return this->size_end();
+      return in;
     }
     if(end_condition == "max_rep"){
       return this->max_rep();
@@ -699,9 +702,11 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
       mig_network mig_buffer = res;
       loop_operation* loop = new loop_operation( actual, item.value()["param"] );
       mig_buffer = compute_flow( res, item.value(), &loop->operations, new root_operation( res, loop->param ), ps, pst, true );
-      while ( loop->check_end() )
+      u_int32_t size_before = res.num_gates();
+      while ( loop->check_end(loop->operations.back()->stats.size < size_before))
       {
         res = mig_buffer;
+        size_before = loop->operations.back()->stats.size;
         mig_buffer = compute_flow( res, item.value(), &loop->operations, loop->operations.back(), ps, pst, true );
       }
       loop->stats.load_data_from_mig( res );
@@ -745,8 +750,9 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
   }
   else
   {
-    std::string loop = "loop";
-    op_result->push_back( new end_operation( actual, res,loop, true ) );
+    std::string loop_name = "loop";
+    end_operation* end = new end_operation( actual, res,loop_name,true );
+    op_result->push_back( end );
   }
 
   return res;
