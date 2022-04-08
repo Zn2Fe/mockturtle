@@ -71,7 +71,7 @@ int main( int argc, char* argv[] )
     }
     std::string result = fmt::format( path, "result.json" );;
     if( argc > 1 ){
-      result= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("result_{}",argv[1]) );
+      result= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("result/result_{}",argv[1]) );
     }
     std::ofstream o( result );
     o << std::setw( 4 ) << json_result << std::endl;
