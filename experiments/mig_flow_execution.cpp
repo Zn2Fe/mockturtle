@@ -31,7 +31,7 @@ int main( int argc, char* argv[] )
   json json_result = json::array();
   stopwatch<>::duration time{ 0 };
   {
-    std::string path =  ( argc > 3 ) ? argv[3] : "/home/yuna/Documents/mig_flow_result/{}";
+    std::string path =  ( argc > 3 ) ? argv[3] : "../../../mig_flow_result/{}";
       
     stopwatch t( time );
     for ( auto const& benchmark : epfl_benchmarks() )
