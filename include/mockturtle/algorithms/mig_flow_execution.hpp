@@ -674,6 +674,41 @@ public:
   }
 };
 
+int str_to_op_number(std::string str){
+  if( str=="root" ){
+    return 0;
+  }
+  if( str == "end" ){
+    return 1;
+  }
+  if( str == "branch" ){
+    return 2;
+  }
+  if( str == "loop" ){
+    return 3;
+  }
+
+  if ( str == "mig_mapper" ){
+    return 101;
+  }
+  if( str == "mig_fun_reduc"){
+    return 102;
+  }
+  if( str == "mig_cr_co" ){
+    return 103;
+  }
+  if( str == "mig_cr" ){
+    return 104;
+  }
+  if( str == "mig_resub" ){
+    return 105;
+  }
+  if( str == "mig_algb_reduc" ){
+    return 106;
+  }
+  return -1;
+} 
+
 
 mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>* op_result, operation* root, mig_flow_param ps, mig_flow_stats* pst, bool loop = false )
 {
@@ -684,7 +719,7 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
   for ( const auto& item : flow["flow"].items() )
   {
 
-    int type_of_operation = item.value()["operation_type"].get<int>();
+    int type_of_operation = str_to_op_number(item.value()["operation_type"].get<std::string>());
 
     if ( type_of_operation == 2 )
     { // branching
