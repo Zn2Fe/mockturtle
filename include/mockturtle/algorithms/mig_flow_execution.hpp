@@ -653,6 +653,9 @@ public:
     if(end_condition == "max_rep"){
       return this->max_rep();
     }
+    if(end_condition == "size&max_rep"){
+      return this->max_rep() && in;
+    }
     
   }
 
