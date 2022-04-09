@@ -32,7 +32,9 @@ int main( int argc, char* argv[] )
   stopwatch<>::duration time{ 0 };
   {
     std::string path =  ( argc > 3 ) ? argv[3] : "../../../mig_flow_result/{}";
-      
+    std::string conf = fmt::format( path, ( argc > 1 ) ? argv[1] : "config.json" );
+    std::cout << "From : " << conf << std::endl;
+        
     stopwatch t( time );
     for ( auto const& benchmark : epfl_benchmarks() )
     {
@@ -44,7 +46,6 @@ int main( int argc, char* argv[] )
       {
         continue;
       }
-      std::string conf = fmt::format( path, ( argc > 1 ) ? argv[1] : "config.json" );
       std::ifstream i( conf );
       json json_flow;
       i >> json_flow;
@@ -73,6 +74,7 @@ int main( int argc, char* argv[] )
     if( argc > 1 ){
       result= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("result/result_{}",argv[1]) );
     }
+    std::cout << "To : " << result << std::endl;
     std::ofstream o( result );
     o << std::setw( 4 ) << json_result << std::endl;
   }
