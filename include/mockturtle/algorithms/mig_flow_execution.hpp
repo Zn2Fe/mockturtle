@@ -712,7 +712,7 @@ int str_to_op_number(std::string str){
 
 mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>* op_result, operation* root, mig_flow_param ps, mig_flow_stats* pst, bool loop = false )
 {
-  mig_network res = mig;
+  mig_network res = cleanup_dangling(mig);
   
   operation* actual = root;
 
