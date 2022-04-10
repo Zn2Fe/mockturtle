@@ -26,7 +26,7 @@ int main( int argc, char* argv[] )
   experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float, bool> exp(
       "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1", "equivalent" );
   std::string path =  ( argc > 3 ) ? argv[3] : "{}"; /*/home/yuna/Documents/mig_flow_result/*/
-  std::string conf = fmt::format( path, ( argc > 1 ) ? fmt::format("config/{}",argv[1]) : "config/config.json" );
+  std::string conf = fmt::format( path, ( argc > 1 ) ? fmt::format("{}",argv[1]) : "config/config.json" );
   std::cout << "From : " << conf << std::endl;
     
   fmt::print( "[i] processing technology library\n" );
@@ -72,7 +72,7 @@ int main( int argc, char* argv[] )
     }
     std::string result = fmt::format( path, "result.json" );;
     if( argc > 1 ){
-      result= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("result/result_{}",argv[1]) );
+      result= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("../result/result_{}",argv[1]) );
     }
     std::cout << "To : " << result << std::endl;
     std::ofstream o( result );
