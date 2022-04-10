@@ -728,9 +728,20 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
     { // branching
       for ( const auto& flows : item.value()["flow"].items() )
       {
-        compute_flow( res, flows.value(), op_result, actual, ps, pst, false );
+        json branch = flows.value();
+        bool add = false;
+        for ( const auto& newitem : flow["flow"].items() ){
+          if(add){
+            branch["flow"].push_back(newitem.value());
+          }
+          if(item == newitem){
+            add = true;
+          }
+        }
+        branch["name"] = flow["name"].get<std::string>().append("_").append(branch["name"].get<std::string>());
+        compute_flow( res, branch, op_result, actual, ps, pst, false );
       }
-      continue;
+      return res;
     }
 
     if ( type_of_operation == 3 )
