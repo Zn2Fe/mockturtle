@@ -738,7 +738,10 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
             add = true;
           }
         }
-        branch["name"] = flow["name"].get<std::string>().append("_").append(branch["name"].get<std::string>());
+        std::string newname = flow["name"].get<std::string>();
+        newname.append("_");
+        newname.append(branch["name"]); 
+        branch["name"] = newname;
         compute_flow( res, branch, op_result, actual, ps, pst, false );
       }
       return res;

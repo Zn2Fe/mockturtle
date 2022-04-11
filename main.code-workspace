@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "mig_flow_result",
+			"path": "../mig_flow_result"
+		}
+	],
+	"settings": {}
+}

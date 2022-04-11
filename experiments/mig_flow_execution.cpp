@@ -69,7 +69,7 @@ int main( int argc, char* argv[] )
 
       for ( mig_flow_result* res_op : result )
       {
-        std::ifstream file_result( conf );
+        std::ifstream file_result( result_path );
         json json_result;
         file_result >> json_result;
         file_result.close();
