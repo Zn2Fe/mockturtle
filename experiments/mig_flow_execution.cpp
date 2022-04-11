@@ -25,20 +25,29 @@ int main( int argc, char* argv[] )
 
   experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float, bool> exp(
       "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1", "equivalent" );
+
   std::string path =  ( argc > 3 ) ? argv[3] : "{}"; /*/home/yuna/Documents/mig_flow_result/*/
   std::string conf = fmt::format( path, ( argc > 1 ) ? fmt::format("{}",argv[1]) : "config/config.json" );
   std::cout << "From : " << conf << std::endl;
-    
+  std::string result_path = fmt::format( path, "result.json" );
+  if( argc > 1 ){
+    result_path= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("../result/result_{}",argv[1]) );
+  }
+  std::cout << "To : " << result_path << std::endl;
+  std::ofstream o( result_path );
+  o << std::setw( 4 ) << json::array() << std::endl;
+  o.close();
+
+
   fmt::print( "[i] processing technology library\n" );
 
-  json json_result = json::array();
+
   stopwatch<>::duration time{ 0 };
   {
         
     stopwatch t( time );
     for ( auto const& benchmark : epfl_benchmarks() )
     {
-
       fmt::print( "[i] processing {}\n", benchmark );
       mig_network mig;
 
@@ -46,6 +55,7 @@ int main( int argc, char* argv[] )
       {
         continue;
       }
+
       std::ifstream i( conf );
       json json_flow;
       i >> json_flow;
@@ -59,6 +69,11 @@ int main( int argc, char* argv[] )
 
       for ( mig_flow_result* res_op : result )
       {
+        std::ifstream file_result( conf );
+        json json_result;
+        file_result >> json_result;
+        file_result.close();
+
         const auto cec = benchmark == "hyp" ? true : abc_cec( res_op->mig(), benchmark );
         exp( benchmark, res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime(), cec );
 
@@ -68,15 +83,15 @@ int main( int argc, char* argv[] )
         json_res["eqv"] = cec;
         json_res["name"] = res_op->name();
         json_result.push_back( json_res );
+        
+        std::ofstream result_out( result_path );
+        result_out << std::setw( 4 ) << json_result << std::endl;
+        result_out.close();
       }
+
     }
-    std::string result = fmt::format( path, "result.json" );;
-    if( argc > 1 ){
-      result= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("../result/result_{}",argv[1]) );
-    }
-    std::cout << "To : " << result << std::endl;
-    std::ofstream o( result );
-    o << std::setw( 4 ) << json_result << std::endl;
+    
+    
   }
   exp.save();
   exp.table();
