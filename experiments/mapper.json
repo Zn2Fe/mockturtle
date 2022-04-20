@@ -4294,5 +4294,28 @@
       }
     ],
     "version": "681fec8"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2215,
+        "flow": "0_0",
+        "runtime1": 20.34177589416504,
+        "size": 57247,
+        "size_mig": 52394
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2215,
+        "flow": "0_1",
+        "runtime1": 19.965545654296875,
+        "size": 57247,
+        "size_mig": 52394
+      }
+    ],
+    "version": "73353f8"
   }
 ]
