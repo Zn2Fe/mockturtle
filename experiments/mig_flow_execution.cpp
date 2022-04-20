@@ -27,13 +27,14 @@ int main( int argc, char* argv[] )
   experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float /*, bool*/> exp(
       "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1" /*, "equivalent"*/ );
 
-  std::string path =  ( argc > 3 ) ? argv[3] : "{}"; /*/home/yuna/Documents/mig_flow_result/*/
-  std::string conf = fmt::format( path, ( argc > 1 ) ? fmt::format("{}",argv[1]) : "config/config.json" );
+
+  std::string path = (argc>3) ? fmt::format("{}/{{}}",argv[3]) : "{}";
+  std::string conf = fmt::format(path,((argc>1) ? argv[1] : "config/config.json"));
+  std::string result_path =  fmt::format(path,((argc>2) ? argv[2] : "result/result.json"));
+  std::string csv_path = fmt::format(path,"global.csv");
   std::cout << "From : " << conf << std::endl;
-  std::string result_path = fmt::format( path, "result.json" );
-  if( argc > 1 ){
-    result_path= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("../result/result_{}",argv[1]) );
-  }
+
+
   std::cout << "To : " << result_path << std::endl;
   std::ofstream o( result_path );
   o << std::setw( 4 ) << json::array() << std::endl;
@@ -91,9 +92,13 @@ int main( int argc, char* argv[] )
         result_out.close();
 
         std::ofstream global;
-        global.open("../global.csv",std::ios::app);
+        global.open(csv_path,std::ios::app);
+        if(!global.is_open()){
+          sleep(1);
+          global.open(csv_path,std::ios::app);
+        }
         global << fmt::format(
-          "{};{};{};{};{};{}",
+          "{};{};{};{};{};{};{}",
           benchmark.value().get<std::string>() ,
           res_op->name(),
           size_before,
