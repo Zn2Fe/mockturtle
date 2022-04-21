@@ -582,7 +582,7 @@ class end_operation : public operation
 {
 public:
   operation* parent;
-  mig_network result;
+  //mig_network result;
   std::string name;
 
   end_operation( operation* parent, mig_network mig, std::string name, bool loop = false )
@@ -593,7 +593,7 @@ public:
     this->name = name;
     if ( not loop )
     {
-      this->result = mig;
+      //this->result = mig;
     }
   }
 
@@ -825,10 +825,10 @@ public:
     this->real = real;
   }
 
-  mig_network mig()
+  /*mig_network mig()
   {
     return real->result;
-  }
+  }*/
   mig_data data()
   {
     return real->stats;
@@ -843,7 +843,7 @@ public:
   }
   float get_flow_runtime()
   {
-    return 0;
+    return real->get_flow_runtime();
   }
 };
 

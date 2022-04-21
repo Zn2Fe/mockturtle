@@ -18,26 +18,31 @@
 
 #include <nlohmann/json.hpp>
 
+
 int main( int argc, char* argv[] )
 {
   using namespace experiments;
   using namespace mockturtle;
 
-  experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float, bool> exp(
-      "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1", "equivalent" );
+  experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float /*, bool*/> exp(
+      "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1" /*, "equivalent"*/ );
 
-  std::string path =  ( argc > 3 ) ? argv[3] : "{}"; /*/home/yuna/Documents/mig_flow_result/*/
-  std::string conf = fmt::format( path, ( argc > 1 ) ? fmt::format("{}",argv[1]) : "config/config.json" );
+
+  std::string path = (argc>3) ? fmt::format("{}/{{}}",argv[3]) : "{}";
+  std::string conf = fmt::format(path,((argc>1) ? argv[1] : "config/config.json"));
+  std::string result_path =  fmt::format(path,((argc>2) ? argv[2] : "result/result.json"));
+  std::string csv_path = fmt::format(path,"global.csv");
   std::cout << "From : " << conf << std::endl;
-  std::string result_path = fmt::format( path, "result.json" );
-  if( argc > 1 ){
-    result_path= fmt::format( path, ( argc > 2 ) ? argv[2] : fmt::format("../result/result_{}",argv[1]) );
-  }
+
+
   std::cout << "To : " << result_path << std::endl;
   std::ofstream o( result_path );
   o << std::setw( 4 ) << json::array() << std::endl;
   o.close();
 
+  std::ifstream i( conf );
+  json json_flow;
+  i >> json_flow;
 
   fmt::print( "[i] processing technology library\n" );
 
@@ -46,19 +51,17 @@ int main( int argc, char* argv[] )
   {
         
     stopwatch t( time );
-    for ( auto const& benchmark : epfl_benchmarks() )
+    for ( auto const& benchmark : json_flow.at("do").items() )
     {
-      fmt::print( "[i] processing {}\n", benchmark );
+      fmt::print( "[i] processing {}\n", benchmark.value().get<std::string>() );
       mig_network mig;
 
-      if ( lorina::read_aiger( benchmark_path( benchmark ), aiger_reader( mig ) ) != lorina::return_code::success )
+      if ( lorina::read_aiger( benchmark_path( benchmark.value().get<std::string>() ), aiger_reader( mig ) ) != lorina::return_code::success )
       {
         continue;
       }
 
-      std::ifstream i( conf );
-      json json_flow;
-      i >> json_flow;
+  
 
       u_int32_t size_before = mig.num_gates();
       u_int32_t depth_before = depth_view( mig ).depth();
@@ -74,19 +77,37 @@ int main( int argc, char* argv[] )
         file_result >> json_result;
         file_result.close();
 
-        const auto cec = benchmark == "hyp" ? true : abc_cec( res_op->mig(), benchmark );
-        exp( benchmark, res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime(), cec );
+        //const auto cec = benchmark == "hyp" ? true : abc_cec( res_op->mig(), benchmark );
+        exp( benchmark.value().get<std::string>() , res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime()/*, cec*/ );
 
         json json_res;
         json_res["flow"] = res_op->save_data_to_json();
-        json_res["benchmark"] = benchmark;
-        json_res["eqv"] = cec;
+        json_res["benchmark"] = benchmark.value().get<std::string>();
+        //json_res["eqv"] = cec;
         json_res["name"] = res_op->name();
         json_result.push_back( json_res );
         
         std::ofstream result_out( result_path );
         result_out << std::setw( 4 ) << json_result << std::endl;
         result_out.close();
+
+        std::ofstream global;
+        global.open(csv_path,std::ios::app);
+        if(!global.is_open()){
+          sleep(1);
+          global.open(csv_path,std::ios::app);
+        }
+        global << fmt::format(
+          "{};{};{};{};{};{};{}",
+          benchmark.value().get<std::string>() ,
+          res_op->name(),
+          size_before,
+          res_op->data().size,
+          depth_before, res_op->data().depth,
+          res_op->get_flow_runtime())
+          <<std::endl;
+
+
       }
 
     }
