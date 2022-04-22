@@ -4340,5 +4340,109 @@
       }
     ],
     "version": "45df624"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "c17",
+        "depth": 3,
+        "depth_mig": 3,
+        "flow": "main",
+        "runtime1": 0.013265230692923069,
+        "size": 6,
+        "size_mig": 5
+      },
+      {
+        "benchmark": "c432",
+        "depth": 26,
+        "depth_mig": 26,
+        "flow": "main",
+        "runtime1": 0.8897412419319153,
+        "size": 208,
+        "size_mig": 165
+      },
+      {
+        "benchmark": "c499",
+        "depth": 19,
+        "depth_mig": 16,
+        "flow": "main",
+        "runtime1": 1.7206447124481201,
+        "size": 398,
+        "size_mig": 316
+      },
+      {
+        "benchmark": "c880",
+        "depth": 25,
+        "depth_mig": 18,
+        "flow": "main",
+        "runtime1": 1.2030973434448242,
+        "size": 325,
+        "size_mig": 271
+      },
+      {
+        "benchmark": "c1355",
+        "depth": 25,
+        "depth_mig": 16,
+        "flow": "main",
+        "runtime1": 1.867940068244934,
+        "size": 502,
+        "size_mig": 316
+      },
+      {
+        "benchmark": "c1908",
+        "depth": 27,
+        "depth_mig": 18,
+        "flow": "main",
+        "runtime1": 1.4127684831619263,
+        "size": 341,
+        "size_mig": 244
+      },
+      {
+        "benchmark": "c2670",
+        "depth": 20,
+        "depth_mig": 16,
+        "flow": "main",
+        "runtime1": 4.450404167175293,
+        "size": 716,
+        "size_mig": 472
+      },
+      {
+        "benchmark": "c3540",
+        "depth": 41,
+        "depth_mig": 27,
+        "flow": "main",
+        "runtime1": 16.466487884521484,
+        "size": 1024,
+        "size_mig": 775
+      },
+      {
+        "benchmark": "c5315",
+        "depth": 37,
+        "depth_mig": 23,
+        "flow": "main",
+        "runtime1": 18.630264282226563,
+        "size": 1776,
+        "size_mig": 1129
+      },
+      {
+        "benchmark": "c6288",
+        "depth": 120,
+        "depth_mig": 46,
+        "flow": "main",
+        "runtime1": 7.361363887786865,
+        "size": 2337,
+        "size_mig": 976
+      },
+      {
+        "benchmark": "c7552",
+        "depth": 26,
+        "depth_mig": 26,
+        "flow": "main",
+        "runtime1": 12.379667282104492,
+        "size": 1469,
+        "size_mig": 1117
+      }
+    ],
+    "version": "a658a53"
   }
 ]

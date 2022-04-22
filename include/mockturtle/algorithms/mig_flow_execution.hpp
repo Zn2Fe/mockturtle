@@ -234,6 +234,7 @@ void to_json( json& j, const resubstitution_params& param )
       { "skip_fanout_limit_for_divisors", param.skip_fanout_limit_for_divisors },
       { "progress", param.progress },
       { "verbose", param.verbose },
+      { "use_dont_cares", param.use_dont_cares},
       { "window_size", param.window_size },
       { "preserve_depth", param.preserve_depth },
       { "max_clauses", param.max_clauses },
@@ -293,6 +294,13 @@ void from_json( const json& j, resubstitution_params& param )
   try
   {
     j.at( "verbose" ).get_to( param.verbose );
+  }
+  catch ( const json::exception& )
+  {
+  }
+    try
+  {
+    j.at( "use_dont_cares" ).get_to( param.use_dont_cares );
   }
   catch ( const json::exception& )
   {
