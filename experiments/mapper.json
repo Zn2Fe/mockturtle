@@ -4344,105 +4344,371 @@
   {
     "entries": [
       {
-        "benchmark": "c17",
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "flow": "main5",
+        "runtime1": 1.1699711084365845,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 14,
+        "flow": "main5",
+        "runtime1": 32.785301208496094,
+        "size": 3336,
+        "size_mig": 2496
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2201,
+        "flow": "main5",
+        "runtime1": 2417.59423828125,
+        "size": 57247,
+        "size_mig": 35225
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8884,
+        "flow": "main5",
+        "runtime1": 9669.9443359375,
+        "size": 214335,
+        "size_mig": 124005
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 210,
+        "flow": "main5",
+        "runtime1": 525.0635375976563,
+        "size": 32060,
+        "size_mig": 24119
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "flow": "main5",
+        "runtime1": 35.02900314331055,
+        "size": 2865,
+        "size_mig": 2168
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 149,
+        "flow": "main5",
+        "runtime1": 330.64215087890625,
+        "size": 27062,
+        "size_mig": 19150
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 123,
+        "flow": "main5",
+        "runtime1": 356.79449462890625,
+        "size": 5416,
+        "size_mig": 4149
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 2299,
+        "flow": "main5",
+        "runtime1": 1070.579833984375,
+        "size": 24618,
+        "size_mig": 12974
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "flow": "main5",
+        "runtime1": 111.23344421386719,
+        "size": 18484,
+        "size_mig": 9149
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 21,
+        "flow": "main5",
+        "runtime1": 116.45738983154297,
+        "size": 11839,
+        "size_mig": 4513
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "flow": "main5",
+        "runtime1": 608.0149536132813,
+        "size": 693,
+        "size_mig": 524
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 13,
+        "flow": "main5",
+        "runtime1": 13.417807579040527,
+        "size": 174,
+        "size_mig": 73
+      },
+      {
+        "benchmark": "dec",
         "depth": 3,
         "depth_mig": 3,
-        "flow": "main",
-        "runtime1": 0.013265230692923069,
-        "size": 6,
-        "size_mig": 5
+        "flow": "main5",
+        "runtime1": 0.26593953371047974,
+        "size": 304,
+        "size_mig": 304
       },
       {
-        "benchmark": "c432",
-        "depth": 26,
-        "depth_mig": 26,
-        "flow": "main",
-        "runtime1": 0.8897412419319153,
-        "size": 208,
-        "size_mig": 165
-      },
-      {
-        "benchmark": "c499",
-        "depth": 19,
-        "depth_mig": 16,
-        "flow": "main",
-        "runtime1": 1.7206447124481201,
-        "size": 398,
-        "size_mig": 316
-      },
-      {
-        "benchmark": "c880",
-        "depth": 25,
-        "depth_mig": 18,
-        "flow": "main",
-        "runtime1": 1.2030973434448242,
-        "size": 325,
-        "size_mig": 271
-      },
-      {
-        "benchmark": "c1355",
-        "depth": 25,
-        "depth_mig": 16,
-        "flow": "main",
-        "runtime1": 1.867940068244934,
-        "size": 502,
-        "size_mig": 316
-      },
-      {
-        "benchmark": "c1908",
-        "depth": 27,
-        "depth_mig": 18,
-        "flow": "main",
-        "runtime1": 1.4127684831619263,
-        "size": 341,
-        "size_mig": 244
-      },
-      {
-        "benchmark": "c2670",
+        "benchmark": "i2c",
         "depth": 20,
-        "depth_mig": 16,
-        "flow": "main",
-        "runtime1": 4.450404167175293,
-        "size": 716,
-        "size_mig": 472
+        "depth_mig": 12,
+        "flow": "main5",
+        "runtime1": 17.303482055664063,
+        "size": 1342,
+        "size_mig": 1121
       },
       {
-        "benchmark": "c3540",
-        "depth": 41,
-        "depth_mig": 27,
-        "flow": "main",
-        "runtime1": 16.466487884521484,
-        "size": 1024,
-        "size_mig": 775
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "flow": "main5",
+        "runtime1": 10.585697174072266,
+        "size": 260,
+        "size_mig": 197
       },
       {
-        "benchmark": "c5315",
-        "depth": 37,
-        "depth_mig": 23,
-        "flow": "main",
-        "runtime1": 18.630264282226563,
-        "size": 1776,
-        "size_mig": 1129
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 97,
+        "flow": "main5",
+        "runtime1": 1454.3819580078125,
+        "size": 46836,
+        "size_mig": 38867
       },
       {
-        "benchmark": "c6288",
-        "depth": 120,
-        "depth_mig": 46,
-        "flow": "main",
-        "runtime1": 7.361363887786865,
-        "size": 2337,
-        "size_mig": 976
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "flow": "main5",
+        "runtime1": 8.258957862854004,
+        "size": 978,
+        "size_mig": 542
       },
       {
-        "benchmark": "c7552",
-        "depth": 26,
-        "depth_mig": 26,
-        "flow": "main",
-        "runtime1": 12.379667282104492,
-        "size": 1469,
-        "size_mig": 1117
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 42,
+        "flow": "main5",
+        "runtime1": 2.007868528366089,
+        "size": 257,
+        "size_mig": 190
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 48,
+        "flow": "main5",
+        "runtime1": 69.0116195678711,
+        "size": 13758,
+        "size_mig": 4253
       }
     ],
     "version": "a658a53"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "adder",
+        "depth": 255,
+        "depth_mig": 129,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 0.9543094635009766,
+        "size": 1020,
+        "size_mig": 384
+      },
+      {
+        "benchmark": "bar",
+        "depth": 12,
+        "depth_mig": 14,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 27.113359451293945,
+        "size": 3336,
+        "size_mig": 2496
+      },
+      {
+        "benchmark": "div",
+        "depth": 4372,
+        "depth_mig": 2201,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 1918.3544921875,
+        "size": 57247,
+        "size_mig": 35221
+      },
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8884,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 13191.287109375,
+        "size": 214335,
+        "size_mig": 124005
+      },
+      {
+        "benchmark": "log2",
+        "depth": 444,
+        "depth_mig": 210,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 501.40850830078125,
+        "size": 32060,
+        "size_mig": 24119
+      },
+      {
+        "benchmark": "max",
+        "depth": 287,
+        "depth_mig": 162,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 22.04532241821289,
+        "size": 2865,
+        "size_mig": 2168
+      },
+      {
+        "benchmark": "multiplier",
+        "depth": 274,
+        "depth_mig": 149,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 285.56195068359375,
+        "size": 27062,
+        "size_mig": 19150
+      },
+      {
+        "benchmark": "sin",
+        "depth": 225,
+        "depth_mig": 123,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 269.156494140625,
+        "size": 5416,
+        "size_mig": 4149
+      },
+      {
+        "benchmark": "sqrt",
+        "depth": 5058,
+        "depth_mig": 2297,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 791.1115112304688,
+        "size": 24618,
+        "size_mig": 12964
+      },
+      {
+        "benchmark": "square",
+        "depth": 250,
+        "depth_mig": 126,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 74.40634155273438,
+        "size": 18484,
+        "size_mig": 9150
+      },
+      {
+        "benchmark": "arbiter",
+        "depth": 87,
+        "depth_mig": 21,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 80.90629577636719,
+        "size": 11839,
+        "size_mig": 4513
+      },
+      {
+        "benchmark": "cavlc",
+        "depth": 16,
+        "depth_mig": 13,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 687.4953002929688,
+        "size": 693,
+        "size_mig": 529
+      },
+      {
+        "benchmark": "ctrl",
+        "depth": 10,
+        "depth_mig": 9,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 16.187850952148438,
+        "size": 174,
+        "size_mig": 75
+      },
+      {
+        "benchmark": "dec",
+        "depth": 3,
+        "depth_mig": 3,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 0.1739743947982788,
+        "size": 304,
+        "size_mig": 304
+      },
+      {
+        "benchmark": "i2c",
+        "depth": 20,
+        "depth_mig": 12,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 12.754243850708008,
+        "size": 1342,
+        "size_mig": 1121
+      },
+      {
+        "benchmark": "int2float",
+        "depth": 16,
+        "depth_mig": 10,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 9.708125114440918,
+        "size": 260,
+        "size_mig": 197
+      },
+      {
+        "benchmark": "mem_ctrl",
+        "depth": 114,
+        "depth_mig": 97,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 2501.898681640625,
+        "size": 46836,
+        "size_mig": 38911
+      },
+      {
+        "benchmark": "priority",
+        "depth": 250,
+        "depth_mig": 117,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 4.5092973709106445,
+        "size": 978,
+        "size_mig": 542
+      },
+      {
+        "benchmark": "router",
+        "depth": 54,
+        "depth_mig": 42,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 1.2989492416381836,
+        "size": 257,
+        "size_mig": 190
+      },
+      {
+        "benchmark": "voter",
+        "depth": 70,
+        "depth_mig": 48,
+        "flow": "mig_map+resub+algb2",
+        "runtime1": 40.89628601074219,
+        "size": 13758,
+        "size_mig": 4266
+      }
+    ],
+    "version": "3def1c5"
   }
 ]

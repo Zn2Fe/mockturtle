@@ -362,6 +362,41 @@ void from_json( const json& j, resubstitution_params& param )
   {
   }
 }
+
+void to_json( json& j, const mig_algebraic_depth_rewriting_params& param )
+{
+  j = json{
+      { "strategy", param.strategy },
+      { "overhead", param.overhead },
+      { "allow_area_increase", param.allow_area_increase },
+  };
+}
+
+void from_json( const json& j, mig_algebraic_depth_rewriting_params& param )
+{
+  try
+  {
+    j.at( "strategy" ).get_to( param.strategy );
+  }
+  catch ( const json::exception& )
+  {
+  }
+  try
+  {
+    j.at( "overhead" ).get_to( param.overhead );
+  }
+  catch ( const json::exception& )
+  {
+  }
+  try
+  {
+    j.at( "allow_area_increase" ).get_to( param.allow_area_increase );
+  }
+  catch ( const json::exception& )
+  {
+  }
+ 
+}
 } // namespace mockturtle
 
 namespace mockturtle
@@ -499,7 +534,7 @@ mig_network flow_mig_resubstitution( mig_network mig, operation_algo_data* data_
 // 206
 mig_network flow_mig_algebraic_rewriting( mig_network mig, operation_algo_data* data_out, json param )
 {
-  mig_algebraic_depth_rewriting_params ps;
+  mig_algebraic_depth_rewriting_params ps = param.get<mig_algebraic_depth_rewriting_params>();
   mig_network res = mig;
   depth_view mig_depth{ res };
 
@@ -534,6 +569,11 @@ public:
   {
     return this->data();
   }
+  virtual std::list<std::string> save_data_to_csv()
+  {
+    std::list<std::string> result;
+    return result;
+  };
 };
 
 class root_operation : public operation
@@ -553,6 +593,11 @@ public:
     json data = this->data();
     res.push_back( data );
     return res;
+  }
+  std::list<std::string> save_data_to_csv(){
+    std::list<std::string> result;
+    result.push_back(fmt::format("{};{};{};{}",this->operation_type,this->stats.size,this->stats.depth,this->stats.runtime));
+    return result;
   }
 };
 
@@ -583,6 +628,11 @@ public:
     json data = this->data();
     res.push_back( data );
     return res;
+  }
+  std::list<std::string> save_data_to_csv(){
+    std::list<std::string> result = this->parent->save_data_to_csv();
+    result.push_back(fmt::format("{};{};{};{}",this->operation_type,this->stats.size,this->stats.depth,this->stats.runtime));
+    return result;
   }
 };
 
@@ -617,6 +667,11 @@ public:
     json data = this->data();
     res.push_back( data );
     return res;
+  }
+  std::list<std::string> save_data_to_csv(){
+    std::list<std::string> result = this->parent->save_data_to_csv();
+    result.push_back(fmt::format("{};{};{};{}",this->operation_type,this->stats.size,this->stats.depth,this->stats.runtime));
+    return result;
   }
 };
 
@@ -682,6 +737,15 @@ public:
     data["flow"] = this->operations.size() == 0 ? json::array() : this->operations.back()->save_data_to_json();
     res.push_back( data );
     return res;
+  }
+  std::list<std::string> save_data_to_csv(){
+    std::list<std::string> result = this->parent->save_data_to_csv();
+    std::list<std::string> this_result = this->parent->save_data_to_csv();
+    for(auto const& i : this_result){
+      result.push_back(i);
+    }
+    result.push_back(fmt::format("{};{};{};{}",this->operation_type,this->stats.size,this->stats.depth,this->stats.runtime)); 
+    return result;
   }
 };
 
@@ -844,6 +908,9 @@ public:
   json save_data_to_json()
   {
     return real->save_data_to_json();
+  }
+  std::list<std::string> save_data_to_csv(){
+    return real->save_data_to_csv();
   }
   std::string name()
   {

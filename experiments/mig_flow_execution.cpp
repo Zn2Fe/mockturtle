@@ -29,11 +29,9 @@ int main( int argc, char* argv[] )
   std::string path = ( argc > 3 ) ? fmt::format( "{}/{{}}", argv[3] ) : "{}";
   std::string conf = fmt::format( path, ( ( argc > 1 ) ? argv[1] : "config/config.json" ) );
   std::string result_path = fmt::format( path, ( ( argc > 2 ) ? argv[2] : "result/result.json" ) );
+  std::string result_csv_path = fmt::format( path, ( ( argc > 2 ) ? argv[2] : "result.csv" ) );
   std::string csv_path = fmt::format( path, "global.csv" );
 
-  std::ofstream o( result_path );
-  o << std::setw( 4 ) << json::array() << std::endl;
-  o.close();
 
   std::ifstream i( conf );
   json json_flow;
@@ -72,29 +70,37 @@ int main( int argc, char* argv[] )
 
       for ( mig_flow_result* res_op : result )
       {
-        std::ifstream file_result( result_path );
-        json json_result;
-        file_result >> json_result;
-        file_result.close();
+        //std::ifstream file_result;
+        std::ofstream file_write;
 
-        // const auto cec = benchmark == "hyp" ? true : abc_cec( res_op->mig(), benchmark );
+        file_write.open(result_path,std::ios::app);
+        if(!file_write.is_open()){        
+          fmt::print("waiting for result file");
+          sleep(1);
+          file_write.open(result_path,std::ios::app);
+        }
+        //file_result.open(result_path);
+        //json json_result;
+        //file_result >> json_result;
+        
+        //file_result.close();
+       // const auto cec = benchmark == "hyp" ? true : abc_cec( res_op->mig(), benchmark );
         exp( benchmark.value().get<std::string>(), res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime() /*, cec*/ );
-
         json json_res;
         json_res["flow"] = res_op->save_data_to_json();
         json_res["benchmark"] = benchmark.value().get<std::string>();
         // json_res["eqv"] = cec;
         json_res["name"] = res_op->name();
-        json_result.push_back( json_res );
-
-        std::ofstream result_out( result_path );
-        result_out << std::setw( 4 ) << json_result << std::endl;
-        result_out.close();
+        //json_result.push_back( json_res );
+        file_write << "," <<std::endl;
+        file_write << std::setw( 4 ) << json_res << std::endl;
+        file_write.close();
 
         std::ofstream global;
         global.open( csv_path, std::ios::app );
         if ( !global.is_open() )
         {
+          fmt::print("waiting for csv file");
           sleep( 1 );
           global.open( csv_path, std::ios::app );
         }
@@ -104,9 +110,30 @@ int main( int argc, char* argv[] )
                       res_op->name(),
                       size_before,
                       res_op->data().size,
-                      depth_before, res_op->data().depth,
+                      depth_before,
+                      res_op->data().depth,
                       res_op->get_flow_runtime() )
                << std::endl;
+
+        std::ofstream resultcsv;
+        resultcsv.open( result_csv_path, std::ios::app );
+        if ( !resultcsv.is_open() )
+        {
+          fmt::print("waiting for csv file");
+          sleep( 1 );
+          resultcsv.open( result_csv_path, std::ios::app );
+        }
+        int j =0;
+        for(const auto& i : res_op->save_data_to_csv()){
+          resultcsv << fmt::format(
+            "{};{};{};{}\n",
+            benchmark.value().get<std::string>(),
+            res_op->name(),
+            j,
+            i
+            );
+          j++;
+        }
       }
     }
   }
