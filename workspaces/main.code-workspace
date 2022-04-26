@@ -5,9 +5,6 @@
 		},
 		{
 			"path": "../../mig_flow_result"
-		},
-		{
-			"path": "../../pymck"
 		}
 	],
 	"settings": {

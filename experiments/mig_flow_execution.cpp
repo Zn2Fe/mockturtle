@@ -18,6 +18,11 @@
 
 #include <nlohmann/json.hpp>
 
+#define WRITE_IN_CSV true
+#define WRITE_IN_JSON_VERBOSE false
+#define WRITE_IN_CSV_VERBOSE false
+
+
 int main( int argc, char* argv[] )
 {
   using namespace experiments;
@@ -26,21 +31,36 @@ int main( int argc, char* argv[] )
   experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float /*, bool*/> exp(
       "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1" /*, "equivalent"*/ );
 
-  std::string path = ( argc > 3 ) ? fmt::format( "{}/{{}}", argv[3] ) : "{}";
+  std::string path = ( argc > 2 ) ? fmt::format( "{}/{{}}", argv[2] ) : "{}";
   std::string conf = fmt::format( path, ( ( argc > 1 ) ? argv[1] : "config/config.json" ) );
-  std::string result_path = fmt::format( path, ( ( argc > 2 ) ? argv[2] : "result/result.json" ) );
-  std::string result_csv_path = fmt::format( path, ( ( argc > 2 ) ? argv[2] : "result.csv" ) );
-  std::string csv_path = fmt::format( path, "global.csv" );
-
 
   std::ifstream i( conf );
   json json_flow;
   i >> json_flow;
-  if ( argc > 4 )
-  {
-    std::cout << "From : " << conf << std::endl;
-    std::cout << "To : " << result_path << std::endl;
-    fmt::print( "[i] processing technology library\n" );
+  i.close();
+  
+  std::string global_name = json_flow.at("name").get<std::string>();
+
+  std::string csv_path = fmt::format( path, fmt::format("resultcsv/{}.csv",global_name));
+  std::string json_v_path = fmt::format( path, fmt::format("result/{}.json",global_name) );
+  std::string csv_v_path = fmt::format( path, fmt::format("result/{}.csv",global_name) );
+
+  std::ofstream csv_write;
+  if(WRITE_IN_CSV){
+    csv_write.open(csv_path);
+    csv_write << "benchmark;flow;size;size_mig;depth;depth_mig;runtime" <<std::endl;
+    csv_write.close();
+  }
+
+  std::ofstream csv_v_write;
+  if(WRITE_IN_CSV_VERBOSE){
+
+  }
+
+  std::ofstream json_v_write;
+  if(WRITE_IN_JSON_VERBOSE){
+    json_v_write.open(json_v_path);
+    json_v_write.close();
   }
 
   stopwatch<>::duration time{ 0 };
@@ -49,13 +69,7 @@ int main( int argc, char* argv[] )
     stopwatch t( time );
     for ( auto const& benchmark : json_flow.at( "do" ).items() )
     {
-      if ( argc > 4 )
-      {
-        fmt::print( "[i] processing {}\n", benchmark.value().get<std::string>() );
-      }
-
       mig_network mig;
-
       if ( lorina::read_aiger( benchmark_path( benchmark.value().get<std::string>() ), aiger_reader( mig ) ) != lorina::return_code::success )
       {
         continue;
@@ -70,41 +84,11 @@ int main( int argc, char* argv[] )
 
       for ( mig_flow_result* res_op : result )
       {
-        //std::ifstream file_result;
-        std::ofstream file_write;
-
-        file_write.open(result_path,std::ios::app);
-        if(!file_write.is_open()){        
-          fmt::print("waiting for result file");
-          sleep(1);
-          file_write.open(result_path,std::ios::app);
-        }
-        //file_result.open(result_path);
-        //json json_result;
-        //file_result >> json_result;
-        
-        //file_result.close();
-       // const auto cec = benchmark == "hyp" ? true : abc_cec( res_op->mig(), benchmark );
         exp( benchmark.value().get<std::string>(), res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime() /*, cec*/ );
-        json json_res;
-        json_res["flow"] = res_op->save_data_to_json();
-        json_res["benchmark"] = benchmark.value().get<std::string>();
-        // json_res["eqv"] = cec;
-        json_res["name"] = res_op->name();
-        //json_result.push_back( json_res );
-        file_write << "," <<std::endl;
-        file_write << std::setw( 4 ) << json_res << std::endl;
-        file_write.close();
 
-        std::ofstream global;
-        global.open( csv_path, std::ios::app );
-        if ( !global.is_open() )
-        {
-          fmt::print("waiting for csv file");
-          sleep( 1 );
-          global.open( csv_path, std::ios::app );
-        }
-        global << fmt::format(
+        if(WRITE_IN_CSV){
+          csv_write.open(csv_path,std::ios::app);
+          csv_write <<  fmt::format(
                       "{};{};{};{};{};{};{}",
                       benchmark.value().get<std::string>(),
                       res_op->name(),
@@ -114,25 +98,19 @@ int main( int argc, char* argv[] )
                       res_op->data().depth,
                       res_op->get_flow_runtime() )
                << std::endl;
-
-        std::ofstream resultcsv;
-        resultcsv.open( result_csv_path, std::ios::app );
-        if ( !resultcsv.is_open() )
-        {
-          fmt::print("waiting for csv file");
-          sleep( 1 );
-          resultcsv.open( result_csv_path, std::ios::app );
+          csv_write.close();
         }
-        int j =0;
-        for(const auto& i : res_op->save_data_to_csv()){
-          resultcsv << fmt::format(
-            "{};{};{};{}\n",
-            benchmark.value().get<std::string>(),
-            res_op->name(),
-            j,
-            i
-            );
-          j++;
+        
+        if(WRITE_IN_JSON_VERBOSE){
+          json json_res;
+          json_res["flow"] = res_op->save_data_to_json();
+          json_res["benchmark"] = benchmark.value().get<std::string>();
+          json_res["name"] = res_op->name();
+
+          json_v_write.open(json_v_path,std::ios::app);
+          json_v_write << "," <<std::endl;
+          json_v_write << std::setw( 4 ) << json_res << std::endl;
+          json_v_write.close();
         }
       }
     }
