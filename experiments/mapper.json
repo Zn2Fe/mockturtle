@@ -4532,8 +4532,8 @@
         "benchmark": "adder",
         "depth": 255,
         "depth_mig": 129,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 0.9543094635009766,
+        "flow": "ref_main5",
+        "runtime1": 1.7790298461914063,
         "size": 1020,
         "size_mig": 384
       },
@@ -4541,8 +4541,8 @@
         "benchmark": "bar",
         "depth": 12,
         "depth_mig": 14,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 27.113359451293945,
+        "flow": "ref_main5",
+        "runtime1": 38.20835494995117,
         "size": 3336,
         "size_mig": 2496
       },
@@ -4550,17 +4550,17 @@
         "benchmark": "div",
         "depth": 4372,
         "depth_mig": 2201,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 1918.3544921875,
+        "flow": "ref_main5",
+        "runtime1": 1821.5855712890625,
         "size": 57247,
-        "size_mig": 35221
+        "size_mig": 35225
       },
       {
         "benchmark": "hyp",
         "depth": 24801,
         "depth_mig": 8884,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 13191.287109375,
+        "flow": "ref_main5",
+        "runtime1": 8496.8818359375,
         "size": 214335,
         "size_mig": 124005
       },
@@ -4568,8 +4568,8 @@
         "benchmark": "log2",
         "depth": 444,
         "depth_mig": 210,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 501.40850830078125,
+        "flow": "ref_main5",
+        "runtime1": 510.1276550292969,
         "size": 32060,
         "size_mig": 24119
       },
@@ -4577,8 +4577,8 @@
         "benchmark": "max",
         "depth": 287,
         "depth_mig": 162,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 22.04532241821289,
+        "flow": "ref_main5",
+        "runtime1": 33.95355224609375,
         "size": 2865,
         "size_mig": 2168
       },
@@ -4586,8 +4586,8 @@
         "benchmark": "multiplier",
         "depth": 274,
         "depth_mig": 149,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 285.56195068359375,
+        "flow": "ref_main5",
+        "runtime1": 320.4294128417969,
         "size": 27062,
         "size_mig": 19150
       },
@@ -4595,35 +4595,35 @@
         "benchmark": "sin",
         "depth": 225,
         "depth_mig": 123,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 269.156494140625,
+        "flow": "ref_main5",
+        "runtime1": 346.41961669921875,
         "size": 5416,
         "size_mig": 4149
       },
       {
         "benchmark": "sqrt",
         "depth": 5058,
-        "depth_mig": 2297,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 791.1115112304688,
+        "depth_mig": 2299,
+        "flow": "ref_main5",
+        "runtime1": 1038.0164794921875,
         "size": 24618,
-        "size_mig": 12964
+        "size_mig": 12974
       },
       {
         "benchmark": "square",
         "depth": 250,
         "depth_mig": 126,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 74.40634155273438,
+        "flow": "ref_main5",
+        "runtime1": 107.09049224853516,
         "size": 18484,
-        "size_mig": 9150
+        "size_mig": 9149
       },
       {
         "benchmark": "arbiter",
         "depth": 87,
         "depth_mig": 21,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 80.90629577636719,
+        "flow": "ref_main5",
+        "runtime1": 112.39690399169922,
         "size": 11839,
         "size_mig": 4513
       },
@@ -4631,26 +4631,26 @@
         "benchmark": "cavlc",
         "depth": 16,
         "depth_mig": 13,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 687.4953002929688,
+        "flow": "ref_main5",
+        "runtime1": 588.5811767578125,
         "size": 693,
-        "size_mig": 529
+        "size_mig": 524
       },
       {
         "benchmark": "ctrl",
         "depth": 10,
-        "depth_mig": 9,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 16.187850952148438,
+        "depth_mig": 13,
+        "flow": "ref_main5",
+        "runtime1": 13.008079528808594,
         "size": 174,
-        "size_mig": 75
+        "size_mig": 73
       },
       {
         "benchmark": "dec",
         "depth": 3,
         "depth_mig": 3,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 0.1739743947982788,
+        "flow": "ref_main5",
+        "runtime1": 0.2607072591781616,
         "size": 304,
         "size_mig": 304
       },
@@ -4658,8 +4658,8 @@
         "benchmark": "i2c",
         "depth": 20,
         "depth_mig": 12,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 12.754243850708008,
+        "flow": "ref_main5",
+        "runtime1": 16.644451141357422,
         "size": 1342,
         "size_mig": 1121
       },
@@ -4667,8 +4667,8 @@
         "benchmark": "int2float",
         "depth": 16,
         "depth_mig": 10,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 9.708125114440918,
+        "flow": "ref_main5",
+        "runtime1": 10.238927841186523,
         "size": 260,
         "size_mig": 197
       },
@@ -4676,17 +4676,17 @@
         "benchmark": "mem_ctrl",
         "depth": 114,
         "depth_mig": 97,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 2501.898681640625,
+        "flow": "ref_main5",
+        "runtime1": 1403.7584228515625,
         "size": 46836,
-        "size_mig": 38911
+        "size_mig": 38867
       },
       {
         "benchmark": "priority",
         "depth": 250,
         "depth_mig": 117,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 4.5092973709106445,
+        "flow": "ref_main5",
+        "runtime1": 7.985818386077881,
         "size": 978,
         "size_mig": 542
       },
@@ -4694,8 +4694,8 @@
         "benchmark": "router",
         "depth": 54,
         "depth_mig": 42,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 1.2989492416381836,
+        "flow": "ref_main5",
+        "runtime1": 1.9372178316116333,
         "size": 257,
         "size_mig": 190
       },
@@ -4703,10 +4703,10 @@
         "benchmark": "voter",
         "depth": 70,
         "depth_mig": 48,
-        "flow": "mig_map+resub+algb2",
-        "runtime1": 40.89628601074219,
+        "flow": "ref_main5",
+        "runtime1": 66.41764831542969,
         "size": 13758,
-        "size_mig": 4266
+        "size_mig": 4253
       }
     ],
     "version": "3def1c5"
