@@ -18,7 +18,6 @@ int main( int argc, char* argv[] ){
         char tmp[256];
         getcwd(tmp, 256);
         std::string conf = fmt::format("{}/{}",config,next->d_name);
-        std::string res = fmt::format("result/result_{}",next->d_name);
         system( fmt::format("mig_flow_execution {} {} &",conf,tmp).c_str());
         }
         

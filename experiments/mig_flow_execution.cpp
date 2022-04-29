@@ -20,7 +20,7 @@
 
 #define WRITE_IN_CSV true
 #define WRITE_IN_JSON_VERBOSE false
-#define WRITE_IN_CSV_VERBOSE false
+#define WRITE_IN_CSV_VERBOSE true
 
 
 int main( int argc, char* argv[] )
@@ -45,22 +45,22 @@ int main( int argc, char* argv[] )
   std::string json_v_path = fmt::format( path, fmt::format("result/{}.json",global_name) );
   std::string csv_v_path = fmt::format( path, fmt::format("result/{}.csv",global_name) );
 
-  std::ofstream csv_write;
+  std::ofstream writer;
   if(WRITE_IN_CSV){
-    csv_write.open(csv_path);
-    csv_write << "benchmark;flow;size;size_mig;depth;depth_mig;runtime" <<std::endl;
-    csv_write.close();
+    writer.open(csv_path);
+    writer << "benchmark;flow;size;size_mig;depth;depth_mig;runtime" <<std::endl;
+    writer.close();
   }
 
-  std::ofstream csv_v_write;
   if(WRITE_IN_CSV_VERBOSE){
-
+    writer.open(csv_v_path);
+    writer << "benchmark;flow;op_num;op_type;size_mig;depth_mig;runtime;size;depth" <<std::endl;
+    writer.close();
   }
 
-  std::ofstream json_v_write;
   if(WRITE_IN_JSON_VERBOSE){
-    json_v_write.open(json_v_path);
-    json_v_write.close();
+    writer.open(json_v_path);
+    writer.close();
   }
 
   stopwatch<>::duration time{ 0 };
@@ -79,6 +79,7 @@ int main( int argc, char* argv[] )
       u_int32_t depth_before = depth_view( mig ).depth();
 
       mig_flow_param ps;
+      ps.progress = false;
       mig_flow_stats st;
       std::list<mig_flow_result*> result = mig_flow_execution( mig, json_flow, ps, &st );
 
@@ -87,8 +88,8 @@ int main( int argc, char* argv[] )
         exp( benchmark.value().get<std::string>(), res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime() /*, cec*/ );
 
         if(WRITE_IN_CSV){
-          csv_write.open(csv_path,std::ios::app);
-          csv_write <<  fmt::format(
+          writer.open(csv_path,std::ios::app);
+          writer <<  fmt::format(
                       "{};{};{};{};{};{};{}",
                       benchmark.value().get<std::string>(),
                       res_op->name(),
@@ -98,7 +99,7 @@ int main( int argc, char* argv[] )
                       res_op->data().depth,
                       res_op->get_flow_runtime() )
                << std::endl;
-          csv_write.close();
+          writer.close();
         }
         
         if(WRITE_IN_JSON_VERBOSE){
@@ -107,10 +108,29 @@ int main( int argc, char* argv[] )
           json_res["benchmark"] = benchmark.value().get<std::string>();
           json_res["name"] = res_op->name();
 
-          json_v_write.open(json_v_path,std::ios::app);
-          json_v_write << "," <<std::endl;
-          json_v_write << std::setw( 4 ) << json_res << std::endl;
-          json_v_write.close();
+          writer.open(json_v_path,std::ios::app);
+          writer << "," <<std::endl;
+          writer << std::setw( 4 ) << json_res << std::endl;
+          writer.close();
+        }
+        if(WRITE_IN_CSV_VERBOSE){
+          int num = 0;
+          writer.open(csv_v_path,std::ios::app);
+          for(std::string res : res_op->save_data_to_csv())
+          {
+           writer <<  fmt::format(
+                      "{};{};{};{};{};{}\n",
+                      benchmark.value().get<std::string>(),
+                      res_op->name(),
+                      num,
+                      res,
+                      size_before,
+                      depth_before
+                       );
+           num+=1; 
+          }
+
+          writer.close();
         }
       }
     }

@@ -58,6 +58,7 @@ int main()
     ps.max_pis = 8u;
     ps.max_inserts = 1u;
     ps.progress = false;
+    ps.use_dont_cares = true;
 
     depth_view depth_mig{mig};
     fanout_view fanout_mig{depth_mig};
