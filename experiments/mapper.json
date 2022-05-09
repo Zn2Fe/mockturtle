@@ -4899,15 +4899,29 @@
   {
     "entries": [
       {
-        "benchmark": "mem_ctrl",
-        "depth": 114,
-        "depth_mig": 97,
+        "benchmark": "leon3_opt",
+        "depth": 54,
+        "depth_mig": 41,
         "flow": "ref_main4",
-        "runtime1": 104.34441375732422,
-        "size": 46836,
-        "size_mig": 38867
+        "runtime1": 9806.701171875,
+        "size": 974977,
+        "size_mig": 954105
       }
     ],
     "version": "9ff54a4"
+  },
+  {
+    "entries": [
+      {
+        "benchmark": "hyp",
+        "depth": 24801,
+        "depth_mig": 8911,
+        "flow": "map_resub_l3",
+        "runtime1": 27.607097625732422,
+        "size": 214335,
+        "size_mig": 123756
+      }
+    ],
+    "version": "593e8e4"
   }
 ]

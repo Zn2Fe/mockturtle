@@ -27,12 +27,9 @@ int main( int argc, char* argv[] )
 {
   using namespace experiments;
   using namespace mockturtle;
-
-  experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float /*, bool*/> exp(
-      "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1" /*, "equivalent"*/ );
-
+  
   std::string path = ( argc > 3 ) ? fmt::format( "{}/{{}}", argv[3] ) : "{}";
-  std::string conf = fmt::format( path, ( ( argc > 2 ) ? argv[2] : "config/config.json" ) );
+  std::string conf = fmt::format( path, ( ( argc > 2 ) ? argv[2] : "config.json" ) );
 
   std::ifstream i( conf );
   json json_flow;
@@ -41,9 +38,9 @@ int main( int argc, char* argv[] )
   
   std::string global_name = json_flow.at("name").get<std::string>();
 
-  std::string csv_path = fmt::format( path, fmt::format("resultcsv/{}.csv",global_name));
-  std::string json_v_path = fmt::format( path, fmt::format("result/{}.json",global_name) );
-  std::string csv_v_path = fmt::format( path, fmt::format("result/{}.csv",global_name) );
+  std::string csv_path = fmt::format( path, fmt::format("../resultcsv/{}.csv",global_name));
+  std::string json_v_path = fmt::format( path, fmt::format("../result/{}.json",global_name) );
+  std::string csv_v_path = fmt::format( path, fmt::format("../resultcsv_v/{}.csv",global_name) );
 
   std::ofstream writer;
   std::string benchmark = (argc >1) ? argv[1] : "adder";
@@ -64,9 +61,7 @@ int main( int argc, char* argv[] )
 
   for ( mig_flow_result* res_op : result )
   {
-    exp( benchmark, res_op->name(), size_before, res_op->data().size, depth_before, res_op->data().depth, res_op->get_flow_runtime() /*, cec*/ );
-
-    if(WRITE_IN_CSV){
+      if(WRITE_IN_CSV){
       writer.open(csv_path,std::ios::app);
       if(!writer.is_open()){
         fmt::print("Waiting for file\n");
@@ -128,7 +123,5 @@ int main( int argc, char* argv[] )
       writer.close();
     }
   }
-  exp.save();
-  exp.table();
   return 0;
 }

@@ -45,6 +45,7 @@
 #include <mockturtle/networks/mig.hpp>
 #include <mockturtle/views/depth_view.hpp>
 #include <mockturtle/views/fanout_view.hpp>
+#include <mockturtle/algorithms/det_randomize.hpp>
 
 /*
  *  Json serialization and deserialization for class used in mig_flow
@@ -396,7 +397,7 @@ void from_json( const json& j, mig_algebraic_depth_rewriting_params& param )
   {
   }
 }
-} // namespace mockturtle
+}
 
 namespace mockturtle
 {
@@ -500,6 +501,10 @@ int str_to_op_number( std::string str )
   {
     return 106;
   }
+  if ( str == "mig_det_randomize" )
+  {
+    return 107;
+  }
   return -1;
 }
 
@@ -527,6 +532,8 @@ std::string op_number_to_str( int op_number )
     return "mig_resub";
   case 106:
     return "mig_algb_reduc";
+  case 107:
+    return "mig_det_randomize";
   default:
     return "error";
   }
@@ -607,12 +614,20 @@ mig_network flow_mig_algebraic_rewriting( mig_network mig, operation_algo_data* 
   mig_algebraic_depth_rewriting_params ps = param.get<mig_algebraic_depth_rewriting_params>();
   mig_network res = mig;
   depth_view mig_depth{ res };
+  fanout_view mig_fanout{ mig_depth };
 
-  mig_algebraic_depth_rewriting( mig_depth, ps, &data_out->flow_mig_algebraic_depth_rewriting_stats );
+  mig_algebraic_depth_rewriting( mig_fanout, ps, &data_out->flow_mig_algebraic_depth_rewriting_stats );
   res = cleanup_dangling( res );
 
   data_out->runtime = to_seconds( data_out->flow_mig_algebraic_depth_rewriting_stats.time_total );
   return res;
+}
+
+mig_network flow_mig_det_randomize( mig_network mig, operation_algo_data* data_out, json param )
+{
+  mig_network mig_shuffled = det_randomize( mig );
+  data_out->runtime = 0;
+  return mig_shuffled;
 }
 } // namespace compute
 
@@ -650,6 +665,7 @@ public:
 class root_operation : public operation
 {
 public:
+  
   root_operation( mig_network mig, json param )
   {
     this->stats.load_data_from_mig( mig );
@@ -664,6 +680,7 @@ public:
     res.push_back( data );
     return res;
   }
+
   std::list<std::string> save_data_to_csv()
   {
     std::list<std::string> result;
@@ -841,7 +858,7 @@ public:
       op_number_to_str(this->operation_type) ,
       this->stats.size,
       this->stats.depth,
-      this->stats.runtime ) );
+      this->operations.size() == 0 ? 0 : this->operations.back()->get_flow_runtime() ) );
     return result;
       
   }
@@ -922,6 +939,9 @@ mig_network compute_flow( mig_network mig, json flow, std::list<end_operation*>*
       break;
     case 106:
       res = compute::flow_mig_algebraic_rewriting( res, operation_data, item.value()["param"] );
+      break;
+    case 107:
+      res = compute::flow_mig_det_randomize(res, operation_data, item.value()["param"] );
       break;
     default:
       break;

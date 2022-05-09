@@ -12,20 +12,18 @@
 #define WRITE_IN_CSV_VERBOSE true
 
 int main( int argc, char* argv[] ){
-    printf("\n");
-    
     char tmp[256];
     getcwd(tmp, 256);
-    std::string conf = (argc>1) ? argv[1]:"config/config.json"; 
+    std::string conf = (argc>1) ? argv[1]:"config.json"; 
     std::ifstream i( conf );
     nlohmann::json json_flow;
     i >> json_flow;
 
     std::string global_name = json_flow.at("name").get<std::string>();
 
-    std::string csv_path = fmt::format( "{}", fmt::format("resultcsv/{}.csv",global_name));
-    std::string json_v_path = fmt::format(  "{}", fmt::format("result/{}.json",global_name) );
-    std::string csv_v_path = fmt::format(  "{}", fmt::format("result/{}.csv",global_name) );
+    std::string csv_path = fmt::format( "{}", fmt::format("../resultcsv/{}.csv",global_name));
+    std::string json_v_path = fmt::format(  "{}", fmt::format("../result/{}.json",global_name) );
+    std::string csv_v_path = fmt::format(  "{}", fmt::format("../result/{}.csv",global_name) );
 
     std::ofstream writer;
     if(WRITE_IN_CSV){

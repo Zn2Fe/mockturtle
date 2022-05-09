@@ -17,8 +17,8 @@ int main( int argc, char* argv[] ){
         std::cout << next->d_name << std::endl;
         char tmp[256];
         getcwd(tmp, 256);
-        std::string conf = fmt::format("{}/{}",config,next->d_name);
-        system( fmt::format("mig_flow_execution {} {} &",conf,tmp).c_str());
+        std::string path = fmt::format("{}/{}",path,config);
+        system( fmt::format("mig_flow_execution {} {} &",next->d_name,tmp).c_str());
         }
         
         next = readdir(dir);

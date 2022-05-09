@@ -32,7 +32,7 @@ int main( int argc, char* argv[] )
       "mapper", "benchmark", "flow", "size", "size_mig", "depth", "depth_mig", "runtime1" /*, "equivalent"*/ );
 
   std::string path = ( argc > 2 ) ? fmt::format( "{}/{{}}", argv[2] ) : "{}";
-  std::string conf = fmt::format( path, ( ( argc > 1 ) ? argv[1] : "config/config.json" ) );
+  std::string conf = fmt::format( path, ( ( argc > 1 ) ? argv[1] : "config.json" ) );
 
   std::ifstream i( conf );
   json json_flow;
@@ -41,9 +41,9 @@ int main( int argc, char* argv[] )
   
   std::string global_name = json_flow.at("name").get<std::string>();
 
-  std::string csv_path = fmt::format( path, fmt::format("resultcsv/{}.csv",global_name));
-  std::string json_v_path = fmt::format( path, fmt::format("result/{}.json",global_name) );
-  std::string csv_v_path = fmt::format( path, fmt::format("result/{}.csv",global_name) );
+  std::string csv_path = fmt::format( path, fmt::format("../resultcsv/{}.csv",global_name));
+  std::string json_v_path = fmt::format( path, fmt::format("../result/{}.json",global_name) );
+  std::string csv_v_path = fmt::format( path, fmt::format("../result/{}.csv",global_name) );
 
   std::ofstream writer;
   if(WRITE_IN_CSV){
