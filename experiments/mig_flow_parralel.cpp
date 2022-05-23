@@ -23,7 +23,7 @@ int main( int argc, char* argv[] ){
 
     std::string csv_path = fmt::format( "{}", fmt::format("../resultcsv/{}.csv",global_name));
     std::string json_v_path = fmt::format(  "{}", fmt::format("../result/{}.json",global_name) );
-    std::string csv_v_path = fmt::format(  "{}", fmt::format("../result/{}.csv",global_name) );
+    std::string csv_v_path = fmt::format(  "{}", fmt::format("../resultcsv_v/{}.csv",global_name) );
 
     std::ofstream writer;
     if(WRITE_IN_CSV){

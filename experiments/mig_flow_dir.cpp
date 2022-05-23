@@ -14,15 +14,12 @@ int main( int argc, char* argv[] ){
     while (next)
     {  
         if (next->d_name[0] != '.') {
-        std::cout << next->d_name << std::endl;
-        char tmp[256];
-        getcwd(tmp, 256);
-        std::string path = fmt::format("{}/{}",path,config);
-        system( fmt::format("mig_flow_execution {} {} &",next->d_name,tmp).c_str());
-        }
         
+        std::string path = fmt::format("{}/{}",config,next->d_name);
+        std::cout << path << std::endl;
+        system( fmt::format("mig_flow_parralel {}",path).c_str());
+        }
         next = readdir(dir);
     }
-    printf("all launched");
     return 0;
 }
