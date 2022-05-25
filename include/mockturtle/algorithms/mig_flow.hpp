@@ -368,6 +368,16 @@ namespace compute
 		param["logic_sharing_cut_limit"] = 1;
 		return mig_flow_mapper( network, param, op_data );
 	}
+  mig_network mig_flow_mape( mig_network network, nlohmann::json param, compute_data* op_data ){
+		param["required_time"] = std::numeric_limits<double>::max();
+		param["skip_delay_round"] = true;
+		param["area_flow_rounds"] = 1;
+		param["ela_rounds"] = 2;
+		param["eswp_rounds"]= 0;
+		param["enable_logic_sharing"] = false;
+		param["logic_sharing_cut_limit"] = 1;
+		return mig_flow_mapper( network, param, op_data );
+	}
 	mig_network mig_flow_mapd( mig_network network, nlohmann::json param, compute_data* op_data ){
 		param["required_time"] = 0;
 		param["skip_delay_round"] = false;
@@ -496,8 +506,14 @@ namespace compute
   }
   
   mig_network mig_flow_det_randomize( mig_network network, nlohmann::json param, compute_data* op_data ){
-    mig_network mig_shuffled = det_randomize( network );
-    op_data->runtime = 0;
+    mig_network mig_shuffled;
+    stopwatch<>::duration time{0};
+    {
+      stopwatch t(time);
+       mig_shuffled = det_randomize( network );
+    }
+    
+    op_data->runtime = to_seconds(time);
     op_data->size = mig_shuffled.num_gates();
 		op_data->depth = depth_view( mig_shuffled ).depth();
     return mig_shuffled;
@@ -522,6 +538,10 @@ mig_network compute_network( mig_network network, nlohmann::json config, compute
   {
     return compute::mig_flow_maps( network, config.at("param"), op_data );
   }
+  if ( operation_type == "mape" )
+  {
+    return compute::mig_flow_mape( network, config.at("param"), op_data );
+  }
   if ( operation_type == "mapd" )
   {
     return compute::mig_flow_mapd( network, config.at("param"), op_data );
@@ -544,11 +564,11 @@ mig_network compute_network( mig_network network, nlohmann::json config, compute
   {
     return compute::mig_flow_cut_rewriting( network, config.at("param"), op_data );
   }
-  if ( operation_type == "cr" )
+  if ( operation_type == "cutr" )
   {
     return compute::mig_flow_cr( network, config.at("param"), op_data );
   }
-	if ( operation_type == "crz" )
+	if ( operation_type == "cutrz" )
   {
     return compute::mig_flow_crz( network, config.at("param"), op_data );
   }
