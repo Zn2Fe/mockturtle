@@ -9,12 +9,17 @@
 #define CHECK_EQV true
 
 #define WRITE_IN_CSV true
-#define WRITE_IN_CSV_V true
 #define VERBOSE true
 #define VERY_VERBOSE true
 
 #define BEST_SIZE true
 #define BEST_DEPTH true
+
+struct benchmark_data{
+  std::string benchmark;
+  u_int32_t size_before;
+  u_int32_t depth_before;
+};
 
 struct flow
 {
@@ -23,6 +28,8 @@ struct flow
   mockturtle::compute_data op_data = mockturtle::compute_data{};
   float runtime = 0;
   int op_num = 0;
+  nlohmann::json json_flow;
+  benchmark_data origin_data;
 };
 
 bool compare_size( const flow& first, const flow& second )
@@ -39,26 +46,15 @@ bool looping_condition(const flow& before, const flow& after, nlohmann::json loo
 }
 
 
-struct csv_verbose_data
+std::list<flow> compute_flow( flow mig_f )
 {
-  std::string path;
-  std::string benchmark;
-  u_int32_t size_before;
-  u_int32_t depth_before;
-};
-
-
-
-std::list<flow> compute_flow( flow mig_f, nlohmann::json json_flow, csv_verbose_data csv_v )
-{
-  std::ofstream writer_csv_v;
   std::list<flow> result;
-  for ( const auto& item : json_flow.items() )
+  for ( const auto& item : mig_f.json_flow.items() )
   {
     std::string operation_type = item.value().at( "operation_type" ).get<std::string>();
     if ( VERY_VERBOSE )
     {
-      fmt::print( "[i],[V] - {}   \t| {}   \t| {}{}\n", csv_v.benchmark, operation_type, mig_f.name,operation_type );
+      fmt::print( "[i],[V] - {}   \t| {}   \t| {}{}\n", mig_f.origin_data.benchmark, operation_type, mig_f.name,operation_type );
     }
 
     if ( operation_type == "branch" )
@@ -67,21 +63,18 @@ std::list<flow> compute_flow( flow mig_f, nlohmann::json json_flow, csv_verbose_
       {
         nlohmann::json branch_flow = branch.value();
         bool add = false;
-        for ( const auto& newitem : json_flow.items() )
+        for ( const auto& newitem : mig_f.json_flow.items() )
         {
           if ( add )
             branch_flow.push_back( newitem.value() );
           if ( item == newitem )
             add = true;
         }
-
-        flow mig_b = {
-            mockturtle::cleanup_dangling( mig_f.mig ),
-            mig_f.name,
-            mig_f.op_data,
-            mig_f.runtime,
-            mig_f.op_num };
-        std::list<flow> compute_res = compute_flow( mig_b, branch_flow, csv_v );
+        flow mig_b{mig_f};
+        mig_b.mig = mockturtle::cleanup_dangling(mig_f.mig);
+        mig_b.json_flow = branch_flow;
+        
+        std::list<flow> compute_res = compute_flow( mig_b );
         for ( flow res : compute_res )
         {
           result.push_back( res );
@@ -97,55 +90,28 @@ std::list<flow> compute_flow( flow mig_f, nlohmann::json json_flow, csv_verbose_
     }
 
     if ( operation_type == "loop" ){
-      flow mig_b = {
-            mockturtle::cleanup_dangling( mig_f.mig ),
-            mig_f.name,
-            mig_f.op_data,
-            mig_f.runtime,
-            mig_f.op_num };
-      mig_b = compute_flow(mig_b,item.value().at("flow"),csv_v).front();
+      flow mig_b{mig_f};
+      mig_b.mig = mockturtle::cleanup_dangling(mig_f.mig);
+      mig_b.json_flow = item.value().at("flow");
+      mig_b = compute_flow(mig_b).front();
       while (looping_condition(mig_f,mig_b,item.value()))
       {
-        mig_f = mig_b;
-        mig_b = {
-            mockturtle::cleanup_dangling( mig_f.mig ),
-            mig_f.name,
-            mig_f.op_data,
-            mig_f.runtime,
-            mig_f.op_num };
-        mig_b = compute_flow(mig_b,item.value().at("flow"),csv_v).front();
+        flow mig_b{mig_f};
+        mig_b.mig = mockturtle::cleanup_dangling(mig_f.mig);
+        mig_b.json_flow = item.value().at("flow");
+        mig_b = compute_flow(mig_b).front();
       }
       continue;      
     }
 
     mockturtle::compute_data op_data;
     mig_f.mig = mockturtle::compute_network( mig_f.mig, item.value(), &op_data );
-    if ( operation_type != "stats" )
-    {
-      mig_f.name.append( operation_type );
-      mig_f.name.append( "_" );
-    }
+    mig_f.name.append( operation_type );
+    mig_f.name.append( "_" );
     mig_f.op_data = op_data;
     mig_f.runtime += op_data.runtime;
     mig_f.op_num += 1;
 
-    if ( WRITE_IN_CSV_V )
-    {
-      writer_csv_v.open( fmt::format( "{}_v.csv", csv_v.path ), std::ios::app );
-      writer_csv_v << fmt::format(
-                          "{};{};{};{};{};{};{},{};{}",
-                          csv_v.benchmark,
-                          mig_f.op_num,
-                          item.value().at( "operation_type" ).get<std::string>(),
-                          mig_f.op_data.size,
-                          mig_f.op_data.depth,
-                          mig_f.op_data.runtime,
-                          csv_v.size_before,
-                          csv_v.depth_before,
-                          mig_f.name.substr( 0, mig_f.name.length() - 1 ) )
-                   << std::endl;
-      writer_csv_v.close();
-    }
   }
   result.push_back( mig_f );
   return result;
@@ -181,14 +147,6 @@ int main( int argc, char* argv[] )
     writer << "benchmark;flow;size;size_mig;depth;depth_mig;runtime" << std::endl;
     writer.close();
   }
-  if ( WRITE_IN_CSV_V )
-  {
-    if ( VERBOSE )
-      fmt::print( "[i] - Creating output CSV_verbose file\n" );
-    writer.open( fmt::format( "{}_v.csv", argv[2] ) );
-    writer << "benchmark;op_num;op_type;size_mig;depth_mig;runtime;size;depth;flow" << std::endl;
-    writer.close();
-  }
 
   for ( auto const& benchmark_json : json_flow.at( "do" ).items() )
   {
@@ -215,13 +173,14 @@ int main( int argc, char* argv[] )
     u_int32_t depth_before = mockturtle::depth_view( mig ).depth();
     std::list<flow> migs;
     flow mig_f = { mig, "" };
-    csv_verbose_data csv_v{ argv[2], benchmark, size_before, depth_before };
+    mig_f.origin_data = benchmark_data{benchmark,size_before,depth_before};
+    mig_f.json_flow = json_flow.at( "flow" );
 
     if ( VERY_VERBOSE )
     {
       fmt::print( "[i],[V] - Start Computing\n" );
     }
-    migs = compute_flow( mig_f, json_flow.at( "flow" ), csv_v );
+    migs = compute_flow( mig_f );
 
     if ( VERBOSE )
     {
