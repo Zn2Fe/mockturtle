@@ -11,16 +11,19 @@
 #define CHECK_EQV false //doesn't work for parralel flow (multiple ref to same file)
 
 #define WRITE_IN_CSV true
+#define WRITE_IN_CSV_VERBOSE true
+
 #define VERBOSE true
 #define VERY_VERBOSE true
 
 using namespace mockturtle;
 using experiment_t = experiments::experiment<std::string, std::string, uint32_t, uint32_t, uint32_t, uint32_t, float, bool>;
 
-struct benchmark_data{
+struct const_flow_data{
   std::string benchmark;
   u_int32_t size_before;
   u_int32_t depth_before;
+  std::string csv_verbose;
 };
 
 struct flow{
@@ -28,9 +31,8 @@ struct flow{
   std::string name;
   mockturtle::compute_data op_data = mockturtle::compute_data{};
   float runtime = 0;
-  int op_num = 0;
   nlohmann::json json_flow = NULL;
-  benchmark_data origin_data = benchmark_data{"",0,0};
+  const_flow_data origin_data = const_flow_data{"",0,0,""};
   bool cec = false;
 };
 
@@ -48,9 +50,9 @@ bool looping_condition(const flow& before, const flow& after, nlohmann::json loo
   return before.op_data.size > after.op_data.size;
 }
 
-std::list<flow> compute_flow( flow mig_f_param, std::list<flow>& flow_branching )
+std::list<flow> compute_flow( const flow& mig_f_param, std::list<flow>& flow_branching )
 {
-  flow mig_f = mig_f_param;
+  flow mig_f{mig_f_param};
   std::list<flow> result;
   for ( const auto& item : mig_f.json_flow.items() )
   {
@@ -92,26 +94,50 @@ std::list<flow> compute_flow( flow mig_f_param, std::list<flow>& flow_branching 
 
     if ( operation_type == "loop" ){
       std::list<flow> ignore;
-      flow mig_b{mig_f};
-      mig_b.json_flow = item.value().at("loop");
+      flow mig_before;
+      flow mig_after(mig_f);
+      mig_after.json_flow = item.value().at("loop");
       do
       {
-        mig_f = mig_b;
-        mig_b.mig = mockturtle::cleanup_dangling(mig_f.mig);
-        
-        mig_b = compute_flow(mig_b ,ignore).back();
-      }while (looping_condition(mig_f,mig_b,item.value()));
-      mig_f.json_flow = mig_f_param.json_flow;
+        mig_before = mig_after;
+        mig_before.mig = mockturtle::cleanup_dangling(mig_before.mig); 
+        mig_after = compute_flow(mig_before ,ignore).back();
+      }while (looping_condition(mig_before,mig_after,item.value()));
+      mig_f.mig = mig_before.mig;
+      mig_f.name = mig_before.name;
+      mig_f.op_data = mig_before.op_data;
+      mig_f.runtime = mig_before.runtime;
       continue;      
     }
 
     mockturtle::compute_data op_data;
     mig_f.mig = mockturtle::compute_network( mig_f.mig, item.value(), &op_data );
+
+    if ( WRITE_IN_CSV_VERBOSE )
+    {
+      std::ofstream writer;
+      writer.open( fmt::format( "{}_VERBOSE.csv", mig_f.origin_data.csv_verbose ), std::ios::app );
+      if(!writer.is_open()){
+        sleep(0.1);
+        writer.open( fmt::format( "{}_VERBOSE.csv", mig_f.origin_data.csv_verbose ), std::ios::app );  
+      }
+      writer << fmt::format(
+          "{};{};{};{};{};{};{};{}\n",
+          mig_f.origin_data.benchmark,
+          mig_f.name.substr( 0, mig_f.name.length() - 1 ),
+          operation_type,
+          mig_f.op_data.size,
+          op_data.size,
+          mig_f.op_data.depth,
+          op_data.depth,
+          op_data.runtime);
+      writer.close();
+    }
+
     mig_f.name.append( operation_type );
     mig_f.name.append( "_" );
     mig_f.op_data = op_data;
     mig_f.runtime += op_data.runtime;
-    mig_f.op_num += 1;
 
   }
   result.push_back( mig_f );
@@ -165,10 +191,10 @@ void thread_run (int thread_id, std::string path_csv){
     for( flow mig_f : migs){
        exp_res( 
         mig_f.origin_data.benchmark,
-        mig_f.name.substr( 0, mig_to_do.name.length() - 1 ),
+        mig_f.name.substr( 0, mig_f.name.length() - 1 ),
         mig_f.origin_data.size_before,
         mig_f.op_data.size,
-        mig_f.op_data.depth,
+        mig_f.origin_data.depth_before,
         mig_f.op_data.depth,
         mig_f.runtime,
         mig_f.cec );
@@ -226,10 +252,20 @@ int main( int argc, char* argv[] )
   {
     if ( VERBOSE )
       fmt::print( "[i] - Creating output CSV file\n" );
-    writer.open( fmt::format( "{}.csv", argv[2] ) );
+    writer.open( fmt::format( "{}.csv", name ) );
     writer << "benchmark;flow;size;size_mig;depth;depth_mig;runtime;cec" << std::endl;
     writer.close();
   }
+
+  if ( WRITE_IN_CSV_VERBOSE )
+  {
+    if ( VERBOSE )
+      fmt::print( "[i] - Creating output CSV_VERBOSE file\n" );
+    writer.open( fmt::format( "{}_VERBOSE.csv", name ) );
+    writer << "benchmark;flow;operation;size_before;size_after;depth_before;depth_after;runtime" << std::endl;
+    writer.close();
+  }
+
 
   for ( auto const& benchmark_json : json_flow.at( "do" ).items() )
   {
@@ -240,7 +276,7 @@ int main( int argc, char* argv[] )
       continue;
     }
     flow mig_f = { mig, "" };
-    mig_f.origin_data = benchmark_data{benchmark,mig.num_gates(),mockturtle::depth_view( mig ).depth()};
+    mig_f.origin_data = const_flow_data{benchmark,mig.num_gates(),mockturtle::depth_view( mig ).depth(),name};
     mig_f.json_flow = json_flow.at( "flow" );
     flow_to_do.push_back(mig_f);
   }
@@ -273,4 +309,4 @@ int main( int argc, char* argv[] )
   exp_res.save();
   exp_res.table();
   return 0;
-}
+} 

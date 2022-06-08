@@ -341,6 +341,7 @@ struct compute_data
 
 namespace compute
 {
+
 	mig_network mig_flow_mapper( mig_network network, nlohmann::json param, compute_data* op_data )
 	{
 	mig_npn_resynthesis resyn{ true };
@@ -382,9 +383,9 @@ namespace compute
 		param["required_time"] = 0;
 		param["skip_delay_round"] = false;
 		param["area_flow_rounds"] = 1;
-		param["ela_rounds"] = 3;
+		param["ela_rounds"] = 2;
 		param["eswp_rounds"]= 1;
-		param["enable_logic_sharing"] = true;
+		param["enable_logic_sharing"] = false;
 		param["logic_sharing_cut_limit"] = 1;
 		return mig_flow_mapper( network, param, op_data );
 	}
@@ -478,7 +479,7 @@ namespace compute
 
   mig_network mig_flow_algebraic_rewriting( mig_network network, nlohmann::json param, compute_data* op_data ){
     
-     mig_algebraic_depth_rewriting_params ps = param.get<mig_algebraic_depth_rewriting_params>();
+    mig_algebraic_depth_rewriting_params ps = param.get<mig_algebraic_depth_rewriting_params>();
     mig_network res = network;
     depth_view mig_depth{ res };
     fanout_view mig_fanout{ mig_depth };
