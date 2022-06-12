@@ -32,16 +32,16 @@
 
 #pragma once
 
-#include <mockturtle/algorithms/mapper.hpp>
-#include <mockturtle/algorithms/node_resynthesis/mig_npn.hpp>
-#include <mockturtle/algorithms/mig_algebraic_rewriting.hpp>
-#include <mockturtle/networks/mig.hpp>
-#include <mockturtle/algorithms/mig_resub.hpp>
 #include <mockturtle/algorithms/cut_rewriting.hpp>
 #include <mockturtle/algorithms/det_randomize.hpp>
+#include <mockturtle/algorithms/mapper.hpp>
+#include <mockturtle/algorithms/mig_algebraic_rewriting.hpp>
+#include <mockturtle/algorithms/mig_resub.hpp>
+#include <mockturtle/algorithms/node_resynthesis/mig_npn.hpp>
+#include <mockturtle/algorithms/rewriting.hpp>
+#include <mockturtle/networks/mig.hpp>
 
 #include <nlohmann/json.hpp>
-
 
 namespace mockturtle
 {
@@ -100,6 +100,20 @@ void from_json( const json& j, map_params& param )
   try
   {
     j.at( "verbose" ).get_to( param.verbose );
+  }
+  catch ( const json::exception& )
+  {
+  }
+  try
+  {
+    j.at( "cut_enumeration_ps.cut_limit" ).get_to( param.cut_enumeration_ps.cut_limit );
+  }
+  catch ( const json::exception& )
+  {
+  }
+  try
+  {
+    j.at( "use_dont_cares" ).get_to( param.use_dont_cares );
   }
   catch ( const json::exception& )
   {
@@ -339,263 +353,283 @@ struct compute_data
   u_int32_t depth = -1;
 };
 
+struct libraries
+{
+  mig_npn_resynthesis* resyn;
+  exact_library<mig_network, mig_npn_resynthesis>* exact_lib;
+};
+
 namespace compute
 {
 
-	mig_network mig_flow_mapper( mig_network network, nlohmann::json param, compute_data* op_data )
-	{
-	mig_npn_resynthesis resyn{ true };
-	exact_library_params eps;
-	exact_library<mig_network, mig_npn_resynthesis> exact_lib( resyn, eps );
-	map_params map_ps = param.get<map_params>();
-	map_stats flow_map_stat;
-	mig_network res = network;
+void mig_flow_mapper( mig_network& network, nlohmann::json param, compute_data* op_data, libraries& library )
+{
 
-	res = map( res, exact_lib, map_ps, &flow_map_stat );
-	res = cleanup_dangling( res );
+  map_params map_ps = param.get<map_params>();
+  map_stats flow_map_stat;
 
-	op_data->runtime = to_seconds( flow_map_stat.time_total );
-	op_data->size = res.num_gates();
-	op_data->depth = depth_view( res ).depth();
-	return res;
-	}
-	mig_network mig_flow_maps( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["required_time"] = std::numeric_limits<double>::max();
-		param["skip_delay_round"] = true;
-		param["area_flow_rounds"] = 1;
-		param["ela_rounds"] = 3;
-		param["eswp_rounds"]= 0;
-		param["enable_logic_sharing"] = true;
-		param["logic_sharing_cut_limit"] = 1;
-		return mig_flow_mapper( network, param, op_data );
-	}
-  mig_network mig_flow_mape( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["required_time"] = std::numeric_limits<double>::max();
-		param["skip_delay_round"] = true;
-		param["area_flow_rounds"] = 1;
-		param["ela_rounds"] = 2;
-		param["eswp_rounds"]= 0;
-		param["enable_logic_sharing"] = false;
-		param["logic_sharing_cut_limit"] = 1;
-		return mig_flow_mapper( network, param, op_data );
-	}
-	mig_network mig_flow_mapd( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["required_time"] = 0;
-		param["skip_delay_round"] = false;
-		param["area_flow_rounds"] = 1;
-		param["ela_rounds"] = 2;
-		param["eswp_rounds"]= 1;
-		param["enable_logic_sharing"] = false;
-		param["logic_sharing_cut_limit"] = 1;
-		return mig_flow_mapper( network, param, op_data );
-	}
+  network = map( network, *library.exact_lib, map_ps, &flow_map_stat );
+  network = cleanup_dangling( network );
 
-	mig_network mig_flow_resubstitution( mig_network network, nlohmann::json param, compute_data* op_data ){
-		resubstitution_params ps = param.get<resubstitution_params>();
-		mig_network res = network;
-		depth_view depth_mig{ res };
-		fanout_view fanout_mig{ depth_mig };
-		resubstitution_stats flow_resubstitution_stats;
+  op_data->runtime = to_seconds( flow_map_stat.time_total );
+  op_data->size = network.num_gates();
+  op_data->depth = depth_view( network ).depth();
+}
 
-		mig_resubstitution( fanout_mig, ps, &flow_resubstitution_stats );
-		res = cleanup_dangling( res );
+void mig_flow_rewrite( mig_network& network, nlohmann::json param, compute_data* op_data, libraries& library )
+{
 
-		op_data->runtime = to_seconds( flow_resubstitution_stats.time_total );
-		op_data->size = res.num_gates();
-		op_data->depth = depth_view( res ).depth();
-		return res;
-	}
-	mig_network mig_flow_resubc( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["max_pis"] = 8;
-		param["max_divisors"] = 150;
-		param["max_inserts"] = 2;
-		param["skip_fanout_limit_for_roots"] = 1000;
-		param["skip_fanout_limit_for_divisors"] = 1000;
-		param["use_dont_cares"] = false;
-		param["window_size"] = 12;
-		param["preserve_depth"] = false;
-		param["max_clauses"] = 1000;
-		param["conflict_limit"] = 1000;
-		param["random_seed"] = 1;
-		param["odc_levels"] = 0;
-		param["max_trials"] = 100;
-		param["max_divisors_k"] = 50;
-		return mig_flow_resubstitution( network, param, op_data );
-	}
-	mig_network mig_flow_resubd( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["max_pis"] = 8;
-		param["max_divisors"] = 150;
-		param["max_inserts"] = 2;
-		param["skip_fanout_limit_for_roots"] = 1000;
-		param["skip_fanout_limit_for_divisors"] = 1000;
-		param["use_dont_cares"] = false;
-		param["window_size"] = 12;
-		param["preserve_depth"] = true;
-		param["max_clauses"] = 1000;
-		param["conflict_limit"] = 1000;
-		param["random_seed"] = 1;
-		param["odc_levels"] = 0;
-		param["max_trials"] = 100;
-		param["max_divisors_k"] = 50;
-		return mig_flow_resubstitution( network, param, op_data );
-	}
+  rewriting_params rewrite_ps;
+  rewrite_ps.use_mffc = true;
+  rewrite_ps.use_dont_cares = false;
+  rewrite_ps.allow_multiple_structures = true;
+  rewriting_stats flow_rewrite_stats;
+  fanout_view f_network{ network };
+  rewrite( f_network, *library.exact_lib, rewrite_ps, &flow_rewrite_stats );
+  network = cleanup_dangling( network );
+  op_data->runtime = to_seconds( flow_rewrite_stats.time_total );
+  op_data->size = network.num_gates();
+  op_data->depth = depth_view( network ).depth();
+  return;
+}
 
-  mig_network mig_flow_cut_rewriting( mig_network network, nlohmann::json param, compute_data* op_data ){
-    mig_npn_resynthesis resyn{ true };
-    cut_rewriting_params ps = param.get<cut_rewriting_params>();
-    mig_network res = network;
-    cut_rewriting_stats flow_cut_rewriting_stats;
+void mig_flow_resubstitution( mig_network& network, nlohmann::json param, compute_data* op_data, libraries& library )
+{
 
-    cut_rewriting( res, resyn, ps, &flow_cut_rewriting_stats );
-    res = cleanup_dangling( res );
+  resubstitution_params ps = param.get<resubstitution_params>();
+  depth_view depth_mig{ network };
+  fanout_view fanout_mig{ depth_mig };
+  resubstitution_stats flow_resubstitution_stats;
 
-    op_data->runtime = to_seconds( flow_cut_rewriting_stats.time_total );
-    op_data->size = res.num_gates();
-		op_data->depth = depth_view( res ).depth();
-    return res;
-	}
-	mig_network mig_flow_cr( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["cut_enumeration_ps.cut_size"] = 4;
-		param["cut_enumeration_ps.cut_limit"] = 12;
-		param["cut_enumeration_ps.minimize_truth_table"] = true;
-		param["allow_zero_gain"] = false;
-		param["use_dont_cares"] = false;
-		param["candidate_selection_strategy"] = 0;
-		param["min_cand_cut_size"] = 3;
-		param["preserve_depth"] = false;
-		return mig_flow_resubstitution( network, param, op_data );
-	}
-	mig_network mig_flow_crz( mig_network network, nlohmann::json param, compute_data* op_data ){
-		param["cut_enumeration_ps.cut_size"] = 4;
-		param["cut_enumeration_ps.cut_limit"] = 12;
-		param["cut_enumeration_ps.minimize_truth_table"] = true;
-		param["allow_zero_gain"] = true;
-		param["use_dont_cares"] = false;
-		param["candidate_selection_strategy"] = 0;
-		param["min_cand_cut_size"] = 3;
-		param["preserve_depth"] = false;
-		return mig_flow_resubstitution( network, param, op_data );
-	}
+  mig_resubstitution( fanout_mig, ps, &flow_resubstitution_stats );
+  network = cleanup_dangling( network );
 
-  mig_network mig_flow_algebraic_rewriting( mig_network network, nlohmann::json param, compute_data* op_data ){
-    
-    mig_algebraic_depth_rewriting_params ps = param.get<mig_algebraic_depth_rewriting_params>();
-    mig_network res = network;
-    depth_view mig_depth{ res };
-    fanout_view mig_fanout{ mig_depth };
-    mig_algebraic_depth_rewriting_stats flow_mig_algebraic_depth_rewriting_stats;
+  op_data->runtime = to_seconds( flow_resubstitution_stats.time_total );
+  op_data->size = network.num_gates();
+  op_data->depth = depth_view( network ).depth();
+}
 
-    mig_algebraic_depth_rewriting( mig_fanout, ps, &flow_mig_algebraic_depth_rewriting_stats );
-    res = cleanup_dangling( res );
+void mig_flow_cut_rewriting( mig_network& network, nlohmann::json param, compute_data* op_data, libraries& library )
+{
+  cut_rewriting_params ps = param.get<cut_rewriting_params>();
+  cut_rewriting_stats flow_cut_rewriting_stats;
 
-    op_data->runtime = to_seconds( flow_mig_algebraic_depth_rewriting_stats.time_total );
-    op_data->size = res.num_gates();
-		op_data->depth = depth_view( res ).depth();
-    return res;
-	}
-  mig_network mig_flow_alg0( mig_network network, nlohmann::json param, compute_data* op_data ){
-    param["strategy"] = 0;
-    return mig_flow_algebraic_rewriting( network, param, op_data );
+  network = cut_rewriting( network, *library.resyn, ps, &flow_cut_rewriting_stats );
+  network = cleanup_dangling( network );
+
+  op_data->runtime = to_seconds( flow_cut_rewriting_stats.time_total );
+  op_data->size = network.num_gates();
+  op_data->depth = depth_view( network ).depth();
+}
+
+void mig_flow_algebraic_rewriting( mig_network& network, nlohmann::json param, compute_data* op_data, libraries& library )
+{
+  mig_algebraic_depth_rewriting_params ps = param.get<mig_algebraic_depth_rewriting_params>();
+  depth_view mig_depth{ network };
+  fanout_view mig_fanout{ mig_depth };
+  mig_algebraic_depth_rewriting_stats flow_mig_algebraic_depth_rewriting_stats;
+
+  mig_algebraic_depth_rewriting( mig_fanout, ps, &flow_mig_algebraic_depth_rewriting_stats );
+  network = cleanup_dangling( network );
+
+  op_data->runtime = to_seconds( flow_mig_algebraic_depth_rewriting_stats.time_total );
+  op_data->size = network.num_gates();
+  op_data->depth = depth_view( network ).depth();
+}
+
+void mig_flow_det_randomize( mig_network& network, nlohmann::json param, compute_data* op_data, libraries& library )
+{
+
+  stopwatch<>::duration time{ 0 };
+  {
+    stopwatch t( time );
+    network = det_randomize( network );
   }
-  mig_network mig_flow_alg1( mig_network network, nlohmann::json param, compute_data* op_data ){
-    param["strategy"] = 1;
-    return mig_flow_algebraic_rewriting( network, param, op_data );
-  }
-  mig_network mig_flow_alg2( mig_network network, nlohmann::json param, compute_data* op_data ){
-    param["strategy"] = 2;
-    return mig_flow_algebraic_rewriting( network, param, op_data );
-  }
-  
-  mig_network mig_flow_det_randomize( mig_network network, nlohmann::json param, compute_data* op_data ){
-    mig_network mig_shuffled;
-    stopwatch<>::duration time{0};
-    {
-      stopwatch t(time);
-       mig_shuffled = det_randomize( network );
-    }
-    
-    op_data->runtime = to_seconds(time);
-    op_data->size = mig_shuffled.num_gates();
-		op_data->depth = depth_view( mig_shuffled ).depth();
-    return mig_shuffled;
-  }
+
+  op_data->runtime = to_seconds( time );
+  op_data->size = network.num_gates();
+  op_data->depth = depth_view( network ).depth();
+}
 } // namespace compute
 
-mig_network compute_network( mig_network network, nlohmann::json config, compute_data* op_data)
+void compute_network( mig_network& network, nlohmann::json& config, compute_data* op_data, libraries& library )
 {
   std::string operation_type = config.at( "operation_type" ).get<std::string>();
-  if ( operation_type == "stats"){
-    op_data->runtime = 0;
-    op_data->size = network.num_gates();
-  	op_data->depth = depth_view( network ).depth();
-    return network;
+  json param;
+  if ( config.contains( "param" ) )
+  {
+    param = config.at( "param" );
   }
-  
+
   if ( operation_type == "mig_mapper" )
   {
-    return compute::mig_flow_mapper( network, config.at("param"), op_data );
+    compute::mig_flow_mapper( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "maps" )
   {
-    return compute::mig_flow_maps( network, config.at("param"), op_data );
+    param["required_time"] = std::numeric_limits<double>::max();
+    param["skip_delay_round"] = true;
+    param["area_flow_rounds"] = 1;
+    param["ela_rounds"] = 3;
+    param["eswp_rounds"] = 0;
+    param["enable_logic_sharing"] = true;
+    param["logic_sharing_cut_limit"] = 1;
+    compute::mig_flow_mapper( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "mape" )
   {
-    return compute::mig_flow_mape( network, config.at("param"), op_data );
+    param["required_time"] = std::numeric_limits<double>::max();
+    param["skip_delay_round"] = true;
+    param["area_flow_rounds"] = 1;
+    param["ela_rounds"] = 2;
+    param["eswp_rounds"] = 0;
+    param["enable_logic_sharing"] = false;
+    param["logic_sharing_cut_limit"] = 1;
+    compute::mig_flow_mapper( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "mapd" )
   {
-    return compute::mig_flow_mapd( network, config.at("param"), op_data );
+    param["required_time"] = 0;
+    param["skip_delay_round"] = false;
+    param["area_flow_rounds"] = 1;
+    param["ela_rounds"] = 2;
+    param["eswp_rounds"] = 1;
+    param["enable_logic_sharing"] = false;
+    param["logic_sharing_cut_limit"] = 1;
+    compute::mig_flow_mapper( network, param, op_data, library );
+    return;
   }
-  
+  if ( operation_type == "mapdc" )
+  {
+    param["required_time"] = std::numeric_limits<double>::max();
+    param["skip_delay_round"] = true;
+    param["area_flow_rounds"] = 1;
+    param["ela_rounds"] = 3;
+    param["eswp_rounds"] = 0;
+    param["cut_enumeration_ps.cut_limit"] = 8;
+    param["enable_logic_sharing"] = true;
+    param["logic_sharing_cut_limit"] = 1;
+    param["use_dont_cares"] = true;
+    compute::mig_flow_mapper( network, param, op_data, library );
+    return;
+  }
+
+  if ( operation_type == "rewrite" )
+  {
+    compute::mig_flow_rewrite( network, param, op_data, library );
+    return;
+  }
+
   if ( operation_type == "mig_resubstitution" )
   {
-    return compute::mig_flow_resubstitution( network, config.at("param"), op_data );
+    compute::mig_flow_resubstitution( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "resubc" )
   {
-    return compute::mig_flow_resubc( network, config.at("param"), op_data );
+    param["max_pis"] = 8;
+    param["max_divisors"] = 150;
+    param["max_inserts"] = 2;
+    param["skip_fanout_limit_for_roots"] = 1000;
+    param["skip_fanout_limit_for_divisors"] = 1000;
+    param["use_dont_cares"] = false;
+    param["window_size"] = 12;
+    param["preserve_depth"] = false;
+    param["max_clauses"] = 1000;
+    param["conflict_limit"] = 1000;
+    param["random_seed"] = 1;
+    param["odc_levels"] = 0;
+    param["max_trials"] = 100;
+    param["max_divisors_k"] = 50;
+    compute::mig_flow_resubstitution( network, param, op_data, library );
+    return;
   }
-	if ( operation_type == "resubd" )
+  if ( operation_type == "resubd" )
   {
-    return compute::mig_flow_resubd( network, config.at("param"), op_data );
+    param["max_pis"] = 8;
+    param["max_divisors"] = 150;
+    param["max_inserts"] = 2;
+    param["skip_fanout_limit_for_roots"] = 1000;
+    param["skip_fanout_limit_for_divisors"] = 1000;
+    param["use_dont_cares"] = false;
+    param["window_size"] = 12;
+    param["preserve_depth"] = true;
+    param["max_clauses"] = 1000;
+    param["conflict_limit"] = 1000;
+    param["random_seed"] = 1;
+    param["odc_levels"] = 0;
+    param["max_trials"] = 100;
+    param["max_divisors_k"] = 50;
+    compute::mig_flow_resubstitution( network, param, op_data, library );
+    return;
   }
 
   if ( operation_type == "mig_cut_rewriting" )
   {
-    return compute::mig_flow_cut_rewriting( network, config.at("param"), op_data );
+    compute::mig_flow_cut_rewriting( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "cutr" )
   {
-    return compute::mig_flow_cr( network, config.at("param"), op_data );
+    param["cut_enumeration_ps.cut_size"] = 4;
+    param["cut_enumeration_ps.cut_limit"] = 12;
+    param["cut_enumeration_ps.minimize_truth_table"] = true;
+    param["allow_zero_gain"] = false;
+    param["use_dont_cares"] = false;
+    param["candidate_selection_strategy"] = 0;
+    param["min_cand_cut_size"] = 3;
+    param["preserve_depth"] = false;
+    compute::mig_flow_cut_rewriting( network, param, op_data, library );
+    return;
   }
-	if ( operation_type == "cutrz" )
+  if ( operation_type == "cutrz" )
   {
-    return compute::mig_flow_crz( network, config.at("param"), op_data );
+    param["cut_enumeration_ps.cut_size"] = 4;
+    param["cut_enumeration_ps.cut_limit"] = 12;
+    param["cut_enumeration_ps.minimize_truth_table"] = true;
+    param["allow_zero_gain"] = true;
+    param["use_dont_cares"] = false;
+    param["candidate_selection_strategy"] = 0;
+    param["min_cand_cut_size"] = 3;
+    param["preserve_depth"] = false;
+    compute::mig_flow_cut_rewriting( network, param, op_data, library );
+    return;
   }
 
   if ( operation_type == "mig_algebraic_rewriting" )
   {
-    return compute::mig_flow_algebraic_rewriting( network, config.at("param"), op_data );
+    compute::mig_flow_algebraic_rewriting( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "alg0" )
   {
-    return compute::mig_flow_alg0( network, config.at("param"), op_data );
+    param["strategy"] = 0;
+    compute::mig_flow_algebraic_rewriting( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "alg1" )
   {
-    return compute::mig_flow_alg1( network, config.at("param"), op_data );
+    param["strategy"] = 1;
+    compute::mig_flow_algebraic_rewriting( network, param, op_data, library );
+    return;
   }
   if ( operation_type == "alg2" )
   {
-    return compute::mig_flow_alg2( network, config.at("param"), op_data );
+    param["strategy"] = 2;
+    compute::mig_flow_algebraic_rewriting( network, param, op_data, library );
+    return;
   }
 
-  if ( operation_type == "detrd" ){
-     return compute::mig_flow_det_randomize( network, config.at("param"), op_data );
+  if ( operation_type == "detrd" )
+  {
+    compute::mig_flow_det_randomize( network, param, op_data, library );
+    return;
   }
   printf( "[i] - Warning, the operation %s doesn't exist", operation_type );
-  return network;
+  return;
 }
 
 } // namespace mockturtle

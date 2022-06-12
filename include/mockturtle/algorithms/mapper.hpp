@@ -42,15 +42,19 @@
 #include "../utils/stopwatch.hpp"
 #include "../utils/tech_library.hpp"
 #include "../views/binding_view.hpp"
+#include "../views/color_view.hpp"
 #include "../views/depth_view.hpp"
 #include "../views/topo_view.hpp"
+#include "../views/window_view.hpp"
 #include "cleanup.hpp"
 #include "cut_enumeration.hpp"
 #include "cut_enumeration/exact_map_cut.hpp"
 #include "cut_enumeration/tech_map_cut.hpp"
+#include "reconv_cut.hpp"
+#include "simulation.hpp"
 #include "detail/mffc_utils.hpp"
 #include "detail/switching_activity.hpp"
-
+#include "dont_cares.hpp"
 
 namespace mockturtle
 {
@@ -93,6 +97,12 @@ struct map_params
   /*! \brief Number of patterns for switching activity computation. */
   uint32_t switching_activity_patterns{ 2048u };
 
+  /*! \brief Use don't cares for optimization. */
+  bool use_dont_cares{ false };
+
+  /*! \brief Window size for don't cares calculation. */
+  uint32_t window_size{ 12u };
+
   /*! \brief Exploit logic sharing in exact area optimization of graph mapping. */
   bool enable_logic_sharing{ false };
 
@@ -101,7 +111,6 @@ struct map_params
 
   /*! \brief Be verbose. */
   bool verbose{ false };
-
 };
 
 /*! \brief Statistics for mapper.
@@ -118,6 +127,8 @@ struct map_stats
   /*! \brief Power result. */
   double power{ 0 };
 
+  /*! \brief Runtime for Boolean matching. */
+  stopwatch<>::duration time_matching{ 0 };
   /*! \brief Runtime for covering. */
   stopwatch<>::duration time_mapping{ 0 };
   /*! \brief Total runtime. */
@@ -143,8 +154,9 @@ struct map_stats
       std::cout << fmt::format( " Power = {:>5.2f};\n", power );
     else
       std::cout << "\n";
-    std::cout << fmt::format( "[i] Mapping runtime = {:>5.2f} secs\n", to_seconds( time_mapping ) );
-    std::cout << fmt::format( "[i] Total runtime   = {:>5.2f} secs\n", to_seconds( time_total ) );
+    std::cout << fmt::format( "[i] Matching runtime = {:>5.2f} secs\n", to_seconds( time_matching ) );
+    std::cout << fmt::format( "[i] Mapping runtime  = {:>5.2f} secs\n", to_seconds( time_mapping ) );
+    std::cout << fmt::format( "[i] Total runtime    = {:>5.2f} secs\n", to_seconds( time_total ) );
   }
 };
 
@@ -320,6 +332,8 @@ private:
 
   void compute_matches()
   {
+    stopwatch t( st.time_matching );
+
     /* match gates */
     ntk.foreach_gate( [&]( auto const& n ) {
       const auto index = ntk.node_to_index( n );
@@ -1729,15 +1743,13 @@ public:
         lib_database( library.get_database() ),
         node_match( ntk.size() ),
         matches(),
-        cuts( fast_cut_enumeration<Ntk, CutSize, true, CutData>( ntk, ps.cut_enumeration_ps ) )
+        cuts( fast_cut_enumeration<Ntk, CutSize, true, CutData>( ntk, ps.cut_enumeration_ps, &st.cut_enumeration_st ) )
   {
     std::tie( lib_inv_area, lib_inv_delay ) = library.get_inverter_info();
   }
 
   NtkDest run()
   {
-    stopwatch t( st.time_mapping );
-
     auto [res, old2new] = initialize_copy_network<NtkDest>( ntk );
 
     /* compute and save topological order */
@@ -1747,10 +1759,15 @@ public:
     } );
 
     /* match cuts with gates */
-    compute_matches();
+    if ( ps.use_dont_cares )
+      compute_matches_dc();
+    else
+      compute_matches();
 
     /* init the data structure */
     init_nodes();
+
+    stopwatch t( st.time_mapping );
 
     /* compute mapping delay */
     if ( !ps.skip_delay_round )
@@ -1828,6 +1845,8 @@ private:
 
   void compute_matches()
   {
+    stopwatch t( st.time_matching );
+
     /* match gates */
     ntk.foreach_gate( [&]( auto const& n ) {
       const auto index = ntk.node_to_index( n );
@@ -1854,16 +1873,153 @@ private:
         /* match the cut using canonization and get the gates */
         const auto tt = cuts.truth_table( *cut );
         const auto fe = kitty::shrink_to<NInputs>( tt );
-        const auto config = kitty::exact_npn_canonization( fe );
-        auto const supergates_npn = library.get_supergates( std::get<0>( config ) );
-        auto const supergates_npn_neg = library.get_supergates( ~std::get<0>( config ) );
+
+        auto [tt_npn, neg, perm] = kitty::exact_npn_canonization( fe );
+
+        auto const supergates_npn = library.get_supergates( tt_npn );
+        auto const supergates_npn_neg = library.get_supergates( ~tt_npn );
 
         if ( supergates_npn != nullptr || supergates_npn_neg != nullptr )
         {
-          auto neg = std::get<1>( config );
-          auto perm = std::get<2>( config );
-          uint8_t phase = ( neg >> NInputs ) & 1;
           cut_match_t<NtkDest, NInputs> match;
+
+          uint8_t phase = ( neg >> NInputs ) & 1;
+
+          match.supergates[phase] = supergates_npn;
+          match.supergates[phase ^ 1] = supergates_npn_neg;
+
+          /* store permutations and negations */
+          match.negation = 0;
+          for ( auto j = 0u; j < perm.size() && j < NInputs; ++j )
+          {
+            match.permutation[perm[j]] = j;
+            match.negation |= ( ( neg >> perm[j] ) & 1 ) << j;
+          }
+          node_matches.push_back( match );
+          ( *cut )->data.match_index = i++;
+        }
+        else
+        {
+          /* Ignore not matched cuts */
+          ( *cut )->data.ignore = true;
+        }
+      }
+
+      matches[index] = node_matches;
+    } );
+  }
+
+  void compute_matches_dc()
+  {
+    stopwatch t( st.time_matching );
+
+    reconvergence_driven_cut_parameters rps;
+    rps.max_leaves = ps.window_size;
+    reconvergence_driven_cut_statistics rst;
+    detail::reconvergence_driven_cut_impl<Ntk, false, false> reconv_cuts( ntk, rps, rst );
+
+    fanout_view<Ntk> fanout_ntk{ntk};
+    color_view<Ntk> color_ntk{fanout_ntk};
+
+    /* match gates */
+    ntk.foreach_gate( [&]( auto const& n ) {
+      const auto index = ntk.node_to_index( n );
+
+      std::vector<cut_match_t<NtkDest, NInputs>> node_matches;
+      std::vector<node<Ntk>> roots = {n};
+
+      auto const extended_leaves = reconv_cuts.run( roots ).first;
+
+      std::vector<node<Ntk>> gates{collect_nodes( color_ntk, extended_leaves, roots )};
+      window_view window_ntk{color_ntk, extended_leaves, roots, gates};
+
+      default_simulator<kitty::dynamic_truth_table> sim( window_ntk.num_pis() );
+      const auto tts = simulate_nodes<kitty::dynamic_truth_table>( window_ntk, sim );
+
+      auto i = 0u;
+      for ( auto& cut : cuts.cuts( index ) )
+      {
+        /* ignore unit cut */
+        if ( cut->size() == 1 && *cut->begin() == index )
+        {
+          ( *cut )->data.ignore = true;
+          continue;
+        }
+
+        if ( cut->size() > NInputs )
+        {
+          /* Ignore cuts too big to be mapped using the library */
+          ( *cut )->data.ignore = true;
+          continue;
+        }
+
+        /* match the cut using canonization and get the gates */
+        const auto tt = cuts.truth_table( *cut );
+        const auto fe = kitty::shrink_to<NInputs>( tt );
+
+        auto [tt_npn, neg, perm] = kitty::exact_npn_canonization( fe );
+        auto perm_neg = perm;
+        auto neg_neg = neg;
+
+        /* dont cares computation */
+        kitty::static_truth_table<NInputs> care;
+
+        bool containment = true;
+        for ( auto const& l : *cut )
+        {
+          if ( color_ntk.color( ntk.index_to_node( l ) ) != color_ntk.current_color() )
+          {
+            containment = false;
+            break;
+          }
+        }
+
+        if ( containment )
+        {
+          /* compute care set */
+          for ( auto i = 0u; i < ( 1u << window_ntk.num_pis() ); ++i )
+          {
+            uint32_t entry{0u};
+            auto j = 0u;
+            for ( auto const& l : *cut )
+            {
+              entry |= kitty::get_bit( tts[l], i ) << j;
+              ++j;
+            }
+            kitty::set_bit( care, entry );
+          }
+        }
+        else
+        {
+          /* completely specified */
+          care = ~care;
+        }
+
+        // std::vector<node<Ntk>> pivots( NInputs, 0u );
+        // auto k = 0u;
+        // for ( auto const& l : *cut )
+        // {
+        //   pivots[k++] = ( ntk.index_to_node( l ) );
+        // }
+        // auto dc_set = satisfiability_dont_cares( fanout_ntk, pivots, 8u );
+        // const auto dc = kitty::extend_to<NInputs>( ~care );
+
+        auto const dc_npn = apply_npn_transformation( ~care, neg & ~( 1 << NInputs ), perm );
+
+        auto const supergates_npn = library.get_supergates( tt_npn, dc_npn, neg, perm );
+        auto const supergates_npn_neg = library.get_supergates( ~tt_npn, dc_npn, neg_neg, perm_neg );
+
+        if ( supergates_npn != nullptr || supergates_npn_neg != nullptr )
+        {
+          cut_match_t<NtkDest, NInputs> match;
+
+          if ( supergates_npn == nullptr )
+          {
+            perm = perm_neg;
+            neg = neg_neg;
+          }
+
+          uint8_t phase = ( neg >> NInputs ) & 1;
 
           match.supergates[phase] = supergates_npn;
           match.supergates[phase ^ 1] = supergates_npn_neg;
@@ -2995,6 +3151,15 @@ private:
     return count;
   }
 
+  void compute_dont_care_window( node<Ntk> const& n, uint64_t max_tfi_inputs = 16u )
+  {
+
+    /* check containment of cuts leaves in the window (extended leaves) */
+
+    /* if contained, compute the SDC else standard boolean matching */
+    /* TODO: expand the window so that all the cuts are contained (use the volume?) */
+  }
+
   template<bool DO_AREA>
   inline bool compare_map( float arrival, float best_arrival, float area_flow, float best_area_flow, uint32_t size, uint32_t best_size )
   {
@@ -3128,7 +3293,7 @@ NtkDest map( Ntk& ntk, exact_library<NtkDest, RewritingFn, NInputs> const& libra
   detail::exact_map_impl<NtkDest, CutSize, CutData, Ntk, RewritingFn, NInputs> p( ntk, library, ps, st );
   auto res = p.run();
 
-  st.time_total = st.time_mapping + st.cut_enumeration_st.time_total;
+  st.time_total = st.time_mapping + st.cut_enumeration_st.time_total + st.time_matching;
   if ( ps.verbose )
   {
     st.report();
